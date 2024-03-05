@@ -46,13 +46,13 @@ Game::~Game()
 void Game::Init()
 {
     // load shaders , ¿˝◊”∫Õ
-    ResourceManager::LoadShader("C:/Work/GameEngine/SimpEngine/Sandbox/src/sprite.vs", "C:/Work/GameEngine/SimpEngine/Sandbox/src/sprite.fs", nullptr, "sprite");
+    ResourceManager::LoadShader("C:/Work/GameEngine/RPG2D/Sandbox/src/sprite.vs", "C:/Work/GameEngine/RPG2D/Sandbox/src/sprite.fs", nullptr, "sprite");
     // configure shaders , …Ë÷√project æÿ’Û
     glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(this->Width), static_cast<float>(this->Height), 0.0f, -1.0f, 1.0f);
     ResourceManager::GetShader("sprite").Use().SetInteger("sprite", 0);
     ResourceManager::GetShader("sprite").SetMatrix4("projection", projection);
     // load textures
-    ResourceManager::LoadTexture("C:/Work/GameEngine/SimpEngine/Sandbox/src/awesomeface.png", true, "face");
+    ResourceManager::LoadTexture("C:/Work/GameEngine/RPG2D/Sandbox/src/awesomeface.png", true, "face");
     // set render-specific controls
     Renderer = new SpriteRenderer(ResourceManager::GetShader("sprite"));
     // configure game objects
