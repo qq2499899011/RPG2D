@@ -1,0 +1,12 @@
+[submodule "RPG2D/vendor/spdlog"]
+	path = RPG2D/vendor/spdlog
+	url = git@github.com:gabime/spdlog.git
+[submodule "RPG2D/vendor/GLFW"]
+	path = RPG2D/vendor/GLFW
+	url = git@github.com:qq2499899011/glfw.git
+[submodule "RPG2D/vendor/imgui"]
+	path = RPG2D/vendor/imgui
+	url = git@github.com:qq2499899011/imgui.git
+[submodule "RPG2D/vendor/glm"]
+	path = RPG2D/vendor/glm
+	url = git@github.com:g-truc/glm.git
