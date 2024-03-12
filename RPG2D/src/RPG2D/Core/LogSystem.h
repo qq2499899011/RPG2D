@@ -6,7 +6,7 @@ namespace RPG2D {
 	//HACK:临时将ref放在这里
 	template<typename T>
 	using Ref = std::shared_ptr<T>;
-	class RPG2D_API Log
+	class Log
 	{
 	public:
 		static void Init();

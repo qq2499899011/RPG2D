@@ -1,5 +1,5 @@
 #include "RPG2Dpch.h"
-#include "Log.h"
+#include "LogSystem.h"
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/sinks/basic_file_sink.h>
 

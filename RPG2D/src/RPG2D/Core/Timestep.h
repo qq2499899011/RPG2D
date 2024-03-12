@@ -10,6 +10,7 @@ namespace RPG2D {
 		{
 		}
 
+		//重载为float对象。
 		operator float() const { return m_Time; }
 
 		float GetSeconds() const { return m_Time; }

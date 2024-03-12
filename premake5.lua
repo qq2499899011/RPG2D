@@ -8,6 +8,11 @@ workspace "RPG2D"--项目名称
 		"Release",
 		"Dist"
 	}
+	--全局定义
+	defines{
+		"_CRT_SECURE_NO_WARNINGS",
+		"_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING",
+	}
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}" --输出路径
 
@@ -41,9 +46,10 @@ include "RPG2D/vendor/imgui"
 
 project "RPG2D"--项目名称
 	location "RPG2D"
-	kind "SharedLib"--项目类型
+	kind "StaticLib"--项目类型
 	language "C++"--语言
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -83,18 +89,11 @@ project "RPG2D"--项目名称
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
 		defines
 		{
 			"RPG2D_PLATFORM_WINDOWS",
-			"RPG2D_BUILD_DLL",
 			"GLFW_INCLUDE_NONE",--消除glad的重复包含
-		}
-
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
 		}
 
 	filter "configurations:Debug"
@@ -117,6 +116,7 @@ project "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"
+	staticruntime "on"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
@@ -140,7 +140,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		systemversion "latest"
-		staticruntime "on"
 		defines
 		{
 			"RPG2D_PLATFORM_WINDOWS"

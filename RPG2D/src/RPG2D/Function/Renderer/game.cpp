@@ -20,7 +20,7 @@
 
 
 // Game-related State data
-SpriteRenderer    *Renderer;
+SpriteRenderer    *RendererManager;
 GameObject        *Player;
 
 
@@ -35,7 +35,7 @@ Game::Game(unsigned int width, unsigned int height)
 
 Game::~Game()
 {
-    delete Renderer;
+    delete RendererManager;
     delete Player;
 }
 /// <summary>
@@ -46,25 +46,25 @@ Game::~Game()
 void Game::Init()
 {
     // load shaders , ¿˝◊”∫Õ
-    ResourceManager::LoadShader("C:/Work/GameEngine/RPG2D/Sandbox/src/sprite.vs", "C:/Work/GameEngine/RPG2D/Sandbox/src/sprite.fs", nullptr, "sprite");
+    AssetManager::LoadShader("C:/Work/GameEngine/RPG2D/Sandbox/src/sprite.vs", "C:/Work/GameEngine/RPG2D/Sandbox/src/sprite.fs", nullptr, "sprite");
     // configure shaders , …Ë÷√project æÿ’Û
     glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(this->Width), static_cast<float>(this->Height), 0.0f, -1.0f, 1.0f);
-    ResourceManager::GetShader("sprite").Use().SetInteger("sprite", 0);
-    ResourceManager::GetShader("sprite").SetMatrix4("projection", projection);
+    AssetManager::GetShader("sprite").Use().SetInteger("sprite", 0);
+    AssetManager::GetShader("sprite").SetMatrix4("projection", projection);
     // load textures
-    ResourceManager::LoadTexture("C:/Work/GameEngine/RPG2D/Sandbox/src/awesomeface.png", true, "face");
+    AssetManager::LoadTexture("C:/Work/GameEngine/RPG2D/Sandbox/src/awesomeface.png", true, "face");
     // set render-specific controls
-    Renderer = new SpriteRenderer(ResourceManager::GetShader("sprite"));
+    RendererManager = new SpriteRenderer(AssetManager::GetShader("sprite"));
     // configure game objects
     glm::vec2 playerPos = glm::vec2(this->Width / 2.0f - PLAYER_SIZE.x / 2.0f, this->Height - PLAYER_SIZE.y);
-    Player = new GameObject(playerPos, PLAYER_SIZE, ResourceManager::GetTexture("face"));
+    Player = new GameObject(playerPos, PLAYER_SIZE, AssetManager::GetTexture("face"));
 }
 void Game::Render()
 {
 	// draw background
-	Renderer->DrawSprite(ResourceManager::GetTexture("face"), glm::vec2(0.0f, 0.0f), glm::vec2(this->Width, this->Height), 0.0f);
+	RendererManager->DrawSprite(AssetManager::GetTexture("face"), glm::vec2(0.0f, 0.0f), glm::vec2(this->Width, this->Height), 0.0f);
 	// draw player
-	Player->Draw(*Renderer);
+	Player->Draw(*RendererManager);
 	std::stringstream ss; ss << this->Lives;
 }
 

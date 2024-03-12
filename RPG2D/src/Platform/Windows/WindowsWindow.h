@@ -1,7 +1,7 @@
 #pragma once
 
 #include "RPG2D/Core/Window.h"
-#include "RPG2D/Renderer/GraphicsContext.h"
+#include "RPG2D/Function/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>
 

@@ -2,6 +2,9 @@
 
 namespace RPG2D {
 
+	/// <summary>
+	/// 图形上下文，方法：初始化 交换缓冲 创建对应API的context
+	/// </summary>
 	class GraphicsContext
 	{
 	public:

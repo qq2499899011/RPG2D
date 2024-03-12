@@ -2,9 +2,10 @@
 #include "Window.h"
 #include "RPG2D/Events/ApplicationEvent.h"
 #include "RPG2D/Core/LayerStack.h"
-#include "RPG2D/Renderer/game.h"
+#include "RPG2D/Function/Renderer/game.h"
+#include "RPG2D/ImGui/ImGuiLayer.h"
 namespace RPG2D {
-	class RPG2D_API Application
+	class Application
 	{
 	public:
 			Application();
@@ -16,6 +17,7 @@ namespace RPG2D {
 			static Application& Get() { return *s_Instance; }
 			Window& GetWindow() { return *m_Window; }
 			Scope<Window> m_Window;
+			ImGuiLayer* m_ImGuiLayer;
 			Game* m_Game = nullptr;
 	private:
 			bool m_Running = true;

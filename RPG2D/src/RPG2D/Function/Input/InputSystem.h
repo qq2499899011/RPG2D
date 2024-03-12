@@ -10,7 +10,7 @@
 /// </summary>
 namespace RPG2D {
 
-	class Input
+	class InputSystem
 	{
 	public:
 		static bool IsKeyPressed(KeyCode key);

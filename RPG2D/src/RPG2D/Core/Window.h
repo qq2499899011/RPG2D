@@ -23,7 +23,7 @@ namespace RPG2D {
 	};
 
 	// 接口，定义一些windows要用到的函数
-	class RPG2D_API Window
+	class Window
 	{
 	public:
 		using EventCallbackFn = std::function<void(Event&)>; //返回void.接受Event的事件处理函数类型

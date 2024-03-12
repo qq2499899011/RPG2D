@@ -5,7 +5,7 @@
 #include "RPG2D/Core/Timestep.h"
 namespace RPG2D {
 
-	class RPG2D_API Layer
+	class Layer
 	{
 	public:
 		Layer(const std::string& name = "Layer");

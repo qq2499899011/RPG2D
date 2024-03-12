@@ -23,7 +23,6 @@ class Sandbox :public RPG2D::Application {
 	public:
 	Sandbox() {
 		PushLayer(new ExampleLayer());
-		PushOverlay(new RPG2D::ImGuiLayer());
 	}
 	~Sandbox() {
 

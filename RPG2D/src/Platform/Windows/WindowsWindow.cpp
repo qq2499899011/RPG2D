@@ -7,7 +7,7 @@
 #include "RPG2D/Events/MouseEvent.h"
 #include "RPG2D/Events/KeyEvent.h"
 #include <glad/glad.h>
-//#include "RPG2D/Renderer/Renderer.h"
+//#include "RPG2D/Function/RendererManager/RendererManager.h"
 
 //#include "Platform/OpenGL/OpenGLContext.h"
 
@@ -76,7 +76,7 @@ namespace RPG2D {
 			RPG2D_PROFILE_SCOPE("glfwCreateWindow");
 			/*
 			#if defined(RPG2D_DEBUG)
-			if (Renderer::GetAPI() == RendererAPI::API::OpenGL)
+			if (RendererManager::GetAPI() == RendererAPI::API::OpenGL)
 				glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);//捕获Opengl的调试信息。
 			#endif
 			*/

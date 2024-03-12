@@ -1,6 +1,6 @@
 #pragma once
 
-#include "RPG2D/Core/Log.h"
+#include "RPG2D/Core/LogSystem.h"
 
 #include <algorithm>
 #include <chrono>

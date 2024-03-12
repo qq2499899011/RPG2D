@@ -1,6 +1,6 @@
 #include "RPG2Dpch.h"
 #include "Application.h"
-#include "Log.h"
+#include "LogSystem.h"
 #include "Timestep.h"
 
 namespace RPG2D {
@@ -19,7 +19,8 @@ namespace RPG2D {
 		m_Game->Init();
 		
 		//新建imgui层，同时将imguiLayer加入到layerStack里面
-		
+		m_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
 	}
 	Application::~Application() {
 		//需要销毁一些东西
@@ -37,6 +38,16 @@ namespace RPG2D {
 	}
 
 	void Application::Run() {
+		//就在这里对整个游戏的核心进行处理
+		//窗口更新;
+
+		//不同子系统进行更新;
+
+		//逻辑处理 输入 物理 动画 
+		
+		//渲染处理 UI texture
+
+
 		while (m_Running) {
 			m_Window->OnUpdate();
 			//HACK:渲染游戏 是不是应该clearbit一下
@@ -44,7 +55,14 @@ namespace RPG2D {
 			//HACK:暂时放在这里
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate(1);
-			
+			m_ImGuiLayer->Begin();
+			{
+				RPG2D_PROFILE_SCOPE("LayerStack OnImGuiRender");
+
+				for (Layer* layer : m_LayerStack)
+					layer->OnImGuiRender();
+			}
+			m_ImGuiLayer->End();
 		}
 		
 	}
@@ -81,7 +99,7 @@ namespace RPG2D {
 		}
 
 		m_Minimized = false;
-		Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
+		RendererManager::OnWindowResize(e.GetWidth(), e.GetHeight());
 		*/
 		return false;//不会过滤，后面需要对event进行再处理
 	}

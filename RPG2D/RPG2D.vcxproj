@@ -23,19 +23,19 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
@@ -54,113 +54,112 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
     <OutDir>..\bin\Debug-windows-x86_64\RPG2D\</OutDir>
     <IntDir>..\bin-int\Debug-windows-x86_64\RPG2D\</IntDir>
     <TargetName>RPG2D</TargetName>
-    <TargetExt>.dll</TargetExt>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
     <OutDir>..\bin\Release-windows-x86_64\RPG2D\</OutDir>
     <IntDir>..\bin-int\Release-windows-x86_64\RPG2D\</IntDir>
     <TargetName>RPG2D</TargetName>
-    <TargetExt>.dll</TargetExt>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
-    <LinkIncremental>false</LinkIncremental>
     <OutDir>..\bin\Dist-windows-x86_64\RPG2D\</OutDir>
     <IntDir>..\bin-int\Dist-windows-x86_64\RPG2D\</IntDir>
     <TargetName>RPG2D</TargetName>
-    <TargetExt>.dll</TargetExt>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>RPG2Dpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>RPG2D_PLATFORM_WINDOWS;RPG2D_BUILD_DLL;GLFW_INCLUDE_NONE;RPG2D_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING;RPG2D_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;RPG2D_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\ImGui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>..\bin\Debug-windows-x86_64\RPG2D\RPG2D.lib</ImportLibrary>
     </Link>
-    <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Debug-windows-x86_64\RPG2D\RPG2D.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\RPG2D\RPG2D.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\RPG2D\RPG2D.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul)</Command>
-    </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>RPG2Dpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>RPG2D_PLATFORM_WINDOWS;RPG2D_BUILD_DLL;GLFW_INCLUDE_NONE;RPG2D_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING;RPG2D_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;RPG2D_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\ImGui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>..\bin\Release-windows-x86_64\RPG2D\RPG2D.lib</ImportLibrary>
     </Link>
-    <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Release-windows-x86_64\RPG2D\RPG2D.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\RPG2D\RPG2D.dll ..\bin\Release-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\RPG2D\RPG2D.dll ..\bin\Release-windows-x86_64\Sandbox &gt; nul)</Command>
-    </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>RPG2Dpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>RPG2D_PLATFORM_WINDOWS;RPG2D_BUILD_DLL;GLFW_INCLUDE_NONE;RPG2D_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING;RPG2D_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;RPG2D_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\ImGui;vendor\glm;vendor\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>..\bin\Dist-windows-x86_64\RPG2D\RPG2D.lib</ImportLibrary>
     </Link>
-    <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Dist-windows-x86_64\RPG2D\RPG2D.dll\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\RPG2D\RPG2D.dll ..\bin\Dist-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\RPG2D\RPG2D.dll ..\bin\Dist-windows-x86_64\Sandbox &gt; nul)</Command>
-    </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
+    <ClInclude Include="src\RPG2D\Function\Framework\Scene.h" />
+    <ClInclude Include="src\RPG2D\Function\Framework\Components.h" />
+    <ClInclude Include="src\RPG2D\Resource\SceneManager\SceneManager.h" />
+    <ClInclude Include="src\RPG2D\Function\Animation\AnimationSystem.h" />
+    <ClInclude Include="src\RPG2D\Function\Global\GlobalContext.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\RPG2D.h" />
     <ClInclude Include="src\RPG2D\Core\Application.h" />
     <ClInclude Include="src\RPG2D\Core\Base.h" />
-    <ClInclude Include="src\RPG2D\Core\Core.h" />
     <ClInclude Include="src\RPG2D\Core\EntryPoint.h" />
-    <ClInclude Include="src\RPG2D\Core\Input.h" />
+    <ClInclude Include="src\RPG2D\Function\Input\InputSystem.h" />
     <ClInclude Include="src\RPG2D\Core\KeyCodes.h" />
     <ClInclude Include="src\RPG2D\Core\Layer.h" />
     <ClInclude Include="src\RPG2D\Core\LayerStack.h" />
-    <ClInclude Include="src\RPG2D\Core\Log.h" />
+    <ClInclude Include="src\RPG2D\Core\LogSystem.h" />
     <ClInclude Include="src\RPG2D\Core\MouseCodes.h" />
     <ClInclude Include="src\RPG2D\Core\Timestep.h" />
     <ClInclude Include="src\RPG2D\Core\Window.h" />
@@ -170,14 +169,21 @@
     <ClInclude Include="src\RPG2D\Events\KeyEvent.h" />
     <ClInclude Include="src\RPG2D\Events\MouseEvent.h" />
     <ClInclude Include="src\RPG2D\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="src\RPG2D\Renderer\GraphicsContext.h" />
-    <ClInclude Include="src\RPG2D\Renderer\game.h" />
-    <ClInclude Include="src\RPG2D\Renderer\game_object.h" />
-    <ClInclude Include="src\RPG2D\Renderer\resource_manager.h" />
-    <ClInclude Include="src\RPG2D\Renderer\shader.h" />
-    <ClInclude Include="src\RPG2D\Renderer\sprite_renderer.h" />
-    <ClInclude Include="src\RPG2D\Renderer\texture.h" />
+    <ClInclude Include="src\RPG2D\Function\Renderer\Buffer.h" />
+    <ClInclude Include="src\RPG2D\Function\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\RPG2D\Function\Renderer\game.h" />
+    <ClInclude Include="src\RPG2D\Function\Renderer\game_object.h" />
+    <ClInclude Include="src\RPG2D\Function\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\RPG2D\Function\Renderer\RenderCommand.h" />
+    <ClInclude Include="src\RPG2D\Function\Renderer\RendererManager.h" />
+    <ClInclude Include="src\RPG2D\Function\Renderer\RendererAPI.h" />
+    <ClInclude Include="src\RPG2D\Function\Renderer\AssetManager.h" />
+    <ClInclude Include="src\RPG2D\Function\Renderer\Shader.h" />
+    <ClInclude Include="src\RPG2D\Function\Renderer\sprite_renderer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="src\RPG2Dpch.h" />
+    <ClInclude Include="src\RPG2D\Function\Renderer\VertexArray.h" />
+    <ClInclude Include="src\RPG2D\Function\Renderer\Texture2D.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_features.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_fixes.hpp" />
@@ -597,25 +603,41 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Framework\Scene.cpp" />
+    <ClCompile Include="src\RPG2D\Resource\SceneManager\SceneManager.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Animation\AnimationSystem.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Global\GlobalContext.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\RPG2D\Core\Application.cpp" />
     <ClCompile Include="src\RPG2D\Core\Layer.cpp" />
     <ClCompile Include="src\RPG2D\Core\LayerStack.cpp" />
-    <ClCompile Include="src\RPG2D\Core\Log.cpp" />
+    <ClCompile Include="src\RPG2D\Core\LogSystem.cpp" />
     <ClCompile Include="src\RPG2D\Core\Window.cpp" />
+    <ClCompile Include="src\RPG2D\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\RPG2D\ImGui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\RPG2D\Renderer\GraphicsContext.cpp" />
-    <ClCompile Include="src\RPG2D\Renderer\game.cpp" />
-    <ClCompile Include="src\RPG2D\Renderer\game_object.cpp" />
-    <ClCompile Include="src\RPG2D\Renderer\resource_manager.cpp" />
-    <ClCompile Include="src\RPG2D\Renderer\shader.cpp" />
-    <ClCompile Include="src\RPG2D\Renderer\sprite_renderer.cpp" />
-    <ClCompile Include="src\RPG2D\Renderer\texture.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Renderer\GraphicsContext.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Renderer\game.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Renderer\game_object.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Renderer\RenderCommand.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Renderer\RendererManager.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Renderer\AssetManager.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Renderer\Shader.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Renderer\sprite_renderer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
     <ClCompile Include="src\RPG2Dpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\RPG2D\Function\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Renderer\Texture2D.cpp" />
     <ClCompile Include="vendor\stb_image\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>

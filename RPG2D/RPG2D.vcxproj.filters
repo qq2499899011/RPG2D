@@ -7,9 +7,6 @@
     <Filter Include="src\Platform">
       <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Platform\OpenGL">
-      <UniqueIdentifier>{35A49437-A105-7245-2A73-B8F796D3A804}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Platform\Windows">
       <UniqueIdentifier>{5B054582-4794-CE4B-F0B2-E246DC20DFF1}</UniqueIdentifier>
     </Filter>
@@ -57,9 +54,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>src\Platform\Windows</Filter>
     </ClInclude>
@@ -72,13 +66,10 @@
     <ClInclude Include="src\RPG2D\Core\Base.h">
       <Filter>src\RPG2D\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\RPG2D\Core\Core.h">
-      <Filter>src\RPG2D\Core</Filter>
-    </ClInclude>
     <ClInclude Include="src\RPG2D\Core\EntryPoint.h">
       <Filter>src\RPG2D\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\RPG2D\Core\Input.h">
+    <ClInclude Include="src\RPG2D\Function\Input\InputSystem.h">
       <Filter>src\RPG2D\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\RPG2D\Core\KeyCodes.h">
@@ -90,7 +81,7 @@
     <ClInclude Include="src\RPG2D\Core\LayerStack.h">
       <Filter>src\RPG2D\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\RPG2D\Core\Log.h">
+    <ClInclude Include="src\RPG2D\Core\LogSystem.h">
       <Filter>src\RPG2D\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\RPG2D\Core\MouseCodes.h">
@@ -120,25 +111,25 @@
     <ClInclude Include="src\RPG2D\ImGui\ImGuiLayer.h">
       <Filter>src\RPG2D\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="src\RPG2D\Renderer\GraphicsContext.h">
+    <ClInclude Include="src\RPG2D\Function\Renderer\GraphicsContext.h">
       <Filter>src\RPG2D\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\RPG2D\Renderer\game.h">
+    <ClInclude Include="src\RPG2D\Function\Renderer\game.h">
       <Filter>src\RPG2D\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\RPG2D\Renderer\game_object.h">
+    <ClInclude Include="src\RPG2D\Function\Renderer\game_object.h">
       <Filter>src\RPG2D\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\RPG2D\Renderer\resource_manager.h">
+    <ClInclude Include="src\RPG2D\Function\Renderer\AssetManager.h">
       <Filter>src\RPG2D\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\RPG2D\Renderer\shader.h">
+    <ClInclude Include="src\RPG2D\Function\Renderer\Shader.h">
       <Filter>src\RPG2D\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\RPG2D\Renderer\sprite_renderer.h">
+    <ClInclude Include="src\RPG2D\Function\Renderer\sprite_renderer.h">
       <Filter>src\RPG2D\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\RPG2D\Renderer\texture.h">
+    <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h">
       <Filter>src\RPG2D\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\RPG2Dpch.h">
@@ -1395,11 +1386,25 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="src\RPG2D\Function\Renderer\Buffer.h" />
+    <ClInclude Include="src\RPG2D\Function\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\RPG2D\Function\Renderer\RenderCommand.h" />
+    <ClInclude Include="src\RPG2D\Function\Renderer\RendererManager.h" />
+    <ClInclude Include="src\RPG2D\Function\Renderer\RendererAPI.h" />
+    <ClInclude Include="src\RPG2D\Function\Renderer\VertexArray.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="src\RPG2D\Function\Global\GlobalContext.h" />
+    <ClInclude Include="src\RPG2D\Function\Animation\AnimationSystem.h" />
+    <ClInclude Include="src\RPG2D\Function\Renderer\Texture2D.h" />
+    <ClInclude Include="src\RPG2D\Resource\SceneManager\SceneManager.h" />
+    <ClInclude Include="src\RPG2D\Function\Framework\Components.h" />
+    <ClInclude Include="src\RPG2D\Function\Framework\Scene.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
@@ -1415,34 +1420,37 @@
     <ClCompile Include="src\RPG2D\Core\LayerStack.cpp">
       <Filter>src\RPG2D\Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\RPG2D\Core\Log.cpp">
+    <ClCompile Include="src\RPG2D\Core\LogSystem.cpp">
       <Filter>src\RPG2D\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\RPG2D\Core\Window.cpp">
       <Filter>src\RPG2D\Core</Filter>
     </ClCompile>
+    <ClCompile Include="src\RPG2D\ImGui\ImGuiBuild.cpp">
+      <Filter>src\RPG2D\ImGui</Filter>
+    </ClCompile>
     <ClCompile Include="src\RPG2D\ImGui\ImGuiLayer.cpp">
       <Filter>src\RPG2D\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="src\RPG2D\Renderer\GraphicsContext.cpp">
+    <ClCompile Include="src\RPG2D\Function\Renderer\GraphicsContext.cpp">
       <Filter>src\RPG2D\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\RPG2D\Renderer\game.cpp">
+    <ClCompile Include="src\RPG2D\Function\Renderer\game.cpp">
       <Filter>src\RPG2D\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\RPG2D\Renderer\game_object.cpp">
+    <ClCompile Include="src\RPG2D\Function\Renderer\game_object.cpp">
       <Filter>src\RPG2D\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\RPG2D\Renderer\resource_manager.cpp">
+    <ClCompile Include="src\RPG2D\Function\Renderer\AssetManager.cpp">
       <Filter>src\RPG2D\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\RPG2D\Renderer\shader.cpp">
+    <ClCompile Include="src\RPG2D\Function\Renderer\Shader.cpp">
       <Filter>src\RPG2D\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\RPG2D\Renderer\sprite_renderer.cpp">
+    <ClCompile Include="src\RPG2D\Function\Renderer\sprite_renderer.cpp">
       <Filter>src\RPG2D\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\RPG2D\Renderer\texture.cpp">
+    <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp">
       <Filter>src\RPG2D\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\RPG2Dpch.cpp">
@@ -1451,5 +1459,21 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
+    <ClCompile Include="src\RPG2D\Function\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Renderer\RenderCommand.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Renderer\RendererManager.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Global\GlobalContext.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Animation\AnimationSystem.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Renderer\Texture2D.cpp" />
+    <ClCompile Include="src\RPG2D\Resource\SceneManager\SceneManager.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Framework\Scene.cpp" />
   </ItemGroup>
 </Project>
