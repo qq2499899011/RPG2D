@@ -1,7 +1,7 @@
 #include "RPG2Dpch.h"
 #include "RPG2D/Function/Renderer/GraphicsContext.h"
 
-#include "RPG2D/Function/Renderer/Renderer.h"
+#include "RPG2D/Function/Renderer/RendererManager.h"
 #include "Platform/OpenGL/OpenGLContext.h"
 
 namespace RPG2D {

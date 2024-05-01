@@ -1,7 +1,6 @@
 #pragma once
 #include "spdlog/spdlog.h"
 #include "spdlog/fmt/ostr.h"
-#include "Core.h"
 namespace RPG2D {
 	//HACK:临时将ref放在这里
 	template<typename T>

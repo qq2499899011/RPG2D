@@ -28,10 +28,9 @@ namespace RPG2D {
 		RPG2D_CORE_ASSERT(status, "Failed to initialize Glad!");
 
 		RPG2D_CORE_INFO("OpenGL Info:");
-		RPG2D_CORE_INFO("  Vendor: {0}", glGetString(GL_VENDOR));
-		RPG2D_CORE_INFO("  Renderer: {0}", glGetString(GL_RENDERER));
-		RPG2D_CORE_INFO("  Version: {0}", glGetString(GL_VERSION));
-
+		RPG2D_CORE_INFO("  Vendor: {0}", std::string(reinterpret_cast<const char*>(glGetString(GL_VENDOR))));
+		RPG2D_CORE_INFO("  Renderer: {0}", std::string(reinterpret_cast<const char*>(glGetString(GL_RENDERER))));
+		RPG2D_CORE_INFO("  Version: {0}", std::string(reinterpret_cast<const char*>(glGetString(GL_VERSION))));
 		RPG2D_CORE_ASSERT(GLVersion.major > 4 || (GLVersion.major == 4 && GLVersion.minor >= 5), "RPG2D requires at least OpenGL version 4.5!");
 	}
 	/// <summary>

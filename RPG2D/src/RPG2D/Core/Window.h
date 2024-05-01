@@ -1,7 +1,6 @@
 #pragma once
 
 #include "RPG2D/Core/Base.h"
-#include"RPG2D/Core/Core.h"
 #include "RPG2D/Events/Event.h"
 #include <string>
 #include <functional>

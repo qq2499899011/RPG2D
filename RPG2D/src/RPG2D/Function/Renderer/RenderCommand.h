@@ -5,7 +5,7 @@
 namespace RPG2D {
 
 	/// <summary>
-	/// 静态方法对renderAPI进行包装，有一个静态的RenderAPI对象，所有方法都是直接包装，不经过任何加工
+	/// 将OpenGL的渲染指令封装，没有其他作用。和RendererAPI一对。
 	/// </summary>
 	class RenderCommand
 	{

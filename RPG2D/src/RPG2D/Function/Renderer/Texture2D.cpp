@@ -1,6 +1,6 @@
 #include "RPG2Dpch.h"
 #include "Texture2D.h"
-#include "Renderer.h"
+#include "RendererManager.h"
 #include "Platform/OpenGL/OpenGLTexture.h"
 namespace RPG2D {
 	Ref<Texture2D> Texture2D::Create(std::string& name)

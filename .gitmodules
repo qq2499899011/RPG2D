@@ -10,3 +10,6 @@
 [submodule "RPG2D/vendor/glm"]
 	path = RPG2D/vendor/glm
 	url = git@github.com:g-truc/glm.git
+[submodule "RPG2D/vendor/Box2D"]
+	path = RPG2D/vendor/Box2D
+	url = git@github.com:qq2499899011/box2d.git

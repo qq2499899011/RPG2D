@@ -11,8 +11,7 @@
 #include "RPG2D/Function/Renderer/Texture2D.h"
 #include <glad/glad.h>
 
-// OpenGLTexture is able to store and configure a texture in OpenGL.
-// It also hosts utility functions for easy management.
+//储存ID 长宽 
 namespace RPG2D {
 	class OpenGLTexture : public Texture2D
 	{
@@ -20,16 +19,16 @@ namespace RPG2D {
 		// holds the ID of the texture object, used for all texture operations to reference to this particular texture
 		uint32_t ID;
 		// texture image dimensions
-		uint32_t Width, Height; // width and height of loaded image in pixels
+		uint32_t Width, Height; // 图片的像素长宽,获取本身大小。
 		// texture Format
-		uint32_t Internal_Format; // format of texture object
-		uint32_t Image_Format; // format of loaded image
+		uint32_t Internal_Format; //内部格式，如何存储数据
+		uint32_t Image_Format; // 加载格式，如何加载数据
 		// texture configuration
-		uint32_t Wrap_S; // wrapping mode on S axis
-		uint32_t Wrap_T; // wrapping mode on T axis
-		uint32_t Filter_Min; // filtering mode if texture pixels < screen pixels
-		uint32_t Filter_Max; // filtering mode if texture pixels > screen pixels
-		std::string name;//名称。
+		uint32_t Wrap_S; // 水平轴反转模式
+		uint32_t Wrap_T; // 垂直轴反转
+		uint32_t Filter_Min; // 被缩小时采取的过滤模式
+		uint32_t Filter_Max; // 被放大时采取的过滤模式
+		std::string name;//名称
 	public:
 		// constructor (sets default texture modes)
 		OpenGLTexture(std::string& name);
@@ -38,10 +37,12 @@ namespace RPG2D {
 		// binds the texture as the current active GL_TEXTURE_2D texture object
 		virtual void Bind(const uint32_t = 0) override;
 		virtual void Unbind(const uint32_t = 0) override;
-		std::string& GetName() const override;
+		virtual std::string GetName() const override;
 		virtual void SetInternalFormat(const uint32_t) override;
 		virtual void SetImageFormat(const uint32_t) override;
 		virtual uint32_t GetID() const override;
+		virtual uint32_t GetWidth() const override;
+		virtual uint32_t GetHeight() const override;
 	};
 }
 

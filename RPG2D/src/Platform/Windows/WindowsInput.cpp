@@ -1,5 +1,5 @@
 #include "RPG2Dpch.h"
-#include "RPG2D/Function/InputSystem.h"
+#include "RPG2D/Function/Input/InputSystem.h"
 
 #include "RPG2D/Core/Application.h"
 #include <GLFW/glfw3.h>

@@ -30,7 +30,9 @@ namespace RPG2D {
 		glm::mat4 m_ViewMatrix;
 		glm::mat4 m_ViewProjectionMatrix;
 
+		//相机位置
 		glm::vec3 m_Position = { 0.0f, 0.0f, 0.0f };
+		//相机旋转
 		float m_Rotation = 0.0f;
 	};
 

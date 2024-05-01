@@ -1,22 +1,44 @@
 #include "RPG2Dpch.h"
 #include "RendererManager.h"
-#include "RPG2D/Function/Renderer/Renderer2D.h"
-
+#include "RPG2D/Resource/Scene/Components.h"
 namespace RPG2D {
-
-	Scope<RendererManager::SceneData> RendererManager::s_SceneData = CreateScope<RendererManager::SceneData>();
-
 	void RendererManager::Init()
 	{
 		RPG2D_PROFILE_FUNCTION();
-
+		//渲染相关初始化
 		RenderCommand::Init();
-		Renderer2D::Init();
+		//创建场景数据
+		//生成SpriteRenderer
+		m_SpriteRenderer = CreateRef<SpriteRenderer>(GlobalContext::GetInstace()->m_AssetManager->GetShader("sprite"));
+		//生成CameraController
+		m_CameraController = CreateRef<OrthographicCameraController>(1280.0f / 720.0f);
+		//Renderer2D::Init();
+	}
+
+	void RendererManager::Update(Ref<Scene> scene, Timestep ts)
+	{
+		//获取相机transform.
+		//设置主相机
+		BeginScene(m_CameraController->GetCamera());
+		//遍历实体，进行渲染.
+		//绘制精灵
+		// Draw sprites
+		Ref<entt::registry> m_Registry = GlobalContext::GetInstace()->m_SceneManager->GetRegistry();
+		{
+			auto group = m_Registry->group<TransformComponent>(entt::get<SpriteRendererComponent>);
+			for (auto entity : group)
+			{
+				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+
+				DrawSprite(transform, sprite);
+			}
+		}
+		EndScene();
 	}
 
 	void RendererManager::Shutdown()
 	{
-		Renderer2D::Shutdown();
+		//Renderer2D::Shutdown();
 	}
 
 	void RendererManager::OnWindowResize(uint32_t width, uint32_t height)
@@ -26,27 +48,28 @@ namespace RPG2D {
 
 	void RendererManager::BeginScene(OrthographicCamera& camera)
 	{
-		s_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
+		//Shader设置相机Uniform
+		GlobalContext::GetInstace()->m_AssetManager->GetShader("sprite")->SetMat4("view_projection", m_CameraController->GetCamera().GetViewProjectionMatrix());
 	}
 
 	void RendererManager::EndScene()
 	{
+		//什么也不做
+
 	}
 
-	/// <summary>
-	/// 传入shader 物体数据 transform，以此画出游戏对象。
-	/// </summary>
-	/// <param name="shader"></param>
-	/// <param name="vertexArray"></param>
-	/// <param name="transform"></param>
-	void RendererManager::Submit(const Ref<Shader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transform)
+	//直接与图片大小有关。
+	void RendererManager::DrawSprite(TransformComponent& transform, SpriteRendererComponent& sprite)
 	{
-		shader->Bind();
-		shader->SetMat4("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
-		shader->SetMat4("u_Transform", transform);
-
-		vertexArray->Bind();
-		RenderCommand::DrawIndexed(vertexArray);
+		//获取位置
+		glm::vec2 pos = glm::vec2(transform.Translation.x, transform.Translation.y);
+		//获取图片本身大小。
+		//获取scale
+		glm::vec2 scale = glm::vec2(transform.Scale.x, transform.Scale.y);
+		//获取size
+		glm::vec2 size = glm::vec2(scale.x * sprite.Texture->GetWidth(), scale.y * sprite.Texture->GetHeight());
+		//根据Transform和Sprite将精灵绘制出来
+		m_SpriteRenderer->DrawSprite(sprite.Texture, pos, size, transform.Rotation.z);
 	}
 
 }

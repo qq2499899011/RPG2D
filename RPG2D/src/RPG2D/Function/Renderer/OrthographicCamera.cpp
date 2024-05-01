@@ -1,5 +1,5 @@
 #include "RPG2Dpch.h"
-#include "RPG2D/Renderer/OrthographicCamera.h"
+#include "OrthographicCamera.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 

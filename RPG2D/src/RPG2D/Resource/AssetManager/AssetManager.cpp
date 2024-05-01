@@ -12,7 +12,7 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
-
+#include <glad/glad.h>
 #include <stb_image.h>
 
 namespace RPG2D {
@@ -99,8 +99,9 @@ namespace RPG2D {
 		const char *vShaderCode = vertexCode.c_str();
 		const char *fShaderCode = fragmentCode.c_str();
 		const char *gShaderCode = geometryCode.c_str();
+		//ÅÐ¶ÏÈç¹û
 		// 2. now create shader object from source code
-		return Shader::Create(vShaderCode,fShaderCode,gShaderCode);
+		return Shader::Create(vShaderCode,fShaderCode,gShaderFile != nullptr ? gShaderCode : nullptr);
 	}
 
 	/// <summary>

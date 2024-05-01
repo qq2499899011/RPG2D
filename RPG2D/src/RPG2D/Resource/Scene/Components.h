@@ -1,18 +1,23 @@
 #pragma once
 
-#include "RPG2D/Function/Renderer/Texture2D.h"
-#include "RPG2D/Core/Base.h"
-//#include "Hazel/Renderer/Font.h"
-#include <string>
+#include "RPG2D/Core/UID.h"
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
-/// <summary>
-/// TODO:会进行比较大的修改，比如对于碰撞盒渲染之类的。
-/// </summary>
+#include <string>
+#include <RPG2D/Function/Renderer/Texture2D.h>
+
 namespace RPG2D {
+
+	struct IDComponent
+	{
+		UID ID;
+		IDComponent() = default;
+		IDComponent(const IDComponent&) = default;
+	};
 
 	struct TagComponent
 	{
@@ -57,6 +62,10 @@ namespace RPG2D {
 			: Color(color) {}
 	};
 
+	struct AnimatorControllerComponent
+	{
+		
+	};
 	struct CircleRendererComponent
 	{
 		glm::vec4 Color{ 1.0f, 1.0f, 1.0f, 1.0f };
@@ -67,38 +76,24 @@ namespace RPG2D {
 		CircleRendererComponent(const CircleRendererComponent&) = default;
 	};
 
-	struct ScriptComponent
+	/*
+	struct CameraComponent
 	{
-		std::string ClassName;
+		SceneCamera Camera;
+		bool Primary = true; // TODO: think about moving to Scene
+		bool FixedAspectRatio = false;
 
-		ScriptComponent() = default;
-		ScriptComponent(const ScriptComponent&) = default;
+		CameraComponent() = default;
+		CameraComponent(const CameraComponent&) = default;
 	};
-
-	// Forward declaration
-	class ScriptableEntity;
-
-	struct NativeScriptComponent
-	{
-		ScriptableEntity* Instance = nullptr;
-
-		ScriptableEntity* (*InstantiateScript)();
-		void (*DestroyScript)(NativeScriptComponent*);
-
-		template<typename T>
-		void Bind()
-		{
-			InstantiateScript = []() { return static_cast<ScriptableEntity*>(new T()); };
-			DestroyScript = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
-		}
-	};
-
+	*/
 	// Physics
-
 	struct Rigidbody2DComponent
 	{
+		//刚体类型
 		enum class BodyType { Static = 0, Dynamic, Kinematic };
 		BodyType Type = BodyType::Static;
+		//固定旋转
 		bool FixedRotation = false;
 
 		// Storage for runtime
@@ -144,14 +139,7 @@ namespace RPG2D {
 		CircleCollider2DComponent(const CircleCollider2DComponent&) = default;
 	};
 
-	//UI组件
-
-	//按钮 spriteRender+con
-
-
-	//
 	/*
-	
 	struct TextComponent
 	{
 		std::string TextString;
@@ -162,19 +150,18 @@ namespace RPG2D {
 	};
 	*/
 
-	/// <summary>
-	/// 打包组件，后续可能会会用到，暂时不用。
-	/// </summary>
-	/// <typeparam name="...Component"></typeparam>
 	template<typename... Component>
 	struct ComponentGroup
 	{
 	};
 
+	/// <summary>
+	/// 不包括IDComponent 和 tagComponent
+	/// </summary>
 	using AllComponents =
 		ComponentGroup<TransformComponent, SpriteRendererComponent,
-		CircleRendererComponent, ScriptComponent,
-		NativeScriptComponent, Rigidbody2DComponent, BoxCollider2DComponent,
+		CircleRendererComponent,
+	    Rigidbody2DComponent, BoxCollider2DComponent,
 		CircleCollider2DComponent>;
 
 }

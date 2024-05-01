@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "LogSystem.h"
 #include "Timestep.h"
-
+#include "RPG2D/Function/Renderer/RenderCommand.h"
 namespace RPG2D {
 
 
@@ -36,22 +36,27 @@ namespace RPG2D {
 	{
 		m_LayerStack.PushOverlay(layer);
 	}
+	
+	void Application::Init()
+	{
+		//做一些准备
+		//初始化GlobalContext
+		//分别调用GlobalContext的各个系统的Update
+	}
 
+	void Application::Update(Timestep ts)
+	{
+	}
 	void Application::Run() {
-		//就在这里对整个游戏的核心进行处理
-		//窗口更新;
-
-		//不同子系统进行更新;
-
-		//逻辑处理 输入 物理 动画 
-		
-		//渲染处理 UI texture
-
-
+		//globalContext获取所有system。
+		//物理->脚本->动画->渲染->UI,对场景进行处理。
+		//记录时间。
 		while (m_Running) {
-			m_Window->OnUpdate();
-			//HACK:渲染游戏 是不是应该clearbit一下
-			m_Game->Render();
+			//
+			//场景处理
+			//这两部也应该是
+			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+			RenderCommand::Clear();
 			//HACK:暂时放在这里
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate(1);
@@ -62,9 +67,11 @@ namespace RPG2D {
 				for (Layer* layer : m_LayerStack)
 					layer->OnImGuiRender();
 			}
+			//HACK:渲染游戏 是不是应该clearbit一下
+			m_Game->Render();
 			m_ImGuiLayer->End();
+			m_Window->OnUpdate();
 		}
-		
 	}
 	void Application::OnEvent(Event& e) {
 		//处理事件中心
@@ -86,11 +93,10 @@ namespace RPG2D {
 		m_Running = false;
 		return true;
 	}
-	//HACK:部分内容没实现，先保留函数并注释
+	
 	bool Application::OnWindowResize(WindowResizeEvent& e)
 	{
-		/*
-		* 		RPG2D_PROFILE_FUNCTION();
+		RPG2D_PROFILE_FUNCTION();
 
 		if (e.GetWidth() == 0 || e.GetHeight() == 0)
 		{
@@ -99,8 +105,7 @@ namespace RPG2D {
 		}
 
 		m_Minimized = false;
-		RendererManager::OnWindowResize(e.GetWidth(), e.GetHeight());
-		*/
-		return false;//不会过滤，后面需要对event进行再处理
+		GlobalContext::GetInstace()->m_RendererManager->OnWindowResize(e.GetWidth(), e.GetHeight());
+		return false;
 	}
 }

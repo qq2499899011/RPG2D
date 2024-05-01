@@ -12,10 +12,9 @@
 #include <map>
 #include <string>
 
-#include <glad/glad.h>
 
-#include "Texture2D.h"
-#include "Shader.h"
+#include "RPG2D/Function/Renderer/Shader.h"
+#include "RPG2D/Function/Renderer/Texture2D.h"
 
 /// <summary>
 /// 从根据传入的着色器文件路径生成shdaer

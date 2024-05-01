@@ -1,9 +1,10 @@
 #pragma once
 #include"RPG2D/Core/Application.h"
-#include"RPG2D/Core/Log.h"
+#include"RPG2D/Core/LogSystem.h"
 //程序入口
 //需要声明外部的函数
 #ifdef RPG2D_PLATFORM_WINDOWS
+//依靠外部实现CreatApplication
 extern RPG2D::Application* RPG2D::CreateApplication();
 int main(int argc,char** argv) {
 	//测试日志,初始化 

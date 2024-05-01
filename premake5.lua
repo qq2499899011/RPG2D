@@ -24,25 +24,14 @@ IncludeDir["Glad"] = "%{wks.location}/RPG2D/vendor/Glad/include"
 IncludeDir["ImGui"] = "%{wks.location}/RPG2D/vendor/ImGui"
 IncludeDir["stb_image"] = "%{wks.location}/RPG2D/vendor/stb_image"
 IncludeDir["glm"] = "%{wks.location}/RPG2D/vendor/glm"
-
---[[
-IncludeDir["yaml_cpp"] = "%{wks.location}/RPG2D/vendor/yaml-cpp/include"
-IncludeDir["Box2D"] = "%{wks.location}/RPG2D/vendor/Box2D/include"
-IncludeDir["filewatch"] = "%{wks.location}/RPG2D/vendor/filewatch"
-IncludeDir["ImGuizmo"] = "%{wks.location}/RPG2D/vendor/ImGuizmo"
 IncludeDir["entt"] = "%{wks.location}/RPG2D/vendor/entt/include"
-IncludeDir["mono"] = "%{wks.location}/RPG2D/vendor/mono/include"
-IncludeDir["shaderc"] = "%{wks.location}/RPG2D/vendor/shaderc/include"
-IncludeDir["SPIRV_Cross"] = "%{wks.location}/RPG2D/vendor/SPIRV-Cross"
-IncludeDir["VulkanSDK"] = "%{VULKAN_SDK}/Include"
-IncludeDir["msdfgen"] = "%{wks.location}/RPG2D/vendor/msdf-atlas-gen/msdfgen"
-IncludeDir["msdf_atlas_gen"] = "%{wks.location}/RPG2D/vendor/msdf-atlas-gen/msdf-atlas-gen"
-]]
+IncludeDir["Box2D"] = "%{wks.location}/RPG2D/vendor/Box2D/include"
 
 --添加子模组premake 文件
 include "RPG2D/vendor/GLFW" -- GLFW脚本文件
 include "RPG2D/vendor/Glad"
 include "RPG2D/vendor/imgui"
+include "RPG2D/vendor/Box2D"
 
 project "RPG2D"--项目名称
 	location "RPG2D"
@@ -60,15 +49,11 @@ project "RPG2D"--项目名称
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
-
 		"%{prj.name}/vendor/stb_image/**.h",
 		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl",
-
-		--"vendor/ImGuizmo/ImGuizmo.h",
-		--"vendor/ImGuizmo/ImGuizmo.cpp"
-	}
+		}
 
 	includedirs
 	{
@@ -79,6 +64,8 @@ project "RPG2D"--项目名称
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
+		"%{IncludeDir.entt}",
+		"%{IncludeDir.Box2D}",
 	}
 	links
 	{
@@ -86,6 +73,7 @@ project "RPG2D"--项目名称
 		"opengl32.lib",
 		"Glad",
 		"ImGui",
+		"Box2D",
 	}
 
 	filter "system:windows"
