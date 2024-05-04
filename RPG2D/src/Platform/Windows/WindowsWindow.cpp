@@ -204,10 +204,9 @@ namespace RPG2D {
 
 	void WindowsWindow::OnUpdate()
 	{
-		RPG2D_PROFILE_FUNCTION();
 		glfwPollEvents();// 处理窗口事件
 		//渲染结束后交换缓冲
-		glfwSwapBuffers(m_Window);//TODO:交换上下文，之后会封装
+		glfwSwapBuffers(m_Window);
 	}
 
 	void WindowsWindow::SetVSync(bool enabled)

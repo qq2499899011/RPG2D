@@ -1,72 +1,50 @@
-[19:24:17] [info] RPG2D: Hello
-[19:24:17] [warning] APP: client hello
-[19:24:17] [info] RPG2D: Creating window RPG2D Engine (1600, 900)
-[19:24:18] [warning] APP: www
-[19:24:18] [info] RPG2D: MouseMovedEvent: 875, 407
-[19:24:19] [info] RPG2D: MouseMovedEvent: 876, 407
-[19:24:19] [info] RPG2D: MouseMovedEvent: 881, 409
-[19:24:19] [info] RPG2D: MouseMovedEvent: 884, 414
-[19:24:19] [info] RPG2D: MouseMovedEvent: 886, 419
-[19:24:19] [info] RPG2D: MouseMovedEvent: 887, 422
-[19:24:19] [info] RPG2D: MouseMovedEvent: 888, 425
-[19:24:19] [info] RPG2D: MouseMovedEvent: 891, 432
-[19:24:19] [info] RPG2D: MouseMovedEvent: 894, 439
-[19:24:19] [info] RPG2D: MouseMovedEvent: 895, 445
-[19:24:19] [info] RPG2D: MouseMovedEvent: 900, 456
-[19:24:19] [info] RPG2D: MouseMovedEvent: 903, 466
-[19:24:19] [info] RPG2D: MouseMovedEvent: 907, 477
-[19:24:19] [info] RPG2D: MouseMovedEvent: 911, 488
-[19:24:19] [info] RPG2D: MouseMovedEvent: 916, 503
-[19:24:19] [info] RPG2D: MouseMovedEvent: 919, 513
-[19:24:19] [info] RPG2D: MouseMovedEvent: 923, 524
-[19:24:19] [info] RPG2D: MouseMovedEvent: 925, 531
-[19:24:19] [info] RPG2D: MouseMovedEvent: 929, 543
-[19:24:19] [info] RPG2D: MouseMovedEvent: 931, 554
-[19:24:19] [info] RPG2D: MouseMovedEvent: 934, 562
-[19:24:19] [info] RPG2D: MouseMovedEvent: 937, 575
-[19:24:19] [info] RPG2D: MouseMovedEvent: 940, 583
-[19:24:19] [info] RPG2D: MouseMovedEvent: 941, 592
-[19:24:19] [info] RPG2D: MouseMovedEvent: 945, 599
-[19:24:19] [info] RPG2D: MouseMovedEvent: 947, 603
-[19:24:19] [info] RPG2D: MouseMovedEvent: 948, 605
-[19:24:19] [info] RPG2D: MouseMovedEvent: 950, 610
-[19:24:19] [info] RPG2D: MouseMovedEvent: 951, 613
-[19:24:19] [info] RPG2D: MouseMovedEvent: 952, 616
-[19:24:19] [info] RPG2D: MouseMovedEvent: 952, 618
-[19:24:19] [info] RPG2D: MouseMovedEvent: 957, 625
-[19:24:19] [info] RPG2D: MouseMovedEvent: 960, 629
-[19:24:19] [info] RPG2D: MouseMovedEvent: 969, 633
-[19:24:19] [info] RPG2D: MouseMovedEvent: 982, 638
-[19:24:19] [info] RPG2D: MouseMovedEvent: 994, 641
-[19:24:19] [info] RPG2D: MouseMovedEvent: 1028, 643
-[19:24:19] [info] RPG2D: MouseMovedEvent: 1046, 643
-[19:24:19] [info] RPG2D: MouseMovedEvent: 1066, 643
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1365, 216
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1378, 186
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1385, 167
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1392, 144
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1395, 125
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1395, 111
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1395, 101
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1395, 85
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1392, 78
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1389, 71
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1384, 66
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1378, 59
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1375, 52
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1371, 29
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1371, 20
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1371, 14
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1373, 7
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1376, 1
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1530, 1
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1531, 1
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1532, 1
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1534, 1
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1535, 1
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1538, 1
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1539, 1
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1541, 1
-[19:24:20] [info] RPG2D: MouseMovedEvent: 1543, 0
-[19:24:20] [info] RPG2D: WindowClose
-[19:24:20] [warning] APP: www1111111222
+[13:53:21] [info] RPG2D: Hello
+[13:53:21] [warning] APP: client hello
+[13:53:21] [info] RPG2D: Creating window RPG2D Engine (1600, 900)
+[13:53:21] [warning] APP: www
+[13:53:21] [info] RPG2D: MouseMovedEvent: 1301, 508
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1301, 506
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1307, 496
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1315, 485
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1323, 472
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1334, 457
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1351, 437
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1378, 403
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1409, 362
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1441, 317
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1469, 276
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1493, 239
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1512, 204
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1527, 176
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1537, 157
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1544, 142
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1549, 130
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1553, 121
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1556, 114
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1559, 107
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1563, 98
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1567, 90
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1572, 81
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1576, 72
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1581, 63
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1585, 56
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1589, 49
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1592, 42
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1594, 37
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1595, 34
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1596, 31
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1597, 29
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1598, 28
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1599, 27
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1599, 26
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1599, 25
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1599, 23
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1599, 21
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1598, 18
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1597, 15
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1595, 11
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1592, 7
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1591, 3
+[13:53:22] [info] RPG2D: MouseMovedEvent: 1590, 0
+[13:53:22] [info] RPG2D: WindowClose
+[13:53:23] [warning] APP: www1111111222

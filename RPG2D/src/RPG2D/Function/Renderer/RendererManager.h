@@ -1,11 +1,10 @@
 #pragma once
 #include "RPG2D/Function/Renderer/RenderCommand.h"
-#include "RPG2D/Function/Renderer/OrthographicCamera.h"
 #include "RPG2D/Function/Renderer/Shader.h"
 #include "RPG2D/Core/Timestep.h"
-#include "RPG2D/Resource/Scene/Scene.h"
 #include "RPG2D/Function/Renderer/SpriteRenderer.h"
 #include "RPG2D/Function/Renderer/OrthographicCameraController.h"
+#include "RPG2D/Function/Script/Components.h"
 namespace RPG2D {
 
 	/// <summary>
@@ -16,7 +15,7 @@ namespace RPG2D {
 	{
 	public:
 		void Init();
-		void Update(Ref<Scene> scene,Timestep ts);
+		void Update(Timestep ts);
 		void Shutdown();
 		void OnWindowResize(uint32_t width, uint32_t height);
 		void BeginScene(OrthographicCamera& camera);

@@ -14,10 +14,6 @@ namespace RPG2D {
 		//创建窗口
 		m_Window = Window::Create();
 		m_Window->SetEventCallback(RPG2D_BIND_EVENT_FN(Application::OnEvent));//这里是把当前的app对象捕获进去了。
-		//创建游戏
-		m_Game = new Game(m_Window->GetWidth(), m_Window->GetHeight());
-		m_Game->Init();
-		
 		//新建imgui层，同时将imguiLayer加入到layerStack里面
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
@@ -41,35 +37,43 @@ namespace RPG2D {
 	{
 		//做一些准备
 		//初始化GlobalContext
-		//分别调用GlobalContext的各个系统的Update
+		GlobalContext::Create();
+		//生成GetInstace;
+		GlobalContext::GetInstance()->Init();
 	}
 
 	void Application::Update(Timestep ts)
 	{
+		//调用更新函数
+		GlobalContext::GetInstance()->Update(ts);
 	}
 	void Application::Run() {
+		//初始化
+		GlobalContext::GetInstance()->m_RendererManager->Init();
 		//globalContext获取所有system。
 		//物理->脚本->动画->渲染->UI,对场景进行处理。
 		//记录时间。
 		while (m_Running) {
-			//
-			//场景处理
-			//这两部也应该是
-			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
-			RenderCommand::Clear();
+			//获取时间间隔
+			float time = GetTime();
+			Timestep timestep = time - m_LastFrameTime;
+			m_LastFrameTime = time;
 			//HACK:暂时放在这里
+			Update(timestep);
+			
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate(1);
 			m_ImGuiLayer->Begin();
 			{
 				RPG2D_PROFILE_SCOPE("LayerStack OnImGuiRender");
-
 				for (Layer* layer : m_LayerStack)
 					layer->OnImGuiRender();
 			}
 			//HACK:渲染游戏 是不是应该clearbit一下
-			m_Game->Render();
 			m_ImGuiLayer->End();
+			
+			
+			//处理事件+交换上下文
 			m_Window->OnUpdate();
 		}
 	}
@@ -105,7 +109,7 @@ namespace RPG2D {
 		}
 
 		m_Minimized = false;
-		GlobalContext::GetInstace()->m_RendererManager->OnWindowResize(e.GetWidth(), e.GetHeight());
+		GlobalContext::GetInstance()->m_RendererManager->OnWindowResize(e.GetWidth(), e.GetHeight());
 		return false;
 	}
 }

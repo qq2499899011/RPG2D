@@ -24,6 +24,12 @@ namespace RPG2D {
 		return Shaders[name];
 	}
 
+	Ref<Shader> AssetManager::LoadShaderWithDir(const std::string vshader, const std::string fshader, const std::string gshader, std::string name)
+	{
+		if (gshader.empty())return LoadShader((shaderDir + vshader).c_str(), (shaderDir + fshader).c_str(), nullptr, name);
+		else return LoadShader((shaderDir + vshader).c_str(), (shaderDir + fshader).c_str(), (shaderDir + gshader).c_str(), name);
+	}
+
 	Ref<Shader> AssetManager::GetShader(std::string name)
 	{
 		return Shaders[name];
@@ -33,6 +39,11 @@ namespace RPG2D {
 	{
 		Textures[name] = loadTextureFromFile(file, alpha);
 		return Textures[name];
+	}
+
+	Ref<Texture2D> AssetManager::LoadTextureWithDir(const std::string file, bool alpha, std::string name)
+	{
+		return LoadTexture((textureDir + file).c_str(), alpha, name);
 	}
 
 	Ref<Texture2D> AssetManager::GetTexture(std::string name)

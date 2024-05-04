@@ -1,6 +1,7 @@
 #include "RPG2Dpch.h"
 #include "RendererManager.h"
-#include "RPG2D/Resource/Scene/Components.h"
+#include "RPG2D/Resource/Scene/Scene.h"
+#include "RPG2D/Function/Script/Components.h"
 namespace RPG2D {
 	void RendererManager::Init()
 	{
@@ -8,22 +9,29 @@ namespace RPG2D {
 		//渲染相关初始化
 		RenderCommand::Init();
 		//创建场景数据
-		//生成SpriteRenderer
-		m_SpriteRenderer = CreateRef<SpriteRenderer>(GlobalContext::GetInstace()->m_AssetManager->GetShader("sprite"));
+		//生成SpriteRenderer,这里需要先创建场景，才能初始化。
+		m_SpriteRenderer = CreateRef<SpriteRenderer>(GlobalContext::GetInstance()->m_AssetManager->GetShader("sprite"));
 		//生成CameraController
-		m_CameraController = CreateRef<OrthographicCameraController>(1280.0f / 720.0f);
+		m_CameraController = CreateRef<OrthographicCameraController>(1280.0f,720.0f,false);
 		//Renderer2D::Init();
 	}
 
-	void RendererManager::Update(Ref<Scene> scene, Timestep ts)
+	void RendererManager::Update(Timestep ts)
 	{
+		//清理场景
+		RenderCommand::SetClearColor({ 0.0f, 0.0f, 0.5f, 1 });
+		RenderCommand::Clear();
+		//调用相机控制器
+		m_CameraController->OnUpdate(ts);
 		//获取相机transform.
 		//设置主相机
 		BeginScene(m_CameraController->GetCamera());
+		//glm::mat4 projection = glm::ortho(0.0f,1280.0f ,0.0f , 720.0f, -1.0f, 1.0f);
+		//GlobalContext::GetInstance()->m_AssetManager->GetShader("sprite")->SetMat4("view_projection", projection);
 		//遍历实体，进行渲染.
 		//绘制精灵
 		// Draw sprites
-		Ref<entt::registry> m_Registry = GlobalContext::GetInstace()->m_SceneManager->GetRegistry();
+		entt::registry* m_Registry = GlobalContext::GetInstance()->m_SceneManager->GetRegistry();
 		{
 			auto group = m_Registry->group<TransformComponent>(entt::get<SpriteRendererComponent>);
 			for (auto entity : group)
@@ -49,7 +57,7 @@ namespace RPG2D {
 	void RendererManager::BeginScene(OrthographicCamera& camera)
 	{
 		//Shader设置相机Uniform
-		GlobalContext::GetInstace()->m_AssetManager->GetShader("sprite")->SetMat4("view_projection", m_CameraController->GetCamera().GetViewProjectionMatrix());
+		GlobalContext::GetInstance()->m_AssetManager->GetShader("sprite")->SetMat4("view_projection", m_CameraController->GetCamera().GetViewProjectionMatrix());
 	}
 
 	void RendererManager::EndScene()

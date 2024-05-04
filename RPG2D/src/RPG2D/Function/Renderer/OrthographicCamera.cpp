@@ -12,8 +12,8 @@ namespace RPG2D {
 	/// <param name="right"></param>
 	/// <param name="bottom"></param>
 	/// <param name="top"></param>
-	OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top)
-		: m_ProjectionMatrix(glm::ortho(left, right, bottom, top, -1.0f, 1.0f)), m_ViewMatrix(1.0f)
+	OrthographicCamera::OrthographicCamera(float width,float height)
+		: m_ProjectionMatrix(glm::ortho(0.f, width, height, 0.f, -1.0f, 1.0f)), m_ViewMatrix(1.0f)
 	{
 		RPG2D_PROFILE_FUNCTION();
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
@@ -26,11 +26,11 @@ namespace RPG2D {
 	/// <param name="right"></param>
 	/// <param name="bottom"></param>
 	/// <param name="top"></param>
-	void OrthographicCamera::SetProjection(float left, float right, float bottom, float top)
+	void OrthographicCamera::SetProjection(float width,float height)
 	{
 		RPG2D_PROFILE_FUNCTION();
 
-		m_ProjectionMatrix = glm::ortho(left, right, bottom, top, -1.0f, 1.0f);
+		m_ProjectionMatrix = glm::ortho(0.f, width, height, 0.f, -1.0f, 1.0f);
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
 

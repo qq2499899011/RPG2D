@@ -1,9 +1,9 @@
 #pragma once
 
 #include "RPG2D/Core/UID.h"
-#include "Components.h"
+#include "RPG2D/Function/Script/Components.h"
 #include "entt.hpp"
-#include "Scene.h"
+#include "RPG2D/Resource/Scene/Scene.h"
 
 namespace RPG2D {
 

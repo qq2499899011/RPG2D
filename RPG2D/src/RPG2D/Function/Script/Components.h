@@ -8,8 +8,8 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
 #include <string>
-#include <RPG2D/Function/Renderer/Texture2D.h>
-
+#include "RPG2D/Function/Renderer/Texture2D.h"
+#include "RPG2D/Function/Animation/AnimatiorController.h"
 namespace RPG2D {
 
 	struct IDComponent
@@ -62,10 +62,34 @@ namespace RPG2D {
 			: Color(color) {}
 	};
 
-	struct AnimatorControllerComponent
+	//动画组件
+	struct AnimatiorControllerComponent
 	{
-		
+		//指向AnimatorController
+		Ref<AnimatiorController> animatiorController;
+		AnimatiorControllerComponent() = default;
+		AnimatiorControllerComponent(const AnimatiorControllerComponent&) = default;
+		AnimatiorControllerComponent(Ref<AnimatiorController> animatior): animatiorController(animatior){}
 	};
+	// Forward declaration
+	class ScriptableEntity;
+
+	//脚本组件,使用这个组件都要执行一次Bind函数。
+	struct NativeScriptComponent
+	{
+		ScriptableEntity* Instance = nullptr;
+		//实例化脚本
+		ScriptableEntity* (*InstantiateScript)();
+		//摧毁脚本
+		void (*DestroyScript)(NativeScriptComponent*);
+		template<typename T>
+		void Bind()
+		{
+			InstantiateScript = []() { return static_cast<ScriptableEntity*>(new T()); };
+			DestroyScript = [](NativeScriptComponent* nsc) { delete nsc->Instance; nsc->Instance = nullptr; };
+		}
+	};
+
 	struct CircleRendererComponent
 	{
 		glm::vec4 Color{ 1.0f, 1.0f, 1.0f, 1.0f };

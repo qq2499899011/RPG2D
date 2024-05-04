@@ -9,8 +9,9 @@ namespace RPG2D {
 	public:
 		SceneManager();
 		Ref<Scene> SetSceneActive(int num);
+		Ref<Scene> SetSceneActive(const std::string& name);
 		bool AddScene(Ref<Scene> scene);
-		Ref<entt::registry> GetRegistry();
+		entt::registry* GetRegistry();
 		Ref<Scene> GetSceneActive();
 	private:
 		int activeSceneNum;

@@ -16,6 +16,7 @@
 #include "RPG2D/Core/Base.h"
 #include "RPG2D/Debug/Instrumentor.h"
 #include "RPG2D/Function/Global/GlobalContext.h"
+#include "RPG2D/Core/Timestep.h"
 #ifdef RPG2D_PLATFORM_WINDOWS
 #include <Windows.h>
 #endif

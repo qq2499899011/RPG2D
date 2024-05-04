@@ -5,8 +5,8 @@
 
 namespace RPG2D {
 
-	OrthographicCameraController::OrthographicCameraController(float aspectRatio, bool rotation)
-		: m_AspectRatio(aspectRatio), m_Camera(-m_AspectRatio * m_ZoomLevel, m_AspectRatio* m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel), m_Rotation(rotation)
+	OrthographicCameraController::OrthographicCameraController(float width,float height,bool rotation)
+		: m_Camera(width,height), m_Rotation(rotation)
 	{
 	}
 
@@ -52,7 +52,6 @@ namespace RPG2D {
 
 		m_Camera.SetPosition(m_CameraPosition);
 
-		m_CameraTranslationSpeed = m_ZoomLevel;
 	}
 
 	void OrthographicCameraController::OnEvent(Event& e)
@@ -65,16 +64,17 @@ namespace RPG2D {
 
 	void OrthographicCameraController::OnResize(float width, float height)
 	{
-		m_AspectRatio = width / height;
-		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+		m_Camera.SetProjection(width,height);
 	}
 
 	//鼠标滑轮滚动时，修改本身的zoomLevel
 	bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
 	{
+		/*
 		m_ZoomLevel -= e.GetYOffset() * 0.25f;
 		m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+		*/
 		return false;
 	}
 

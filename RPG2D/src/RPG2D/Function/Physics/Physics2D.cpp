@@ -1,7 +1,43 @@
 #include "RPG2Dpch.h"
 #include "Physics2D.h"
 #include "RPG2D/Function/Global/GlobalContext.h"
-#include "RPG2D/Resource/Scene/Entity.h"
+#include "RPG2D/Function/Script/Entity.h"
+#include "RPG2D/Function/Script/Components.h"
+// Box2D
+#include "box2d/b2_world.h"
+#include "box2d/b2_body.h"
+#include "box2d/b2_fixture.h"
+#include "box2d/b2_polygon_shape.h"
+#include "box2d/b2_circle_shape.h"
+
+//将box2d中的body类型与组件中定义的body类型进行相互转换
+namespace RPG2D {
+	inline b2BodyType Rigidbody2DTypeToBox2DBody(Rigidbody2DComponent::BodyType bodyType)
+	{
+		switch (bodyType)
+		{
+		case Rigidbody2DComponent::BodyType::Static:    return b2_staticBody;
+		case Rigidbody2DComponent::BodyType::Dynamic:   return b2_dynamicBody;
+		case Rigidbody2DComponent::BodyType::Kinematic: return b2_kinematicBody;
+		}
+
+		RPG2D_CORE_ASSERT(false, "Unknown body type");
+		return b2_staticBody;
+	}
+
+	inline Rigidbody2DComponent::BodyType Rigidbody2DTypeFromBox2DBody(b2BodyType bodyType)
+	{
+		switch (bodyType)
+		{
+		case b2_staticBody:    return Rigidbody2DComponent::BodyType::Static;
+		case b2_dynamicBody:   return Rigidbody2DComponent::BodyType::Dynamic;
+		case b2_kinematicBody: return Rigidbody2DComponent::BodyType::Kinematic;
+		}
+
+		RPG2D_CORE_ASSERT(false, "Unknown body type");
+		return Rigidbody2DComponent::BodyType::Static;
+	}
+}
 namespace RPG2D {
 	PhysicsSystem::PhysicsSystem()
 	{
@@ -10,27 +46,29 @@ namespace RPG2D {
 	PhysicsSystem::~PhysicsSystem()
 	{
 	}
+	//这个初始化需要场景定义结束之后进行调用。
 	void PhysicsSystem::Init()
 	{
+		//切换场景时调用
 		//通过SceneManager获取相应的view
-		//根据
 		//设置重力加速度方向
 		m_PhysicsWorld = new b2World({ 0.0f, -9.8f });
 		//找到所有含有刚体组件的实体
 		//直接通过SceneManager获取view
-		Ref<entt::registry> m_Registry = GlobalContext::GetInstace()->m_SceneManager->GetRegistry();
+		entt::registry* m_Registry = GlobalContext::GetInstance()->m_SceneManager->GetRegistry();
+		GlobalContext::GetInstance()->m_SceneManager->GetSceneActive()->SetPhysicsWorld(m_PhysicsWorld);
 		auto view = m_Registry->view<Rigidbody2DComponent>();
 		//遍历实体，对于每个刚体实体，建立其在box2d中的对应body。
 		for (auto e : view)
 		{
 			//清晰表达实体与场景关系
-			Entity entity = { e, GlobalContext::GetInstace()->m_SceneManager->GetSceneActive().get()};
+			Entity entity = { e, GlobalContext::GetInstance()->m_SceneManager->GetSceneActive().get()};
 			//获取transform和刚体组件
 			auto& transform = entity.GetComponent<TransformComponent>();
 			auto& rb2d = entity.GetComponent<Rigidbody2DComponent>();
 
 			b2BodyDef bodyDef;
-			bodyDef.type = Utils::Rigidbody2DTypeToBox2DBody(rb2d.Type);
+			bodyDef.type = Rigidbody2DTypeToBox2DBody(rb2d.Type);
 			bodyDef.position.Set(transform.Translation.x, transform.Translation.y);
 			bodyDef.angle = transform.Rotation.z;
 
@@ -76,13 +114,13 @@ namespace RPG2D {
 	{
 		//更新模拟情况。
 		m_PhysicsWorld->Step(ts, velocityIterations, positionIterations);
-		Ref<entt::registry> m_Registry = GlobalContext::GetInstace()->m_SceneManager->GetRegistry();
+		entt::registry* m_Registry = GlobalContext::GetInstance()->m_SceneManager->GetRegistry();
 		// 遍历所有具有刚体组件的实体
 		auto view = m_Registry->view<Rigidbody2DComponent>();
 		for (auto e : view)
 		{
 			//新建实体
-			Entity entity = { e, GlobalContext::GetInstace()->m_SceneManager->GetSceneActive().get()};
+			Entity entity = { e, GlobalContext::GetInstance()->m_SceneManager->GetSceneActive().get()};
 			//获取实体的组件
 			auto& transform = entity.GetComponent<TransformComponent>();
 			auto& rb2d = entity.GetComponent<Rigidbody2DComponent>();

@@ -118,7 +118,11 @@ project "Sandbox"
 	{
 		"RPG2D/vendor/spdlog/include",
 		"RPG2D/src",
+		"RPG2D/vendor",
+		"%{IncludeDir.entt}",
 		"%{IncludeDir.glm}",
+		"%{IncludeDir.ImGuizmo}"
+
 	}
 
 	links{

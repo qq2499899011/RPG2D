@@ -8,6 +8,7 @@
 ******************************************************************/
 #include "RPG2Dpch.h"
 #include "SpriteRenderer.h"
+#include <glad/glad.h>
 #include "RenderCommand.h"
 #include "Buffer.h"
 namespace RPG2D {

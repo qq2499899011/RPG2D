@@ -7,10 +7,22 @@ namespace RPG2D {
 		activeSceneNum = 0;
 	}
 
+	//设置活跃场景
 	Ref<Scene> SceneManager::SetSceneActive(int num)
 	{
 		activeSceneNum = num;
+		//设置后初始化物理场景
+		GlobalContext::GetInstance()->m_PhysicsSystem->Init();
 		return scenes[num];
+	}
+	//通过场景名称设置活跃场景
+	Ref<Scene> SceneManager::SetSceneActive(const std::string& name) {
+		for (size_t i = 0; i < scenes.size(); i++) {
+			if ((scenes[i]->GetName()).compare(name) == 0) {
+				//比较名称是否一致
+				return SetSceneActive(i);
+			}
+		}
 	}
 
 	bool SceneManager::AddScene(Ref<Scene> scene)
@@ -19,7 +31,7 @@ namespace RPG2D {
 		return true;
 	}
 
-	Ref<entt::registry> SceneManager::GetRegistry()
+	entt::registry* SceneManager::GetRegistry()
 	{
 		return scenes[activeSceneNum]->GetRegistry();
 	}

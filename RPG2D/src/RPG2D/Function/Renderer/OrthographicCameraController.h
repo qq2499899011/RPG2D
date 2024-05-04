@@ -10,7 +10,7 @@ namespace RPG2D {
 	class OrthographicCameraController
 	{
 	public:
-		OrthographicCameraController(float aspectRatio, bool rotation = false);
+		OrthographicCameraController(float,float,bool);
 
 		void OnUpdate(Timestep ts);
 		void OnEvent(Event& e);
@@ -20,15 +20,10 @@ namespace RPG2D {
 		OrthographicCamera& GetCamera() { return m_Camera; }
 		const OrthographicCamera& GetCamera() const { return m_Camera; }
 
-		float GetZoomLevel() const { return m_ZoomLevel; }
-		void SetZoomLevel(float level) { m_ZoomLevel = level; }
 	private:
 		bool OnMouseScrolled(MouseScrolledEvent& e);
 		bool OnWindowResized(WindowResizeEvent& e);
 	private:
-		float m_AspectRatio;
-		//缩放程度
-		float m_ZoomLevel = 1.0f;
 		//相机
 		OrthographicCamera m_Camera;
 		//是否可以旋转

@@ -14,6 +14,8 @@ int main(int argc,char** argv) {
 	//创建app并运行
 	auto app = RPG2D::CreateApplication();
 	RPG2D_WARN("www");
+	//初始化并执行
+	app->Init();
 	app->Run();
 	delete app;
 	RPG2D_WARN("www1111111222");

@@ -38,7 +38,7 @@ namespace RPG2D {
 		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;//设置事件的回调函数，当事件发生时回调callback
 		virtual void SetVSync(bool enabled) = 0;//设置垂直同步
 		virtual bool IsVSync() const = 0;//是否开启了垂直同步
-
+		virtual float GetTime() const = 0;//返回时间
 		virtual void* GetNativeWindow() const = 0;//获取窗口
 
 		static Scope<Window> Create(const WindowProps& props = WindowProps());//创建窗口，创建一个指向window类的unique指针
