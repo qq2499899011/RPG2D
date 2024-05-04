@@ -1,6 +1,7 @@
 #include <RPG2D.h>
 #include "RPG2D/Core/EntryPoint.h"
 #include "Player.h"
+#include "Bullet.h"
 using namespace RPG2D;
 class ExampleLayer : public Layer
 {
@@ -108,6 +109,31 @@ public:
 			scene->AddComponentWithName<NativeScriptComponent>("Player", playerScript);
 			//物理组件
 			//scene->DisableEntity(player);
+		}
+		//子弹
+		{
+			Entity player = scene->CreateEntity("Bullet");
+			assetManager->LoadTextureWithDir("bullet.png",true,"bullet");
+			//新建sprite组件
+			SpriteRendererComponent bulletSprite;
+			bulletSprite.Texture = assetManager->GetTexture("bullet");
+			//增加sprite组件
+			scene->AddComponentWithName<SpriteRendererComponent>("Bullet", bulletSprite);
+			//设置transform组件
+			TransformComponent bulletTrans;
+			bulletTrans.Translation = glm::vec3{ 0,0,0 };
+			//大小。scale*长宽 = 实际大小。
+			//scale = 实际大小/长宽。
+			//bulletTrans.Scale = glm::vec3{ 100.0f / playerSprite.Texture->GetWidth(),50.0f / playerSprite.Texture->GetHeight(),1 };
+			bulletTrans.Scale = glm::vec3{ 0.2,0.2,1 };
+			scene->GetComponentByName<TransformComponent>("Bullet") = bulletTrans;
+			//脚本组件
+			NativeScriptComponent bulletScript;
+			bulletScript.Bind<Bullet>();
+			scene->AddComponentWithName<NativeScriptComponent>("Bullet", bulletScript);
+			//物理组件
+			//scene->DisableEntity(player);
+
 		}
 		//启用场景
 		sceneManager->SetSceneActive("Start");
