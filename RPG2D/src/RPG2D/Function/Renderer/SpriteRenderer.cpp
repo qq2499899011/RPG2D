@@ -35,7 +35,8 @@ namespace RPG2D {
 		model = glm::translate(model, glm::vec3(position, 0.0f));  // first translate (transformations are: scale happens first, then rotation, and then final translation happens; reversed order)
 		//旋转
 		model = glm::translate(model, glm::vec3(0.5f * size.x, 0.5f * size.y, 0.0f)); // move origin of rotation to center of quad
-		model = glm::rotate(model, glm::radians(rotate), glm::vec3(0.0f, 0.0f, 1.0f)); // then rotate
+		//model = glm::rotate(model, glm::radians(rotate), glm::vec3(0.0f, 0.0f, 1.0f)); // then rotate
+		model = glm::rotate(model, glm::radians(-180.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // then rotate
 		model = glm::translate(model, glm::vec3(-0.5f * size.x, -0.5f * size.y, 0.0f)); // move origin back
 		//缩放
 		model = glm::scale(model, glm::vec3(size, 1.0f)); // last scale
@@ -56,7 +57,7 @@ namespace RPG2D {
 	{
 		//生成VBO数据
 		unsigned int VBO;
-		float vertices[] = { 
+		float vertices[] = {
 			// pos      // tex
 			0.0f, 1.0f, 0.0f, 1.0f,
 			1.0f, 0.0f, 1.0f, 0.0f,
@@ -66,6 +67,17 @@ namespace RPG2D {
 			1.0f, 1.0f, 1.0f, 1.0f,
 			1.0f, 0.0f, 1.0f, 0.0f
 		};
+		/*float vertices[] = {
+			// pos      // tex
+			0.0f, 1.0f, 1.0f, 1.0f,
+			1.0f, 0.0f, 0.0f, 0.0f,
+			0.0f, 0.0f, 1.0f, 0.0f, 
+
+			0.0f, 1.0f, 1.0f, 1.0f,
+			1.0f, 1.0f, 0.0f, 1.0f,
+			1.0f, 0.0f, 0.0f, 0.0f
+		};*/
+
 		//生成VAO
 		quadVAO = VertexArray::Create();
 		//生成VBO；

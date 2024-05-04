@@ -16,10 +16,14 @@ namespace RPG2D {
 
 	Scene::Scene()
 	{
+		// 设置默认的过滤条件，排除带有"Disable"标签的实体
+		m_Registry.set<entt::exclude_t<Disable>>();
 	}
 
 	Scene::Scene(const std::string& name)
 	{
+		// 设置默认的过滤条件，排除带有"Disable"标签的实体
+		m_Registry.set<entt::exclude_t<Disable>>();
 		this->name = name;
 	}
 
@@ -92,7 +96,6 @@ namespace RPG2D {
 		m_EntityMap.erase(entity.GetUID());
 		m_Registry.destroy(entity);
 	}
-	//销毁，直接从Map中删除，并且摧毁entity
 	//实体复制,其实也相当于预制体
 	Entity Scene::DuplicateEntity(Entity entity)
 	{
@@ -120,6 +123,11 @@ namespace RPG2D {
 			return { m_EntityMap.at(uid), this };
 
 		return {};
+	}
+
+	void Scene::DisableEntity(Entity entity)
+	{
+		m_Registry.assign<Disable>(entity);
 	}
 
 	entt::registry* Scene::GetRegistry()

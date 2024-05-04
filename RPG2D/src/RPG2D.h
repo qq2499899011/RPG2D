@@ -8,5 +8,5 @@
 #include "RPG2D/Function/Script/Components.h"
 #include "RPG2D/Function/Script/Entity.h"
 #include "RPG2D/Resource/Scene/Scene.h"
+#include "RPG2D/Function/Script/ScriptableEntity.h"
 //entry point
-#include "RPG2D/Core/EntryPoint.h"

@@ -8,7 +8,7 @@ namespace RPG2D {
     // 添加纹理
     void Animatior::AddFrame(Timestep ts, Ref<Texture2D> texture) {
         //还要记录最大时间。
-        if (ts > maxTime)maxTime = ts;
+        if (ts > maxTime-0.1f)maxTime = ts+0.1f;
         frames[ts] = texture;
     }
     // 更新时间
@@ -22,7 +22,8 @@ namespace RPG2D {
         curTexture = it->second;
     }
     //重置时间
-    void Animatior::Reset() {
+    void Animatior::Reset() 
+    {
         currentTime = 0;
     }
 }

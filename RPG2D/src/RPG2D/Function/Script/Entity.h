@@ -6,7 +6,7 @@
 #include "RPG2D/Resource/Scene/Scene.h"
 
 namespace RPG2D {
-
+	struct Disable{};
 	//对原entity的封装
 	class Entity
 	{

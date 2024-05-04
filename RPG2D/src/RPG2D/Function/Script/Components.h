@@ -127,6 +127,7 @@ namespace RPG2D {
 		Rigidbody2DComponent(const Rigidbody2DComponent&) = default;
 	};
 
+	//碰撞体的size可以和物体的长宽一致
 	struct BoxCollider2DComponent
 	{
 		glm::vec2 Offset = { 0.0f, 0.0f };

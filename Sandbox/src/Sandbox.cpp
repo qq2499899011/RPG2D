@@ -1,4 +1,6 @@
 #include <RPG2D.h>
+#include "RPG2D/Core/EntryPoint.h"
+#include "Player.h"
 using namespace RPG2D;
 class ExampleLayer : public Layer
 {
@@ -73,12 +75,12 @@ public:
 		}
 		//角色
 		{
-			scene->CreateEntity("Player");
+			Entity player = scene->CreateEntity("Player");
 			//创建animatior
 			Ref<Animatior> playerAnimatior = CreateRef<Animatior>();
-			playerAnimatior->AddFrame(0.1, assetManager->GetTexture("player1"));
-			playerAnimatior->AddFrame(0.2, assetManager->GetTexture("player2"));
-			playerAnimatior->AddFrame(0.3, assetManager->GetTexture("player3"));
+			playerAnimatior->AddFrame(0.0f, assetManager->GetTexture("player1"));
+			playerAnimatior->AddFrame(0.1f, assetManager->GetTexture("player2"));
+			playerAnimatior->AddFrame(0.2f, assetManager->GetTexture("player3"));
 			//创建Controller
 			Ref<AnimatiorController> playerAC = CreateRef<AnimatiorController>();
 			playerAC->AddAnimation(AnimationState::Idle, playerAnimatior);
@@ -100,6 +102,12 @@ public:
 			//playerTrans.Scale = glm::vec3{ 100.0f / playerSprite.Texture->GetWidth(),50.0f / playerSprite.Texture->GetHeight(),1 };
 			playerTrans.Scale = glm::vec3{1,1,1};
 			scene->GetComponentByName<TransformComponent>("Player") = playerTrans;
+			//脚本组件
+			NativeScriptComponent playerScript;
+			playerScript.Bind<Player>();
+			scene->AddComponentWithName<NativeScriptComponent>("Player", playerScript);
+			//物理组件
+			//scene->DisableEntity(player);
 		}
 		//启用场景
 		sceneManager->SetSceneActive("Start");

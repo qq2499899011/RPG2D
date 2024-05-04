@@ -2,6 +2,7 @@
 #include "RendererManager.h"
 #include "RPG2D/Resource/Scene/Scene.h"
 #include "RPG2D/Function/Script/Components.h"
+#include "RPG2D/Function/Script/Entity.h"
 namespace RPG2D {
 	void RendererManager::Init()
 	{
@@ -33,7 +34,8 @@ namespace RPG2D {
 		// Draw sprites
 		entt::registry* m_Registry = GlobalContext::GetInstance()->m_SceneManager->GetRegistry();
 		{
-			auto group = m_Registry->group<TransformComponent>(entt::get<SpriteRendererComponent>);
+			//auto group = m_Registry->group<TransformComponent>(entt::get<SpriteRendererComponent>);
+			auto group = m_Registry->group<TransformComponent,SpriteRendererComponent>(entt::exclude<Disable>);
 			for (auto entity : group)
 			{
 				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);

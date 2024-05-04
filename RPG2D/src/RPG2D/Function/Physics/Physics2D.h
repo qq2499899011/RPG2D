@@ -1,6 +1,7 @@
 #pragma once
 class b2World;
 namespace RPG2D {
+	class Entity;
 	class PhysicsSystem
 	{
 	public:
@@ -9,7 +10,7 @@ namespace RPG2D {
 		//每次加载场景后调用物理场景的调用函数。
 		void Init();
 		void Update(Timestep ts);
-
+		void AddEntity(Entity);
 	private:
 		//迭代精度
 		const int32_t velocityIterations = 6;

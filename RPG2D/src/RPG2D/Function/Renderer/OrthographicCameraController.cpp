@@ -13,12 +13,12 @@ namespace RPG2D {
 	void OrthographicCameraController::OnUpdate(Timestep ts)
 	{
 
-		if (InputSystem::IsKeyPressed(Key::A))
+		if (InputSystem::IsKeyPressed(Key::Left))
 		{
 			m_CameraPosition.x -= cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
 			m_CameraPosition.y -= sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
 		}
-		else if (InputSystem::IsKeyPressed(Key::D))
+		else if (InputSystem::IsKeyPressed(Key::Right))
 		{
 			m_CameraPosition.x += cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
 			m_CameraPosition.y += sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;

@@ -26,6 +26,8 @@ namespace RPG2D {
 		Entity FindEntityByName(std::string_view name);
 		//通过UID获取实体
 		Entity GetEntityByUID(UID uid);
+		//禁用组件
+		void DisableEntity(Entity entity);
 		//增加组件
 		template<typename T>
 		bool AddComponentWithName(const std::string& name, T& component) {
