@@ -48,18 +48,6 @@ public:
 		assetManager->LoadTextureWithDir("player1.png",true,"player1");
 		assetManager->LoadTextureWithDir("player2.png",true,"player2");
 		assetManager->LoadTextureWithDir("player3.png",true,"player3");
-		//创建animatior
-		Ref<Animatior> playerAnimatior = CreateRef<Animatior>();
-		playerAnimatior->AddFrame(0.1, assetManager->GetTexture("player1"));
-		playerAnimatior->AddFrame(0.2, assetManager->GetTexture("player2"));
-		playerAnimatior->AddFrame(0.3, assetManager->GetTexture("player3"));
-		//创建Controller
-		Ref<AnimatiorController> playerAC = CreateRef<AnimatiorController>();
-		playerAC->AddAnimation(AnimationState::Idle, playerAnimatior);
-		playerAC->SetState(AnimationState::Idle);
-		//创建动画组件
-		AnimatiorControllerComponent playerACcomponent;
-		playerACcomponent.animatiorController = playerAC;
 		//创建场景
 		Ref<SceneManager> sceneManager = GlobalContext::GetInstance()->m_SceneManager;
 		//创建场景
@@ -85,8 +73,33 @@ public:
 		}
 		//角色
 		{
-			
-			
+			scene->CreateEntity("Player");
+			//创建animatior
+			Ref<Animatior> playerAnimatior = CreateRef<Animatior>();
+			playerAnimatior->AddFrame(0.1, assetManager->GetTexture("player1"));
+			playerAnimatior->AddFrame(0.2, assetManager->GetTexture("player2"));
+			playerAnimatior->AddFrame(0.3, assetManager->GetTexture("player3"));
+			//创建Controller
+			Ref<AnimatiorController> playerAC = CreateRef<AnimatiorController>();
+			playerAC->AddAnimation(AnimationState::Idle, playerAnimatior);
+			playerAC->SetState(AnimationState::Idle);
+			//创建动画组件
+			AnimatiorControllerComponent playerACcomponent;
+			playerACcomponent.animatiorController = playerAC;
+			scene->AddComponentWithName<AnimatiorControllerComponent>("Player", playerACcomponent);
+			//新建sprite组件
+			SpriteRendererComponent playerSprite;
+			playerSprite.Texture = assetManager->GetTexture("player1");
+			//增加sprite组件
+			scene->AddComponentWithName<SpriteRendererComponent>("Player", playerSprite);
+			//设置transform组件
+			TransformComponent playerTrans;
+			playerTrans.Translation = glm::vec3{ 0,0,0 };
+			//大小。scale*长宽 = 实际大小。
+			//scale = 实际大小/长宽。
+			//playerTrans.Scale = glm::vec3{ 100.0f / playerSprite.Texture->GetWidth(),50.0f / playerSprite.Texture->GetHeight(),1 };
+			playerTrans.Scale = glm::vec3{1,1,1};
+			scene->GetComponentByName<TransformComponent>("Player") = playerTrans;
 		}
 		//启用场景
 		sceneManager->SetSceneActive("Start");

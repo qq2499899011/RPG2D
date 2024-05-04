@@ -184,7 +184,7 @@ namespace RPG2D {
 	/// </summary>
 	using AllComponents =
 		ComponentGroup<TransformComponent, SpriteRendererComponent,
-		CircleRendererComponent,
+		CircleRendererComponent,SpriteRendererComponent,NativeScriptComponent,
 	    Rigidbody2DComponent, BoxCollider2DComponent,
 		CircleCollider2DComponent>;
 

@@ -179,4 +179,12 @@ namespace RPG2D {
 	{
 	}
 
+	template<>
+	void Scene::OnComponentAdded<NativeScriptComponent>(Entity entity, NativeScriptComponent& component)
+	{
+	}
+	template<>
+	void Scene::OnComponentAdded<AnimatiorControllerComponent>(Entity entity, AnimatiorControllerComponent& component)
+	{
+	}
 }
