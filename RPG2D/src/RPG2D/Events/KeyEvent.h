@@ -10,7 +10,6 @@ namespace RPG2D {
 	public:
 		KeyCode GetKeyCode() const { return m_KeyCode; }
 
-		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 	protected:
 		//抽象类 keyEvent的基类，构造函数protected所以不会被实例化
 		KeyEvent(const KeyCode keycode)

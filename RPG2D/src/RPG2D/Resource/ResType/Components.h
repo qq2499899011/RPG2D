@@ -55,7 +55,7 @@ namespace RPG2D {
 		glm::vec4 Color{ 1.0f, 1.0f, 1.0f, 1.0f };
 		Ref<Texture2D> Texture;
 		float TilingFactor = 1.0f;
-
+		bool mirror = false;
 		SpriteRendererComponent() = default;
 		SpriteRendererComponent(const SpriteRendererComponent&) = default;
 		SpriteRendererComponent(const glm::vec4& color)
@@ -118,7 +118,7 @@ namespace RPG2D {
 		enum class BodyType { Static = 0, Dynamic, Kinematic };
 		BodyType Type = BodyType::Static;
 		//¹Ì¶¨Ðý×ª
-		bool FixedRotation = false;
+		bool FixedRotation = true;
 
 		// Storage for runtime
 		void* RuntimeBody = nullptr;

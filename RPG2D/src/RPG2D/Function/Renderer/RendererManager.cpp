@@ -1,8 +1,8 @@
 #include "RPG2Dpch.h"
 #include "RendererManager.h"
 #include "RPG2D/Resource/Scene/Scene.h"
-#include "RPG2D/Function/Script/Components.h"
-#include "RPG2D/Function/Script/Entity.h"
+#include "RPG2D/Resource/ResType/Components.h"
+#include "RPG2D/Resource/ResType/Entity.h"
 namespace RPG2D {
 	void RendererManager::Init()
 	{
@@ -34,8 +34,8 @@ namespace RPG2D {
 		// Draw sprites
 		entt::registry* m_Registry = GlobalContext::GetInstance()->m_SceneManager->GetRegistry();
 		{
-			//auto group = m_Registry->group<TransformComponent>(entt::get<SpriteRendererComponent>);
-			auto group = m_Registry->group<TransformComponent,SpriteRendererComponent>(entt::exclude<Disable>);
+			auto group = m_Registry->group<TransformComponent>(entt::get<SpriteRendererComponent>);
+			//auto group = m_Registry->group<TransformComponent,SpriteRendererComponent>();
 			for (auto entity : group)
 			{
 				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
@@ -72,14 +72,14 @@ namespace RPG2D {
 	void RendererManager::DrawSprite(TransformComponent& transform, SpriteRendererComponent& sprite)
 	{
 		//获取位置
-		glm::vec2 pos = glm::vec2(transform.Translation.x, transform.Translation.y);
+		glm::vec3 pos = glm::vec3(transform.Translation);
 		//获取图片本身大小。
 		//获取scale
 		glm::vec2 scale = glm::vec2(transform.Scale.x, transform.Scale.y);
 		//获取size
 		glm::vec2 size = glm::vec2(scale.x * sprite.Texture->GetWidth(), scale.y * sprite.Texture->GetHeight());
 		//根据Transform和Sprite将精灵绘制出来
-		m_SpriteRenderer->DrawSprite(sprite.Texture, pos, size, transform.Rotation.z);
+		m_SpriteRenderer->DrawSprite(sprite.Texture, pos, size, transform.Rotation.z,sprite.mirror);
 	}
 
 }

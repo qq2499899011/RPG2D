@@ -18,8 +18,12 @@ namespace RPG2D {
 		//创建实体
 		Entity CreateEntity(const std::string& name = std::string());
 		Entity CreateEntityWithUID(UID uid, const std::string& name = std::string());
-		//摧毁实体
-		void DestroyEntity(Entity entity);
+		//清空摧毁实体
+		void ClearDestroyList();
+		//清空所有列表中的实体
+		void DestroyEntityInList();
+		//移除实体，加入实体列表中。
+		void RemoveEntity(Entity entity);
 		//复制实体
 		Entity DuplicateEntity(Entity entity);
 		//通过名字查找实体
@@ -35,7 +39,6 @@ namespace RPG2D {
 			entity.AddComponent<T>(component);
 			return true;
 		}
-
 		template<typename T>
 		bool AddComponentWithUID(UID uid, T& component)
 		{
@@ -45,7 +48,7 @@ namespace RPG2D {
 		}
 
 		template<typename T>
-		T& GetComponentByName(const std::string& name)
+		T& GetComponentWithName(const std::string& name)
 		{
 			Entity entity = FindEntityByName(name);
 			return entity.GetComponent<T>();
@@ -70,15 +73,19 @@ namespace RPG2D {
 	private:
 		//加入组件时
 		template<typename T>
-		void OnComponentAdded(Entity entity, T& component);
+		void OnComponentAdded(Entity entity, T& component);	
+		//摧毁实体
+		void DestroyEntity(Entity entity);
 	private:
 		//实体组件集合
 		entt::registry m_Registry;
 		//box2D物理
 		b2World* m_PhysicsWorld = nullptr;
-		//UUID与entity对应关系
-		//原因：点击运行场景，实体发生位置等变化复原。
+		//UID与entity对应关系，实现通过UID对实体进行查找
 		std::unordered_map<UID, entt::entity> m_EntityMap;
+		//暂存物体
+		std::vector<Entity> m_EntityDestroyList;
+		//场景名称。
 		std::string name;
 		friend class Entity;
 	};

@@ -4,7 +4,7 @@
 #include "RPG2D/Core/Timestep.h"
 #include "RPG2D/Function/Renderer/SpriteRenderer.h"
 #include "RPG2D/Function/Renderer/OrthographicCameraController.h"
-#include "RPG2D/Function/Script/Components.h"
+#include "RPG2D/Resource/ResType/Components.h"
 namespace RPG2D {
 
 	/// <summary>

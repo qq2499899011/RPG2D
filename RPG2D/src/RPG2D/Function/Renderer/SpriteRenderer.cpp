@@ -24,7 +24,7 @@ namespace RPG2D {
 	}
 
 	//给出texture，transform直接进行渲染即可。
-	void SpriteRenderer::DrawSprite(Ref<Texture2D> texture, glm::vec2 position, glm::vec2 size, float rotate, glm::vec3 color)
+	void SpriteRenderer::DrawSprite(Ref<Texture2D> texture, glm::vec3 position, glm::vec2 size, float rotate,bool mirror, glm::vec3 color)
 	{
 		//使用shader
 		this->shader->Bind();
@@ -32,11 +32,11 @@ namespace RPG2D {
 		glm::mat4 model = glm::mat4(1.0f);
 		//保证图片中心位于原点，然后再移动，最后回到原来的位置。
 		//位移
-		model = glm::translate(model, glm::vec3(position, 0.0f));  // first translate (transformations are: scale happens first, then rotation, and then final translation happens; reversed order)
+		model = glm::translate(model, glm::vec3(position));  // first translate (transformations are: scale happens first, then rotation, and then final translation happens; reversed order)
 		//旋转
 		model = glm::translate(model, glm::vec3(0.5f * size.x, 0.5f * size.y, 0.0f)); // move origin of rotation to center of quad
-		//model = glm::rotate(model, glm::radians(rotate), glm::vec3(0.0f, 0.0f, 1.0f)); // then rotate
-		model = glm::rotate(model, glm::radians(-180.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // then rotate
+		if(!mirror)model = glm::rotate(model, glm::radians(rotate), glm::vec3(0.0f, 0.0f, 1.0f)); // 正常
+		else model = glm::rotate(model, glm::radians(-180.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // 镜像
 		model = glm::translate(model, glm::vec3(-0.5f * size.x, -0.5f * size.y, 0.0f)); // move origin back
 		//缩放
 		model = glm::scale(model, glm::vec3(size, 1.0f)); // last scale

@@ -1,7 +1,8 @@
 #include "RPG2Dpch.h"
 #include "Scene.h"
-#include "RPG2D/Function/Script/Entity.h"
-#include "RPG2D/Function/Script/Components.h"
+#include "RPG2D/Resource/ResType/Entity.h"
+#include "RPG2D/Resource/ResType/Components.h"
+#include "RPG2D/Resource/ResType/ScriptableEntity.h"
 #include "RPG2D/Function/Physics/Physics2D.h"
 #include <glm/glm.hpp>
 #include "RPG2D/Core/UID.h"
@@ -89,6 +90,25 @@ namespace RPG2D {
 		tag.Tag = name.empty() ? "Entity" : name;
 		m_EntityMap[uid] = entity;
 		return entity;
+	}
+	void Scene::ClearDestroyList()
+	{
+		m_EntityDestroyList.clear();
+	}
+	void Scene::DestroyEntityInList()
+	{
+		//删除全部实体
+		for (Entity entity : m_EntityDestroyList) {
+			DestroyEntity(entity);
+		}
+		m_EntityDestroyList.clear();
+	}
+	void Scene::RemoveEntity(Entity entity)
+	{
+		//先加入列表中
+		m_EntityDestroyList.push_back(entity);
+		//同时加入物理列表中
+		GlobalContext::GetInstance()->m_PhysicsSystem->RemoveEntity(entity);
 	}
 	//销毁，直接从Map中删除，并且摧毁entity
 	void Scene::DestroyEntity(Entity entity)
@@ -190,6 +210,14 @@ namespace RPG2D {
 	template<>
 	void Scene::OnComponentAdded<NativeScriptComponent>(Entity entity, NativeScriptComponent& component)
 	{
+		//实例化
+		if (!component.Instance)
+		{
+			//实例化
+			component.Instance = component.InstantiateScript();
+			component.Instance->m_Entity = Entity{ entity, GlobalContext::GetInstance()->m_SceneManager->GetSceneActive().get() };
+			component.Instance->OnCreate();
+		}
 	}
 	template<>
 	void Scene::OnComponentAdded<AnimatiorControllerComponent>(Entity entity, AnimatiorControllerComponent& component)

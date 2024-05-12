@@ -1,5 +1,6 @@
 #include "RPG2Dpch.h"
 #include "AnimationSystem.h"
+#include "RPG2D/Resource/ResType/Entity.h"
 namespace RPG2D {
 	void AnimationSystem::Init()
 	{
@@ -11,7 +12,7 @@ namespace RPG2D {
 		//获取animatior和spriteRenderer组件。更新组件内容
 		entt::registry* m_Registry = GlobalContext::GetInstance()->m_SceneManager->GetRegistry();
 		{
-			auto group = m_Registry->group<AnimatiorControllerComponent>(entt::get<SpriteRendererComponent>);
+			auto group = m_Registry->group<AnimatiorControllerComponent,SpriteRendererComponent>();
 			for (auto entity : group)
 			{
 				auto [animatior, sprite] = group.get<AnimatiorControllerComponent, SpriteRendererComponent>(entity);

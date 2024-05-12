@@ -22,6 +22,7 @@ namespace RPG2D {
 		Instance->m_SceneManager = CreateRef<SceneManager>();
 		Instance->m_AssetManager = CreateRef<AssetManager>(); 
 		Instance->m_RendererManager = CreateRef<RendererManager>(); 
+		Instance->m_EventSystem = CreateRef<EventSystem>();
 	}
 
 	void GlobalContext::Init()
@@ -31,6 +32,8 @@ namespace RPG2D {
 	void GlobalContext::Update(Timestep ts)
 	{
 		//调用所有系统的更新函数
+		//每次更新前，把列表中实体销毁
+		m_SceneManager->GetSceneActive()->DestroyEntityInList();
 		//物理->脚本->动画->渲染->UI,对场景进行处理。
 		m_PhysicsSystem->Update(ts);
 		m_ScriptSystem->Update(ts);

@@ -24,15 +24,15 @@ namespace RPG2D {
 			m_CameraPosition.y += sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
 		}
 
-		if (InputSystem::IsKeyPressed(Key::W))
-		{
-			m_CameraPosition.x += -sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
-			m_CameraPosition.y += cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
-		}
-		else if (InputSystem::IsKeyPressed(Key::S))
+		if (InputSystem::IsKeyPressed(Key::Up))
 		{
 			m_CameraPosition.x -= -sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
 			m_CameraPosition.y -= cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
+		}
+		else if (InputSystem::IsKeyPressed(Key::Down))
+		{
+			m_CameraPosition.x += -sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
+			m_CameraPosition.y += cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * ts;
 		}
 
 		if (m_Rotation)
@@ -49,9 +49,7 @@ namespace RPG2D {
 
 			m_Camera.SetRotation(m_CameraRotation);
 		}
-
 		m_Camera.SetPosition(m_CameraPosition);
-
 	}
 
 	void OrthographicCameraController::OnEvent(Event& e)

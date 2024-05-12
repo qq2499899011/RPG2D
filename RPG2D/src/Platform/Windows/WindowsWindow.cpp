@@ -100,26 +100,30 @@ namespace RPG2D {
 		//5.设置回调函数 其实就是注册监听函数，对各种事件发生时进行处理。 调用已经设置好的回调函数进行处理，事件产生中心，产生之后发送到事件处理核心函数
 		// Set GLFW callbacks
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
-			{
-				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-				data.Width = width;
-				data.Height = height;
+		{
+			//窗口大小变化事件
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+			data.Width = width;
+			data.Height = height;
 
-				WindowResizeEvent event(width, height);
-				data.EventCallback(event);
-			});
+			WindowResizeEvent event(width, height);
+			//直接呼叫OnEvent,出发了相应函数
+			//GlobalContext::GetInstance()->m_EventSystem->TriggerEvent(EventType::WindowResize,&event);
+			data.EventCallback(event);
+		});
 
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				WindowCloseEvent event;
+				//直接调用TriggerEvent
 				data.EventCallback(event);
 			});
 
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 			{
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-
+				
 				switch (action)
 				{
 				case GLFW_PRESS:
@@ -153,6 +157,7 @@ namespace RPG2D {
 
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
 			{
+				//调用相应的事件处理函数
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
 				switch (action)

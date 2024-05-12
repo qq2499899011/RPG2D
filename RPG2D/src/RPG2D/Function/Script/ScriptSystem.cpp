@@ -1,14 +1,13 @@
 #include "RPG2Dpch.h"
 #include "ScriptSystem.h"
-#include "RPG2D/Function/Script/Components.h"
-#include "RPG2D/Function/Script/Entity.h"
-#include "ScriptableEntity.h"
+#include "RPG2D/Resource/ResType/Components.h"
+#include "RPG2D/Resource/ResType/Entity.h"
+#include "RPG2D/Resource/ResType/ScriptableEntity.h"
 namespace RPG2D {
 	ScriptSystem::ScriptSystem()
 	{
 		//
 	}
-
 	void ScriptSystem::Update(Timestep ts)
 	{
 		//对于每一个实体，遍历所有具有NattiveComponent组件的实体，如果没有实例化就先实例化。

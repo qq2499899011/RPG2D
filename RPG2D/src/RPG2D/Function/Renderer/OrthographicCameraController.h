@@ -32,7 +32,7 @@ namespace RPG2D {
 		glm::vec3 m_CameraPosition = { 0.0f, 0.0f, 0.0f };
 		float m_CameraRotation = 0.0f; //In degrees, in the anti-clockwise direction
 		//相机速度
-		float m_CameraTranslationSpeed = 50.0f, m_CameraRotationSpeed = 180.0f;
+		float m_CameraTranslationSpeed = 500.0f, m_CameraRotationSpeed = 180.0f;
 	};
 
 }

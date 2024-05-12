@@ -2,6 +2,7 @@
 
 #include "RPG2D/Core/Base.h"
 #include "RPG2D/Events/Event.h"
+#include "RPG2D/Function/Global/GlobalContext.h"
 #include <string>
 #include <functional>
 

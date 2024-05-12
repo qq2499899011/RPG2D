@@ -23,6 +23,7 @@ namespace RPG2D {
 	public:
 		UID();
 		UID(uint64_t id);
+		UID(uint64_t id, bool);
 		~UID();
 		uint64_t getID();
 		operator uint64_t() const { return id; }

@@ -54,7 +54,7 @@ namespace RPG2D {
 
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
+		glBlendEquation(GL_FUNC_ADD); // 设置混合方程
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_LINE_SMOOTH);
 	}

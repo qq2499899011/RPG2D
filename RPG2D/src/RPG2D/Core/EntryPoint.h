@@ -22,3 +22,4 @@ int main(int argc,char** argv) {
 }
 
 #endif // RPG2D_PLATFORM_WINDOWS
+

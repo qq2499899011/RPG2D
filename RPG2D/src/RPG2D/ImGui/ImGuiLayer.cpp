@@ -79,12 +79,15 @@ namespace RPG2D {
 
 	void ImGuiLayer::OnEvent(Event& e)
 	{
+		//如果是鼠标或者键盘类型，需要阻挡
+		/*
 		if (m_BlockEvents)
 		{
 			ImGuiIO& io = ImGui::GetIO();
 			e.Handled |= e.IsInCategory(EventCategoryMouse) & io.WantCaptureMouse;
 			e.Handled |= e.IsInCategory(EventCategoryKeyboard) & io.WantCaptureKeyboard;
 		}
+		*/
 	}
 
 	void ImGuiLayer::Begin()

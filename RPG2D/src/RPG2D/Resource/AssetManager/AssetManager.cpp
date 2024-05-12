@@ -137,7 +137,7 @@ namespace RPG2D {
 		if (alpha)
 		{
 			texture->SetImageFormat(GL_RGBA);
-			texture->SetImageFormat(GL_RGBA);
+			texture->SetInternalFormat(GL_RGBA);
 		}
 		// load image
 		int width, height, nrChannels;

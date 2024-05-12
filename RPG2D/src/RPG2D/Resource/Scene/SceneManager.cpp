@@ -40,5 +40,29 @@ namespace RPG2D {
 	{
 		return scenes[activeSceneNum];
 	}
+
+	void SceneManager::SetNextScene(int next)
+	{
+		nextSceneNum = next;
+	}
+
+	void SceneManager::SetNextScene(const std::string& name)
+	{
+		for (size_t i = 0; i < scenes.size(); i++) {
+			if ((scenes[i]->GetName()).compare(name) == 0) {
+				//比较名称是否一致
+				return SetNextScene(i);
+			}
+		}
+	}
+
+	void SceneManager::SwitchScene()
+	{
+		//查看当前是否需要切换场景
+		if (nextSceneNum != -1) {
+			SetSceneActive(nextSceneNum);
+			nextSceneNum = -1;
+		}
+	}
 	
 }

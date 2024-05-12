@@ -9,10 +9,16 @@ public:
 	virtual void OnDestroy() override;
 	virtual void OnUpdate(Timestep ts) override;
 	void SetAmmo(Entity entity);
+	static Entity Assemble();
 private:
 	void movement(Timestep ts);
-	void fire();
-	float playerSpeed = 3.0f;
+	void fire(Timestep);
+	float playerSpeed = 500.0f;
+	const float firingRate = 3.0f;
+	float CD = 0;//…‰ª˜¿‰»¥ ±º‰
+	bool canFire = false;
+	bool dirLeft = true;
+	glm::vec2 m_Velocity = glm::vec2(8.0f, 0);
 	Entity ammo;
 };
 

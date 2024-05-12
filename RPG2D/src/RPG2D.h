@@ -5,8 +5,9 @@
 #include "RPG2D/Core/Timestep.h"
 #include "RPG2D/ImGui/ImGuiLayer.h"
 #include "RPG2D/Function/Global/GlobalContext.h"
-#include "RPG2D/Function/Script/Components.h"
-#include "RPG2D/Function/Script/Entity.h"
+#include "RPG2D/Resource/ResType/Components.h"
+//#include "RPG2D/Events/Event.h"
+#include "RPG2D/Resource/ResType/Entity.h"
 #include "RPG2D/Resource/Scene/Scene.h"
-#include "RPG2D/Function/Script/ScriptableEntity.h"
+#include "RPG2D/Resource/ResType/ScriptableEntity.h"
 //entry point

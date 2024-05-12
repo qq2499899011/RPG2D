@@ -6,6 +6,7 @@
 #include "RPG2D/Function/Script/ScriptSystem.h"
 #include "RPG2D/Resource/AssetManager/AssetManager.h"
 #include "RPG2D/Resource/Scene/SceneManager.h"
+#include "RPG2D/Events/EventSystem.h"
 /// <summary>
 /// 管理所有的system和manager
 /// </summary>
@@ -20,6 +21,7 @@ namespace RPG2D {
 		Ref<SceneManager> m_SceneManager;
 		Ref<AssetManager> m_AssetManager;
 		Ref<RendererManager> m_RendererManager;
+		Ref<EventSystem> m_EventSystem;
 		//要把常用的操作进行包装。
 		static Ref<GlobalContext> GetInstance();
 		static void Create();

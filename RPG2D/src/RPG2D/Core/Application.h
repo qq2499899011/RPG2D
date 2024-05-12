@@ -14,6 +14,7 @@ namespace RPG2D {
 		virtual void Init();
 		void Run();
 		void OnEvent(Event& e);
+		void RegisterEvent();
 		static Application& Get() { return *s_Instance; }
 		Window& GetWindow() { return *m_Window; }
 		float GetTime() { return m_Window->GetTime(); }

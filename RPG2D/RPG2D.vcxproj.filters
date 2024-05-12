@@ -55,6 +55,9 @@
     <Filter Include="src\RPG2D\Resource\AssetManager">
       <UniqueIdentifier>{1CDDD952-88C0-E892-91C3-16CFFD25AFE3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\RPG2D\Resource\ResType">
+      <UniqueIdentifier>{4D2B94F2-393B-40C3-A2F4-A4E18E232F5C}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\RPG2D\Resource\Scene">
       <UniqueIdentifier>{EF65834B-DB8A-D2CB-04D6-B75BF059D1E9}</UniqueIdentifier>
     </Filter>
@@ -150,6 +153,9 @@
     <ClInclude Include="src\RPG2D\Events\Event.h">
       <Filter>src\RPG2D\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\RPG2D\Events\EventSystem.h">
+      <Filter>src\RPG2D\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\RPG2D\Events\KeyEvent.h">
       <Filter>src\RPG2D\Events</Filter>
     </ClInclude>
@@ -170,6 +176,9 @@
     </ClInclude>
     <ClInclude Include="src\RPG2D\Function\Input\InputSystem.h">
       <Filter>src\RPG2D\Function\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RPG2D\Function\Physics\ContactListener.h">
+      <Filter>src\RPG2D\Function\Physics</Filter>
     </ClInclude>
     <ClInclude Include="src\RPG2D\Function\Physics\Physics2D.h">
       <Filter>src\RPG2D\Function\Physics</Filter>
@@ -207,19 +216,7 @@
     <ClInclude Include="src\RPG2D\Function\Renderer\VertexArray.h">
       <Filter>src\RPG2D\Function\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\RPG2D\Function\Renderer\game_object.h">
-      <Filter>src\RPG2D\Function\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\RPG2D\Function\Script\Components.h">
-      <Filter>src\RPG2D\Function\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="src\RPG2D\Function\Script\Entity.h">
-      <Filter>src\RPG2D\Function\Script</Filter>
-    </ClInclude>
     <ClInclude Include="src\RPG2D\Function\Script\ScriptSystem.h">
-      <Filter>src\RPG2D\Function\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="src\RPG2D\Function\Script\ScriptableEntity.h">
       <Filter>src\RPG2D\Function\Script</Filter>
     </ClInclude>
     <ClInclude Include="src\RPG2D\ImGui\ImGuiLayer.h">
@@ -227,6 +224,15 @@
     </ClInclude>
     <ClInclude Include="src\RPG2D\Resource\AssetManager\AssetManager.h">
       <Filter>src\RPG2D\Resource\AssetManager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RPG2D\Resource\ResType\Components.h">
+      <Filter>src\RPG2D\Resource\ResType</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RPG2D\Resource\ResType\Entity.h">
+      <Filter>src\RPG2D\Resource\ResType</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RPG2D\Resource\ResType\ScriptableEntity.h">
+      <Filter>src\RPG2D\Resource\ResType</Filter>
     </ClInclude>
     <ClInclude Include="src\RPG2D\Resource\Scene\Scene.h">
       <Filter>src\RPG2D\Resource\Scene</Filter>
@@ -1532,6 +1538,9 @@
     <ClCompile Include="src\RPG2D\Core\Window.cpp">
       <Filter>src\RPG2D\Core</Filter>
     </ClCompile>
+    <ClCompile Include="src\RPG2D\Events\EventSystem.cpp">
+      <Filter>src\RPG2D\Events</Filter>
+    </ClCompile>
     <ClCompile Include="src\RPG2D\Function\Animation\AnimationSystem.cpp">
       <Filter>src\RPG2D\Function\Animation</Filter>
     </ClCompile>
@@ -1543,6 +1552,9 @@
     </ClCompile>
     <ClCompile Include="src\RPG2D\Function\Global\GlobalContext.cpp">
       <Filter>src\RPG2D\Function\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RPG2D\Function\Physics\ContactListener.cpp">
+      <Filter>src\RPG2D\Function\Physics</Filter>
     </ClCompile>
     <ClCompile Include="src\RPG2D\Function\Physics\Physics2D.cpp">
       <Filter>src\RPG2D\Function\Physics</Filter>
@@ -1580,12 +1592,6 @@
     <ClCompile Include="src\RPG2D\Function\Renderer\VertexArray.cpp">
       <Filter>src\RPG2D\Function\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\RPG2D\Function\Renderer\game_object.cpp">
-      <Filter>src\RPG2D\Function\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\RPG2D\Function\Script\Entity.cpp">
-      <Filter>src\RPG2D\Function\Script</Filter>
-    </ClCompile>
     <ClCompile Include="src\RPG2D\Function\Script\ScriptSystem.cpp">
       <Filter>src\RPG2D\Function\Script</Filter>
     </ClCompile>
@@ -1597,6 +1603,9 @@
     </ClCompile>
     <ClCompile Include="src\RPG2D\Resource\AssetManager\AssetManager.cpp">
       <Filter>src\RPG2D\Resource\AssetManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RPG2D\Resource\ResType\Entity.cpp">
+      <Filter>src\RPG2D\Resource\ResType</Filter>
     </ClCompile>
     <ClCompile Include="src\RPG2D\Resource\Scene\Scene.cpp">
       <Filter>src\RPG2D\Resource\Scene</Filter>

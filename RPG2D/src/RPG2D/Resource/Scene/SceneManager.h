@@ -13,8 +13,12 @@ namespace RPG2D {
 		bool AddScene(Ref<Scene> scene);
 		entt::registry* GetRegistry();
 		Ref<Scene> GetSceneActive();
+		void SetNextScene(int next);
+		void SetNextScene(const std::string& name);
+		void SwitchScene();
 	private:
 		int activeSceneNum;
+		int nextSceneNum = -1;
 		std::vector<Ref<Scene>> scenes;
 	};
 }

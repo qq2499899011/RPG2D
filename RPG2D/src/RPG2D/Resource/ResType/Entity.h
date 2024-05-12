@@ -1,7 +1,7 @@
 #pragma once
 
 #include "RPG2D/Core/UID.h"
-#include "RPG2D/Function/Script/Components.h"
+#include "RPG2D/Resource/ResType/Components.h"
 #include "entt.hpp"
 #include "RPG2D/Resource/Scene/Scene.h"
 

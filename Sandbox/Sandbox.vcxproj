@@ -131,10 +131,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Bullet.h" />
+    <ClInclude Include="src\DIYEvent.h" />
+    <ClInclude Include="src\Enemy.h" />
+    <ClInclude Include="src\EnemyGenerator.h" />
+    <ClInclude Include="src\Ground.h" />
+    <ClInclude Include="src\Player.h" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="src\Bullet.cpp" />
+    <ClCompile Include="src\DIYEvent.cpp" />
+    <ClCompile Include="src\Enemy.cpp" />
     <ClCompile Include="src\EnemyGenerator.cpp" />
     <ClCompile Include="src\Ground.cpp" />
-    <ClCompile Include="src\Enemy.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Sandbox.cpp" />
   </ItemGroup>
@@ -142,13 +151,6 @@
     <ProjectReference Include="..\RPG2D\RPG2D.vcxproj">
       <Project>{84ECF70D-F000-20BF-B982-C31E25561CF0}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\Bullet.h" />
-    <ClInclude Include="src\EnemyGenerator.h" />
-    <ClInclude Include="src\Ground.h" />
-    <ClInclude Include="src\Enemy.h" />
-    <ClInclude Include="src\Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

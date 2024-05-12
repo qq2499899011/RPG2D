@@ -2,59 +2,33 @@
 #include <string>
 namespace RPG2D {
 
-	// Events in RPG2D are currently blocking, meaning when an event occurs it
-	// immediately gets dispatched and must be dealt with right then an there.
-	// For the future, a better strategy might be to buffer events in an event
-	// bus and process them during the "event" part of the update stage.
-
 	enum class EventType
 	{
 		None = 0,
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
 		AppTick, AppUpdate, AppRender,
 		KeyPressed, KeyReleased, KeyTyped,
-		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
+		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled,DIYEvent
 	};
 
-	enum EventCategory
-	{
-		None = 0,
-		EventCategoryApplication = BIT(0), //1
-		EventCategoryInput = BIT(1), //2
-		EventCategoryKeyboard = BIT(2), //4
-		EventCategoryMouse = BIT(3), //8
-		EventCategoryMouseButton = BIT(4)  //16
-	};
 
-	//用于实现event派生子类的函数，根据类型生成而不需要 不断重写这些函数。
+	//用于实现event派生子类的函数，三个功能，分别返回事件类型、
 #define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; }\
 								virtual EventType GetEventType() const override { return GetStaticType(); }\
 								virtual const char* GetName() const override { return #type; }
-
-//同上面，根据输入的类型生成相应的函数
-#define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
 	class Event
 	{
 	public:
 		virtual ~Event() = default;
-
 		bool Handled = false;//事件是否被处理了
-
-		virtual EventType GetEventType() const = 0;//事件类型
-		virtual const char* GetName() const = 0;//时间名称-类型的字符串形式
-		virtual int GetCategoryFlags() const = 0;//事件类别
-
+		virtual EventType GetEventType() const = 0;//获取事件类型
+		virtual const char* GetName() const = 0;//获取事件名称
 		//toString 调试用
 		virtual std::string ToString() const { return GetName(); }
-
-		//判断时间是否属于这个类型。快速对时间进行分类
-		bool IsInCategory(EventCategory category)
-		{
-			return GetCategoryFlags() & category;
-		}
 	};
 
+	//事件处理器
 	class EventDispatcher
 	{
 	public:
@@ -63,8 +37,7 @@ namespace RPG2D {
 		{
 		}
 
-		// F will be deduced by the compiler
-		//T是事件类型，F是处理的相关函数。//dispatch 其实就是判断事件是否符合指定的事件类型，如果满足事件类型，就对事件进行处理。处理方式由F决定。
+		//处理事件，在处理事件时，在函数中书写相应的dispatch<Event>(Func),就可以指定事件类型与对应事件处理函数的对应关系。
 		template<typename T, typename F>
 		bool Dispatch(const F& func)
 		{

@@ -14,6 +14,7 @@ namespace RPG2D {
 		static Ref<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
 	private:
 		//静态变量的声明
+		//一共有两个Loger
 		static Ref<spdlog::logger> s_CoreLogger;
 		static Ref<spdlog::logger> s_ClientLogger;
 	};
