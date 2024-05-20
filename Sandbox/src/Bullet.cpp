@@ -52,6 +52,8 @@ Entity Bullet::Assemble()
 	box2d.Size = glm::vec2(width, height);
 	//因为box2d y轴向上，opengl y轴向下，offset.y为负值
 	box2d.Offset = glm::vec2(width / 2, height / 2);
+	//设置传感器
+	box2d.isSensor = true;
 	scene->AddComponentWithUID<BoxCollider2DComponent>(uid, box2d);
 	Ref<PhysicsSystem> physics = GlobalContext::GetInstance()->m_PhysicsSystem;
 	physics->AddEntity(bullet);

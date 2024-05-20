@@ -162,7 +162,6 @@
     <ClInclude Include="src\RPG2D\Debug\Instrumentor.h" />
     <ClInclude Include="src\RPG2D\Events\ApplicationEvent.h" />
     <ClInclude Include="src\RPG2D\Events\Event.h" />
-    <ClInclude Include="src\RPG2D\Events\EventSystem.h" />
     <ClInclude Include="src\RPG2D\Events\KeyEvent.h" />
     <ClInclude Include="src\RPG2D\Events\MouseEvent.h" />
     <ClInclude Include="src\RPG2D\Function\Animation\AnimationSystem.h" />
@@ -192,6 +191,7 @@
     <ClInclude Include="src\RPG2D\Resource\Scene\Scene.h" />
     <ClInclude Include="src\RPG2D\Resource\Scene\SceneManager.h" />
     <ClInclude Include="src\RPG2Dpch.h" />
+    <ClInclude Include="src\RPG2D\Function\UI\UISystem.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_features.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_fixes.hpp" />
@@ -625,7 +625,6 @@
     <ClCompile Include="src\RPG2D\Core\LogSystem.cpp" />
     <ClCompile Include="src\RPG2D\Core\UID.cpp" />
     <ClCompile Include="src\RPG2D\Core\Window.cpp" />
-    <ClCompile Include="src\RPG2D\Events\EventSystem.cpp" />
     <ClCompile Include="src\RPG2D\Function\Animation\AnimationSystem.cpp" />
     <ClCompile Include="src\RPG2D\Function\Animation\Animatior.cpp" />
     <ClCompile Include="src\RPG2D\Function\Animation\AnimatiorController.cpp" />
@@ -653,6 +652,7 @@
     <ClCompile Include="src\RPG2Dpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\RPG2D\Function\UI\UISystem.cpp" />
     <ClCompile Include="vendor\stb_image\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>

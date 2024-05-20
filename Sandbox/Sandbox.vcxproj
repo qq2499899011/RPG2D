@@ -137,6 +137,7 @@
     <ClInclude Include="src\EnemyGenerator.h" />
     <ClInclude Include="src\Ground.h" />
     <ClInclude Include="src\Player.h" />
+    <ClInclude Include="src\UI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bullet.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="src\Ground.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Sandbox.cpp" />
+    <ClCompile Include="src\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RPG2D\RPG2D.vcxproj">

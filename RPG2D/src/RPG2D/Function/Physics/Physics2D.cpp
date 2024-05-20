@@ -54,7 +54,7 @@ namespace RPG2D {
 	{
 		
 		//设置重力加速度方向
-		m_PhysicsWorld = new b2World({ 0.0f, 0.0f });
+		m_PhysicsWorld = new b2World({ 0.0f, 9.8f });
 		//清空bodyToDestroy
 		m_BodiesToDestroy.clear();
 		//设置碰撞检测
@@ -148,19 +148,17 @@ namespace RPG2D {
 		if (entity.HasComponent<BoxCollider2DComponent>())
 		{
 			auto& bc2d = entity.GetComponent<BoxCollider2DComponent>();
-
+			//自动对相关碰撞体小大除以2，所以设置碰撞体时，直接填入实际大小即可。
 			b2PolygonShape boxShape;
 			boxShape.SetAsBox(bc2d.Size.x/(m_PixelPerMeter*2), bc2d.Size.y/(2*m_PixelPerMeter), b2Vec2(bc2d.Offset.x/m_PixelPerMeter, bc2d.Offset.y/m_PixelPerMeter), 0.0f);
 			//boxShape.SetAsBox(bc2d.Size.x, bc2d.Size.y);
 			b2FixtureDef fixtureDef;
 			fixtureDef.shape = &boxShape;
-			fixtureDef.isSensor = true;
-			/*
+			fixtureDef.isSensor = bc2d.isSensor;
 			fixtureDef.density = bc2d.Density;
 			fixtureDef.friction = bc2d.Friction;
 			fixtureDef.restitution = bc2d.Restitution;
 			fixtureDef.restitutionThreshold = bc2d.RestitutionThreshold;
-			*/
 			body->CreateFixture(&fixtureDef);
 		}
 
@@ -208,6 +206,7 @@ namespace RPG2D {
 		newPos.y = pos.y/m_PixelPerMeter;
 		body->SetTransform(newPos, 0.0f);
 	}
+	//这里速度和y轴方向相反，也就是向上是跳。
 	void PhysicsSystem::SetVelocity(Entity entity, glm::vec2 velocity)
 	{
 		//获取刚体
@@ -216,8 +215,20 @@ namespace RPG2D {
 		//设置初始速度
 		b2Vec2 v;
 		v.x = velocity.x;
-		v.y = velocity.y;
+		v.y = -velocity.y;
 		body->SetLinearVelocity(v);
+	}
+	//获取速度需要符合opengl的坐标轴，因此需要y取相反数
+	glm::vec2 PhysicsSystem::GetVelocity(Entity entity)
+	{
+		//获取实体
+		//获取刚体
+		Rigidbody2DComponent& rgb2d = entity.GetComponent<Rigidbody2DComponent>();
+		b2Body* body = static_cast<b2Body*>(rgb2d.RuntimeBody);
+		//获取速度
+		b2Vec2 v = body->GetLinearVelocity();
+		glm::vec2 vec(v.x, -v.y);
+		return vec;
 	}
 	void PhysicsSystem::DestroyBodies()
 	{

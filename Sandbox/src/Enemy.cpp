@@ -15,10 +15,13 @@ void Enemy::OnUpdate(Timestep ts)
 
 void Enemy::OnCollisionBegin(Entity other)
 {
-	//碰撞时调用
-	RPG2D_INFO("dead");
-	//调用移除函数
-	GlobalContext::GetInstance()->m_SceneManager->GetSceneActive()->RemoveEntity(m_Entity);
+	//获取对方的Tag，如果是子弹，就死亡
+	if (other.GetName().compare("Bullet") == 0) {
+		//碰撞时调用
+		RPG2D_INFO("dead");
+		//调用移除函数
+		GlobalContext::GetInstance()->m_SceneManager->GetSceneActive()->RemoveEntity(m_Entity);
+	}
 }
 
 Entity Enemy::Assemble()

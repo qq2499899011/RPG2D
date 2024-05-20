@@ -18,6 +18,7 @@ namespace RPG2D {
 		glm::vec2 GetPixelPosition(Entity entity);
 		void SetPositionWithPixel(Entity,glm::vec2);
 		void SetVelocity(Entity,glm::vec2);
+		glm::vec2 GetVelocity(Entity);
 	private:
 		void DestroyBodies();
 		//µü´ú¾«¶È

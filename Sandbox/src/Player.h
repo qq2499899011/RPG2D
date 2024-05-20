@@ -8,6 +8,7 @@ public:
 	virtual void OnCreate() override;
 	virtual void OnDestroy() override;
 	virtual void OnUpdate(Timestep ts) override;
+	virtual void OnCollisionBegin(Entity other)override;
 	void SetAmmo(Entity entity);
 	static Entity Assemble();
 private:
@@ -18,7 +19,8 @@ private:
 	float CD = 0;//…‰ª˜¿‰»¥ ±º‰
 	bool canFire = false;
 	bool dirLeft = true;
-	glm::vec2 m_Velocity = glm::vec2(8.0f, 0);
+	float m_VecX = 8.0f;
+	bool canJump = true;
 	Entity ammo;
 };
 

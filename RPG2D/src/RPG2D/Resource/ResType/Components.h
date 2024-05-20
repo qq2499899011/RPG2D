@@ -136,9 +136,9 @@ namespace RPG2D {
 		// TODO(Yan): move into physics material in the future maybe
 		float Density = 1.0f;
 		float Friction = 0.5f;
-		float Restitution = 0.0f;
-		float RestitutionThreshold = 0.5f;
-
+		float Restitution = 0.0f;//默认完全不弹性
+		float RestitutionThreshold = 0.5f;//只有速度超过这个值的物体相撞时，才会发生碰撞
+		bool isSensor = false;
 		// Storage for runtime
 		void* RuntimeFixture = nullptr;
 
@@ -163,7 +163,50 @@ namespace RPG2D {
 		CircleCollider2DComponent() = default;
 		CircleCollider2DComponent(const CircleCollider2DComponent&) = default;
 	};
+	using ButtonCallBack = std::function<void()>;
+	//按钮组件
+	struct ButtonComponent
+	{
+		//按钮名称
+		std::string context;
+		//按钮函数
+		ButtonCallBack buttonClick;
+		//颜色
+		glm::vec4 color = glm::vec4(1.0f,0.0f,0.0f,1.0f);
+		ButtonComponent() = default;
+		ButtonComponent(const ButtonComponent&) = default;
+		ButtonComponent(const std::string& tag)
+			: context(tag) {}
+		void Bind(ButtonCallBack callback) {
+			//直接赋值即可
+			buttonClick = callback;
+		}
+		//直接调用即可
+		void OnClick() {
+			buttonClick();
+		}
+	};
+	//文本组件
+	struct TextComponent
+	{
+		//文本内容
+		std::string context;
+		glm::vec4 color = glm::vec4(1.0f,1.0f,1.0f,1.0f);
+		TextComponent() = default;
+		TextComponent(const TextComponent&) = default;
+	};
 
+	//进度条组件，可以用来显示血条等信息
+	struct ProgressBarComponent {
+		//名称
+		std::string context;
+		//百分比
+		float percent;
+		//颜色
+		glm::vec4 color = glm::vec4(1.0f,1.0f,1.0f,1.0f);
+		ProgressBarComponent() = default;
+		ProgressBarComponent(const ProgressBarComponent&) = default;
+	};
 	/*
 	struct TextComponent
 	{
@@ -186,7 +229,7 @@ namespace RPG2D {
 	using AllComponents =
 		ComponentGroup<TransformComponent, SpriteRendererComponent,
 		CircleRendererComponent,SpriteRendererComponent,NativeScriptComponent,
-	    Rigidbody2DComponent, BoxCollider2DComponent,
+	    Rigidbody2DComponent, BoxCollider2DComponent,ButtonComponent,TextComponent,ProgressBarComponent,
 		CircleCollider2DComponent>;
 
 }

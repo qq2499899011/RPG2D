@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "Bullet.h"
 #include "Enemy.h"
+#include "Ground.h"
+#include "UI.h"
 using namespace RPG2D;
 class ExampleLayer : public Layer
 {
@@ -80,8 +82,14 @@ public:
 			//大小。scale*长宽 = 实际大小。
 			//scale = 实际大小/长宽。
 			//trans.Scale = glm::vec3{ 1280.0f / spriteComponent.Texture->GetWidth(),720.0f / spriteComponent.Texture->GetHeight(),1 };
+			//背景的大小被放大了1.2倍,最终大小为 2945*768
 			trans.Scale = glm::vec3{1.2,1.2,1};
 			scene->GetComponentWithName<TransformComponent>("background") = trans;
+		}
+		//地面
+		{
+			//左上角0,666.大小2945*102碰撞体
+			Ground::Assemble();
 		}
 		//角色
 		{
@@ -97,7 +105,10 @@ public:
 			pos.x += 500.0f;
 			//操作玩家
 			physics->SetPositionWithPixel(enemy2, pos);
-			
+		}
+		//UI
+		{
+			UI::Assemble();
 		}
 	}
 };

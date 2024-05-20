@@ -223,4 +223,17 @@ namespace RPG2D {
 	void Scene::OnComponentAdded<AnimatiorControllerComponent>(Entity entity, AnimatiorControllerComponent& component)
 	{
 	}
+	template<>
+	void Scene::OnComponentAdded<ButtonComponent>(Entity entity, ButtonComponent& component)
+	{
+	}	
+	template<>
+	void Scene::OnComponentAdded<TextComponent>(Entity entity, TextComponent& component)
+	{
+	}
+	template<>
+	void Scene::OnComponentAdded<ProgressBarComponent>(Entity entity, ProgressBarComponent& component)
+	{
+	}
+
 }

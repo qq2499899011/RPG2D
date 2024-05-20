@@ -23,11 +23,13 @@ namespace RPG2D {
 		Instance->m_AssetManager = CreateRef<AssetManager>(); 
 		Instance->m_RendererManager = CreateRef<RendererManager>(); 
 		Instance->m_EventSystem = CreateRef<EventSystem>();
+		Instance->m_UISystem = CreateRef<UISystem>();
 	}
 
 	void GlobalContext::Init()
 	{
 		//初始化
+		m_UISystem->Init();
 	}
 	void GlobalContext::Update(Timestep ts)
 	{
@@ -39,6 +41,7 @@ namespace RPG2D {
 		m_ScriptSystem->Update(ts);
 		m_AnimationSystem->Update(ts);
 		m_RendererManager->Update(ts);
+		m_UISystem->Update(ts);
 		//TODO：还没有对UI进行封装
 	}
 }

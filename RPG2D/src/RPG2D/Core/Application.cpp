@@ -32,14 +32,14 @@ namespace RPG2D {
 		//做一些准备
 		//初始化GlobalContext
 		GlobalContext::Create();
-		//生成GetInstace;
-		GlobalContext::GetInstance()->Init();
 		//创建窗口
 		m_Window = Window::Create();
 		//相当于只要m_Window产生了事件，就调用App::OnEvent函数。
 		//注册事件函数
-		//RegisterEvent();
+		RegisterEvent();
 		m_Window->SetEventCallback(RPG2D_BIND_EVENT_FN(Application::OnEvent));//这里是把当前的app对象捕获进去了。
+		//初始化;
+		GlobalContext::GetInstance()->Init();
 		/*
 		//新建imgui层，同时将imguiLayer加入到layerStack里面
 		m_ImGuiLayer = new ImGuiLayer();
@@ -55,8 +55,8 @@ namespace RPG2D {
 	//对应用程序中需要监听的事件进行注册
 	void Application::RegisterEvent()
 	{
-		//GlobalContext::GetInstance()->m_EventSystem->RegisterEventHandler(EventType::WindowClose,RPG2D_BIND_EVENT_FN(OnWindowClose));
-		//GlobalContext::GetInstance()->m_EventSystem->RegisterEventHandler(EventType::WindowResize,RPG2D_BIND_EVENT_FN(OnWindowResize));
+		GlobalContext::GetInstance()->m_EventSystem->RegisterEventHandler(EventType::WindowClose,RPG2D_BIND_EVENT_FN(OnWindowClose));
+		GlobalContext::GetInstance()->m_EventSystem->RegisterEventHandler(EventType::WindowResize,RPG2D_BIND_EVENT_FN(OnWindowResize));
 	}
 	void Application::Run() {
 		//初始化内容
@@ -98,8 +98,8 @@ namespace RPG2D {
 		RPG2D_CORE_INFO(e);
 		EventDispatcher dispatcher(e);
 		//应该有一些列的处理函数,处理这样一个函数
-		dispatcher.Dispatch<WindowCloseEvent>(RPG2D_BIND_EVENT_FN(Application::OnWindowClose));
-		dispatcher.Dispatch<WindowResizeEvent>(RPG2D_BIND_EVENT_FN(Application::OnWindowResize));
+		//dispatcher.Dispatch<WindowCloseEvent>(RPG2D_BIND_EVENT_FN(Application::OnWindowClose));
+		//dispatcher.Dispatch<WindowResizeEvent>(RPG2D_BIND_EVENT_FN(Application::OnWindowResize));
 		//分发处理事件
 		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it)
 		{
@@ -109,11 +109,30 @@ namespace RPG2D {
 			(*it)->OnEvent(e);
 		}
 	}
-	bool Application::OnWindowClose(WindowCloseEvent& e)
+
+	bool Application::OnWindowClose(Event* e)
 	{
 		m_Running = false;
 		return true;
 	}
+
+	bool Application::OnWindowResize(Event* event)
+	{
+		RPG2D_CORE_INFO("WindowResize!!!!");
+		//首选将事件转化成为对应的类型
+		WindowResizeEvent* e = dynamic_cast<WindowResizeEvent*>(event);
+		if (e->GetWidth() == 0 || e->GetHeight() == 0)
+		{
+			m_Minimized = true;
+			return false;
+		}
+		m_Minimized = false;
+		GlobalContext::GetInstance()->m_RendererManager->OnWindowResize(e->GetWidth(), e->GetHeight());
+		return false;
+	}
+	
+	
+	/*
 	
 	bool Application::OnWindowResize(WindowResizeEvent& e)
 	{
@@ -129,4 +148,6 @@ namespace RPG2D {
 		GlobalContext::GetInstance()->m_RendererManager->OnWindowResize(e.GetWidth(), e.GetHeight());
 		return false;
 	}
+	
+	*/
 }

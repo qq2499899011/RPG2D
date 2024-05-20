@@ -36,6 +36,9 @@
     <ClCompile Include="src\DIYEvent.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\UI.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Player.h">
@@ -54,6 +57,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\DIYEvent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

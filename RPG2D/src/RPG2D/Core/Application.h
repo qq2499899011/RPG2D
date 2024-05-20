@@ -28,7 +28,9 @@ namespace RPG2D {
 		LayerStack m_LayerStack;
 		float m_LastFrameTime = 0.0f;
 		bool OnWindowClose(WindowCloseEvent& e);
-		bool OnWindowResize(WindowResizeEvent& e);
+		//bool OnWindowResize(WindowResizeEvent& e);
+		bool OnWindowResize(Event* e);
+		bool OnWindowClose(Event* e);
 		static Application* s_Instance;//单例模式
 	};
 	//在sandbox中定义
