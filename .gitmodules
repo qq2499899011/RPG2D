@@ -16,3 +16,6 @@
 [submodule "RPG2D/vendor/SDL_mixer"]
 	path = RPG2D/vendor/SDL_mixer
 	url = git@github.com:qq2499899011/SDL_mixer.git
+[submodule "RPG2D/vendor/SoLoud"]
+	path = RPG2D/vendor/SoLoud
+	url = git@github.com:qq2499899011/soloud.git
