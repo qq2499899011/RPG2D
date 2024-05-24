@@ -19,7 +19,7 @@ void Player::OnUpdate(Timestep ts)
 void Player::OnCollisionBegin(Entity other)
 {
 	//如果和地面发生碰撞，才可以继续条约
-
+	canJump = true;
 }
 
 void Player::SetAmmo(Entity entity)

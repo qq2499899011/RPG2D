@@ -20,7 +20,6 @@ Entity Bullet::Assemble()
 	Ref<AssetManager> assetManager = GlobalContext::GetInstance()->m_AssetManager;
 	Entity bullet = scene->CreateEntity("Bullet");
 	UID uid = bullet.GetUID();
-	assetManager->LoadTextureWithDir("bullet.png",true,"bullet");
 	//新建sprite组件
 	SpriteRendererComponent bulletSprite;
 	bulletSprite.Texture = assetManager->GetTexture("bullet");

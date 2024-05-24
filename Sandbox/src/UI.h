@@ -11,11 +11,12 @@ public:
 		//设置transform组件
 		TransformComponent buttonTrans;
 		buttonTrans.Translation = glm::vec3{ 0,0,0.3f };
-		buttonTrans.Scale = glm::vec3{ 50,50,1 };
+		buttonTrans.Scale = glm::vec3{ 200,50,1 };
 		scene->GetComponentWithName<TransformComponent>("Button") = buttonTrans;
 		//绑定按钮组件
 		ButtonComponent buttonComponent;
 		buttonComponent.context = "Helloworld";
+		buttonComponent.fontsize = 50.0f;
 		buttonComponent.Bind(&UI::OnClick);
 		button.AddComponent<ButtonComponent>(buttonComponent);
 

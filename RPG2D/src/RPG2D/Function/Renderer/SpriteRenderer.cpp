@@ -24,7 +24,7 @@ namespace RPG2D {
 	}
 
 	//给出texture，transform直接进行渲染即可。
-	void SpriteRenderer::DrawSprite(Ref<Texture2D> texture, glm::vec3 position, glm::vec2 size, float rotate,bool mirror, glm::vec3 color)
+	void SpriteRenderer::DrawSprite(Ref<Texture2D> texture, glm::vec3 position, glm::vec2 size, float rotate,bool mirror, glm::vec3 color,glm::ivec2 index)
 	{
 		//使用shader
 		this->shader->Bind();
@@ -44,12 +44,47 @@ namespace RPG2D {
 		this->shader->SetMat4("model", model);
 		//设置渲染颜色
 		this->shader->SetFloat3("spriteColor", color);
+		glm::vec4 subc = texture->GetSubTextureCoords(index.x, index.y);
+		this->shader->SetFloat4("subTextureCoords", subc);
 		//绑定纹理
 		//glActiveTexture(GL_TEXTURE0);
 		texture->Bind();
 		//调用渲染函数
-		RenderCommand::DrawLines(this->quadVAO, 6);
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		RenderCommand::DrawArray(this->quadVAO, 6);
+		this->quadVAO->Unbind();
+	}
+	//绘制粒子发射器控制的所有粒子
+	void SpriteRenderer::DrawParticle(Ref<ParticleEmitter> emitter,glm::vec3 pos,glm::vec2 size,float rotation)
+	{
+		//使用shader
+		this->shader->Bind();
+		//获取材质并绑定
+		Ref<Texture2D> texture = emitter->GetTexture();
+		texture->Bind();
+		//遍历emitter中的所有粒子进行绘制
+		for (Particle& particle : emitter->GetParticles()) {
+			if (particle.life <= 0.0f)continue;
+			//设置model转化矩阵
+			glm::mat4 model = glm::mat4(1.0f);
+			//位移
+			model = glm::translate(model, glm::vec3(pos)+glm::vec3(particle.position,0.0f));  // first translate (transformations are: scale happens first, then rotation, and then final translation happens; reversed order)
+			//旋转
+			glm::vec2 pSize = glm::vec2(size.x * particle.size.x, size.y * particle.size.y);
+			model = glm::translate(model, glm::vec3(0.5f * pSize.x, 0.5f * pSize.y, 0.0f)); // move origin of rotation to center of quad
+			model = glm::rotate(model, glm::radians(rotation+particle.rotation), glm::vec3(0.0f, 0.0f, 1.0f)); // 正常
+			model = glm::translate(model, glm::vec3(-0.5f * pSize.x, -0.5f * pSize.y, 0.0f)); // move origin back
+			//缩放
+			model = glm::scale(model, glm::vec3(pSize, 1.0f)); // last scale
+			//设置model到shader
+			this->shader->SetMat4("model", model);
+			//设置渲染颜色
+			this->shader->SetFloat3("spriteColor", particle.color);
+			//设置纹理映射
+			this->shader->SetFloat4("subTextureCoords", texture->GetSubTextureCoords(0, 0));
+			//调用渲染函数
+			RenderCommand::DrawArray(this->quadVAO, 6);
+		}
+		//调用
 		this->quadVAO->Unbind();
 	}
 	//初始化渲染数据

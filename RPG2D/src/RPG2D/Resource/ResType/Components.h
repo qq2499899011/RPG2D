@@ -10,6 +10,7 @@
 #include <string>
 #include "RPG2D/Function/Renderer/Texture2D.h"
 #include "RPG2D/Function/Animation/AnimatiorController.h"
+#include "RPG2D/Function/Particle/ParticleEmitter.h"
 namespace RPG2D {
 
 	struct IDComponent
@@ -54,6 +55,8 @@ namespace RPG2D {
 	{
 		glm::vec4 Color{ 1.0f, 1.0f, 1.0f, 1.0f };
 		Ref<Texture2D> Texture;
+		//默认纹理序号0
+		glm::ivec2 Index{ 0,0 };
 		float TilingFactor = 1.0f;
 		bool mirror = false;
 		SpriteRendererComponent() = default;
@@ -99,18 +102,6 @@ namespace RPG2D {
 		CircleRendererComponent() = default;
 		CircleRendererComponent(const CircleRendererComponent&) = default;
 	};
-
-	/*
-	struct CameraComponent
-	{
-		SceneCamera Camera;
-		bool Primary = true; // TODO: think about moving to Scene
-		bool FixedAspectRatio = false;
-
-		CameraComponent() = default;
-		CameraComponent(const CameraComponent&) = default;
-	};
-	*/
 	// Physics
 	struct Rigidbody2DComponent
 	{
@@ -133,7 +124,6 @@ namespace RPG2D {
 		glm::vec2 Offset = { 0.0f, 0.0f };
 		glm::vec2 Size = { 0.5f, 0.5f };
 
-		// TODO(Yan): move into physics material in the future maybe
 		float Density = 1.0f;
 		float Friction = 0.5f;
 		float Restitution = 0.0f;//默认完全不弹性
@@ -151,7 +141,6 @@ namespace RPG2D {
 		glm::vec2 Offset = { 0.0f, 0.0f };
 		float Radius = 0.5f;
 
-		// TODO(Yan): move into physics material in the future maybe
 		float Density = 1.0f;
 		float Friction = 0.5f;
 		float Restitution = 0.0f;
@@ -169,6 +158,7 @@ namespace RPG2D {
 	{
 		//按钮名称
 		std::string context;
+		float fontsize = 20.0f;
 		//按钮函数
 		ButtonCallBack buttonClick;
 		//颜色
@@ -191,6 +181,7 @@ namespace RPG2D {
 	{
 		//文本内容
 		std::string context;
+		float fontsize = 20.0f;
 		glm::vec4 color = glm::vec4(1.0f,1.0f,1.0f,1.0f);
 		TextComponent() = default;
 		TextComponent(const TextComponent&) = default;
@@ -200,24 +191,23 @@ namespace RPG2D {
 	struct ProgressBarComponent {
 		//名称
 		std::string context;
+		float fontsize = 20.0f;
 		//百分比
-		float percent;
+		float percent = 1.0f;
 		//颜色
 		glm::vec4 color = glm::vec4(1.0f,1.0f,1.0f,1.0f);
 		ProgressBarComponent() = default;
 		ProgressBarComponent(const ProgressBarComponent&) = default;
 	};
-	/*
-	struct TextComponent
-	{
-		std::string TextString;
-		Ref<Font> FontAsset = Font::GetDefault();
-		glm::vec4 Color{ 1.0f };
-		float Kerning = 0.0f;
-		float LineSpacing = 0.0f;
-	};
-	*/
+	//粒子发射器组件，生成并管理粒子
+	struct ParticleEmitterComponent {
+		//粒子发射器
+		Ref<ParticleEmitter> particleEmitter;
+		ParticleEmitterComponent() = default;
+		ParticleEmitterComponent(const ParticleEmitterComponent&) = default;
+		ParticleEmitterComponent(Ref<ParticleEmitter> emitter) : particleEmitter(emitter) {}
 
+	};
 	template<typename... Component>
 	struct ComponentGroup
 	{

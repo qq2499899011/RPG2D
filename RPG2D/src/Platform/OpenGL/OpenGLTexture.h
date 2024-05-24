@@ -20,6 +20,7 @@ namespace RPG2D {
 		uint32_t ID;
 		// texture image dimensions
 		uint32_t Width, Height; // 图片的像素长宽,获取本身大小。
+		uint32_t SubWidth, SubHeight;//子纹理长宽
 		// texture Format
 		uint32_t Internal_Format; //内部格式，如何存储数据
 		uint32_t Image_Format; // 加载格式，如何加载数据
@@ -43,6 +44,14 @@ namespace RPG2D {
 		virtual uint32_t GetID() const override;
 		virtual uint32_t GetWidth() const override;
 		virtual uint32_t GetHeight() const override;
+		virtual uint32_t GetSubWidth() const override;
+		virtual uint32_t GetSubHeight() const override;
+		virtual void SetSubWidth(const uint32_t) override;
+		virtual void SetSubHeight(const uint32_t) override;
+		virtual glm::vec4 GetSubTextureCoords(int, int) override;
+
+		// 通过 Texture2D 继承
+		void SetSubWH(const uint32_t, const uint32_t) override;
 	};
 }
 

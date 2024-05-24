@@ -20,10 +20,11 @@ namespace RPG2D {
 		void OnWindowResize(uint32_t width, uint32_t height);
 		void BeginScene(OrthographicCamera& camera);
 		void EndScene();
-		void DrawSprite(TransformComponent& transform,SpriteRendererComponent& sprite);
 		static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 	private:
 		Ref<SpriteRenderer> m_SpriteRenderer;
 		Ref<OrthographicCameraController> m_CameraController;
+		void DrawSprite(TransformComponent& transform,SpriteRendererComponent& sprite);
+		void DrawParticle(TransformComponent& transform,ParticleEmitterComponent&);
 	};
 }

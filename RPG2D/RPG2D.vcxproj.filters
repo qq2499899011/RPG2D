@@ -1492,6 +1492,8 @@
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
     <ClInclude Include="src\RPG2D\Function\UI\UISystem.h" />
+    <ClInclude Include="src\RPG2D\Function\Particle\ParticleSystem.h" />
+    <ClInclude Include="src\RPG2D\Function\Particle\ParticleEmitter.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -1615,5 +1617,7 @@
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
     <ClCompile Include="src\RPG2D\Function\UI\UISystem.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Particle\ParticleSystem.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Particle\ParticleEmitter.cpp" />
   </ItemGroup>
 </Project>

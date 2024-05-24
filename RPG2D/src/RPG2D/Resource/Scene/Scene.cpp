@@ -235,5 +235,8 @@ namespace RPG2D {
 	void Scene::OnComponentAdded<ProgressBarComponent>(Entity entity, ProgressBarComponent& component)
 	{
 	}
-
+	template<>
+	void Scene::OnComponentAdded<ParticleEmitterComponent>(Entity entity, ParticleEmitterComponent& component)
+	{
+	}
 }

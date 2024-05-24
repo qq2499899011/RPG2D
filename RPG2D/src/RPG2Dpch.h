@@ -12,6 +12,7 @@
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
+#include <random>
 
 #include "RPG2D/Core/Base.h"
 #include "RPG2D/Debug/Instrumentor.h"

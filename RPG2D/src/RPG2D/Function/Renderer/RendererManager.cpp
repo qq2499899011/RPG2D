@@ -31,7 +31,6 @@ namespace RPG2D {
 		//GlobalContext::GetInstance()->m_AssetManager->GetShader("sprite")->SetMat4("view_projection", projection);
 		//遍历实体，进行渲染.
 		//绘制精灵
-		// Draw sprites
 		entt::registry* m_Registry = GlobalContext::GetInstance()->m_SceneManager->GetRegistry();
 		{
 			auto group = m_Registry->group<TransformComponent>(entt::get<SpriteRendererComponent>);
@@ -41,6 +40,16 @@ namespace RPG2D {
 				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
 				DrawSprite(transform, sprite);
+			}
+		}
+		//渲染粒子
+		{
+			auto group = m_Registry->view<TransformComponent, ParticleEmitterComponent>();
+			for (auto entity : group)
+			{
+				auto [trans, emitter] = group.get<TransformComponent, ParticleEmitterComponent>(entity);
+				//渲染粒子
+				DrawParticle(trans, emitter);
 			}
 		}
 		EndScene();
@@ -79,7 +88,18 @@ namespace RPG2D {
 		//获取size
 		glm::vec2 size = glm::vec2(scale.x * sprite.Texture->GetWidth(), scale.y * sprite.Texture->GetHeight());
 		//根据Transform和Sprite将精灵绘制出来
-		m_SpriteRenderer->DrawSprite(sprite.Texture, pos, size, transform.Rotation.z,sprite.mirror);
+		m_SpriteRenderer->DrawSprite(sprite.Texture, pos, size, transform.Rotation.z,sprite.mirror,sprite.Color,sprite.Index);
+	}
+	//直接与图片大小有关。
+	void RendererManager::DrawParticle(TransformComponent& transform, ParticleEmitterComponent& emitter)
+	{
+		//获取位置
+		glm::vec3 pos = glm::vec3(transform.Translation);
+		//获取图片本身大小。
+		//获取scale
+		glm::vec2 scale = glm::vec2(transform.Scale.x, transform.Scale.y);
+		//根据Transform和Sprite将精灵绘制出来
+		m_SpriteRenderer->DrawParticle(emitter.particleEmitter,pos,scale);
 	}
 
 }

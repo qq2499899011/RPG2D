@@ -11,10 +11,10 @@ namespace RPG2D {
 		//End
 		void End();
 		void Update(Timestep);
+		void SetFontSize(float size) { m_FontSize = size; };
+		float GetFontSize() { return m_FontSize; };
 	private:
-		bool show_demo_window = true;
-		bool show_another_window = false;
-		int counter = 0;
+		float m_FontSize = 20.0f;
 	};
 }
 

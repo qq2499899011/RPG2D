@@ -29,6 +29,9 @@ namespace RPG2D {
 		//设置长宽
 		this->Width = width;
 		this->Height = height;
+		//设置默认子纹理长宽
+		SubWidth = width;
+		SubHeight = height;
 		//绑定纹理，加载数据
 		glBindTexture(GL_TEXTURE_2D, this->ID);
 		glTexImage2D(GL_TEXTURE_2D, 0, this->Internal_Format, width, height, 0, this->Image_Format, GL_UNSIGNED_BYTE, data);
@@ -77,5 +80,34 @@ namespace RPG2D {
 	uint32_t OpenGLTexture::GetHeight() const
 	{
 		return Height;
+	}
+	uint32_t OpenGLTexture::GetSubWidth() const
+	{
+		return SubWidth;
+	}
+	uint32_t OpenGLTexture::GetSubHeight() const
+	{
+		return SubHeight;
+	}
+	void OpenGLTexture::SetSubWidth(const uint32_t width)
+	{
+		SubWidth = width;
+	}
+	void OpenGLTexture::SetSubHeight(const uint32_t height)
+	{
+		SubHeight = height;
+	}
+	glm::vec4 OpenGLTexture::GetSubTextureCoords(int xIndex, int yIndex)
+	{
+		float x0 = (xIndex * SubWidth) / static_cast<float>(Width);
+		float y0 = (yIndex * SubHeight) / static_cast<float>(Height);
+		float x1 = ((xIndex + 1) * SubWidth) / static_cast<float>(Width);
+		float y1 = ((yIndex + 1) * SubHeight) / static_cast<float>(Height);
+		return glm::vec4(x0, y0, x1, y1);
+	}
+	void OpenGLTexture::SetSubWH(const uint32_t w, const uint32_t h)
+	{
+		SubWidth = w;
+		SubHeight = h;
 	}
 }

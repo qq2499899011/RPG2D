@@ -5,6 +5,7 @@
 #include "Enemy.h"
 #include "Ground.h"
 #include "UI.h"
+#include "ParticleExample.h"
 using namespace RPG2D;
 class ExampleLayer : public Layer
 {
@@ -51,6 +52,7 @@ public:
 		//加载纹理
 		assetManager->LoadTextureWithDir("awesomeface.png", true, "face");
 		assetManager->LoadTextureWithDir("background.png", true, "back");
+		assetManager->LoadTextureWithDir("bullet.png",true,"bullet");
 		//动画纹理
 		assetManager->LoadTextureWithDir("player1.png",true,"player1");
 		assetManager->LoadTextureWithDir("player2.png",true,"player2");
@@ -73,7 +75,10 @@ public:
 			//新建sprite组件
 			SpriteRendererComponent spriteComponent;
 			//spriteComponent.Texture = assetManager->GetTexture("face");
+			Ref<Texture2D> texture = assetManager->GetTexture("back");
+			//texture->SetSubWH(100,100);
 			spriteComponent.Texture = assetManager->GetTexture("back");
+			//spriteComponent.Index = glm::ivec2(3, 1);
 			//增加sprite组件
 			scene->AddComponentWithName<SpriteRendererComponent>("background", spriteComponent);
 			//设置transform组件
@@ -82,7 +87,7 @@ public:
 			//大小。scale*长宽 = 实际大小。
 			//scale = 实际大小/长宽。
 			//trans.Scale = glm::vec3{ 1280.0f / spriteComponent.Texture->GetWidth(),720.0f / spriteComponent.Texture->GetHeight(),1 };
-			//背景的大小被放大了1.2倍,最终大小为 2945*768
+			//背景的大小被放大了1.2倍,最终大小为 2945*768 ,实际大小2454*640;
 			trans.Scale = glm::vec3{1.2,1.2,1};
 			scene->GetComponentWithName<TransformComponent>("background") = trans;
 		}
@@ -109,6 +114,10 @@ public:
 		//UI
 		{
 			UI::Assemble();
+		}
+		//粒子效果
+		{
+			ParticleExample::Assemble();
 		}
 	}
 };

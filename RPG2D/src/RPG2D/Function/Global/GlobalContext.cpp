@@ -24,6 +24,7 @@ namespace RPG2D {
 		Instance->m_RendererManager = CreateRef<RendererManager>(); 
 		Instance->m_EventSystem = CreateRef<EventSystem>();
 		Instance->m_UISystem = CreateRef<UISystem>();
+		Instance->m_ParticleSystem = CreateRef<ParticleSystem>();
 	}
 
 	void GlobalContext::Init()
@@ -40,6 +41,7 @@ namespace RPG2D {
 		m_PhysicsSystem->Update(ts);
 		m_ScriptSystem->Update(ts);
 		m_AnimationSystem->Update(ts);
+		m_ParticleSystem->Update(ts);
 		m_RendererManager->Update(ts);
 		m_UISystem->Update(ts);
 		//TODO：还没有对UI进行封装

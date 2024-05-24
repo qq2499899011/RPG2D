@@ -24,33 +24,12 @@ namespace RPG2D {
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
 		//设置字体
-		/*
-		float fontSize = 18.0f;// *2.0f;
-		io.Fonts->AddFontFromFileTTF("assets/fonts/opensans/OpenSans-Bold.ttf", fontSize);
-		io.FontDefault = io.Fonts->AddFontFromFileTTF("assets/fonts/opensans/OpenSans-Regular.ttf", fontSize);
-		*/
-
+		io.FontDefault = io.Fonts->AddFontFromFileTTF("C:/Work/GameEngine/RPG2D/Sandbox/asset/font/simhei.ttf", m_FontSize);
 		// imgui颜色
 		ImGui::StyleColorsDark();
-		//ImGui::StyleColorsClassic();
-
-		// When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
-		ImGuiStyle& style = ImGui::GetStyle();
-		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-		{
-			//禁止圆角处理，保证视窗和其他窗口看起来一样
-			style.WindowRounding = 0.0f;
-			//颜色设置不透明
-			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
-		}
-		//imgui美化
-		//SetDarkThemeColors();
-
 		//初始化glfw和opengl
 		Application& app = Application::Get();
 		GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
-
-		// Setup Platform/RendererManager bindings
 		ImGui_ImplGlfw_InitForOpenGL(window, true);
 		ImGui_ImplOpenGL3_Init("#version 460");
 	}
@@ -102,7 +81,7 @@ namespace RPG2D {
 		//窗口透明
 		ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0, 0, 0, 0)); // 将背景颜色设为完全透明
 		//开始UI绘制
-		ImGui::Begin("Simple Button", nullptr, ImGuiWindowFlags_NoTitleBar  | ImGuiWindowFlags_NoScrollbar);
+		ImGui::Begin("Main UI Window", nullptr, ImGuiWindowFlags_NoTitleBar  | ImGuiWindowFlags_NoScrollbar);
 		entt::registry* m_Registry = GlobalContext::GetInstance()->m_SceneManager->GetRegistry();
 		//遍历所有带有Button组件的实体
 		auto group1 = m_Registry->view<TransformComponent,ButtonComponent>();
@@ -113,6 +92,8 @@ namespace RPG2D {
 			ImGui::SetCursorPos(ImVec2(trans.Translation.x,trans.Translation.y));
 			//设置颜色
 			ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(button.color.r, button.color.g, button.color.b, button.color.a));
+			//获取字体缩放比例
+			ImGui::SetWindowFontScale(button.fontsize/m_FontSize);
 			if (ImGui::Button(button.context.c_str(), ImVec2(trans.Scale.x, trans.Scale.y))) {
 				//按下后调用函数
 				button.buttonClick();
@@ -127,6 +108,7 @@ namespace RPG2D {
 				auto [trans, text] = group2.get<TransformComponent, TextComponent>(entity);
 				//根据当前位置绘制按钮
 				ImGui::SetCursorPos(ImVec2(trans.Translation.x,trans.Translation.y));
+				ImGui::SetWindowFontScale(text.fontsize/m_FontSize);
 				ImGui::Text(text.context.c_str());
 			}
 		}
@@ -138,6 +120,7 @@ namespace RPG2D {
 				auto [trans, progress] = group3.get<TransformComponent, ProgressBarComponent>(entity);
 				//根据当前位置绘制按钮
 				ImGui::SetCursorPos(ImVec2(trans.Translation.x, trans.Translation.y));
+				ImGui::SetWindowFontScale(progress.fontsize/m_FontSize);
 				ImGui::ProgressBar(progress.percent,ImVec2(trans.Scale.x,trans.Scale.y),progress.context.c_str());
 			}
 		}
