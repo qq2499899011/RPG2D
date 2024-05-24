@@ -13,3 +13,6 @@
 [submodule "RPG2D/vendor/Box2D"]
 	path = RPG2D/vendor/Box2D
 	url = git@github.com:qq2499899011/box2d.git
+[submodule "RPG2D/vendor/SDL_mixer"]
+	path = RPG2D/vendor/SDL_mixer
+	url = git@github.com:qq2499899011/SDL_mixer.git
