@@ -11,6 +11,7 @@
 #include "RPG2D/Function/Renderer/Texture2D.h"
 #include "RPG2D/Function/Animation/AnimatiorController.h"
 #include "RPG2D/Function/Particle/ParticleEmitter.h"
+#include "RPG2D/Function/Audio/Audio.h"
 namespace RPG2D {
 
 	struct IDComponent
@@ -208,6 +209,18 @@ namespace RPG2D {
 		ParticleEmitterComponent(Ref<ParticleEmitter> emitter) : particleEmitter(emitter) {}
 
 	};
+	//音频组件
+	struct AudioComponent {
+		//音频
+		Ref<Audio> audio;
+		bool play = false;//是否播放
+		bool isLoop = false;//是否循环
+		float volume = 1.0f;//音量
+		uint32_t handle = 0;//对应音频句柄
+		AudioComponent() = default;
+		AudioComponent(const AudioComponent&) = default;
+		AudioComponent(Ref<Audio> song) : audio(song) {}
+	};
 	template<typename... Component>
 	struct ComponentGroup
 	{
@@ -220,6 +233,6 @@ namespace RPG2D {
 		ComponentGroup<TransformComponent, SpriteRendererComponent,
 		CircleRendererComponent,SpriteRendererComponent,NativeScriptComponent,
 	    Rigidbody2DComponent, BoxCollider2DComponent,ButtonComponent,TextComponent,ProgressBarComponent,
-		CircleCollider2DComponent>;
+		CircleCollider2DComponent,AudioComponent>;
 
 }

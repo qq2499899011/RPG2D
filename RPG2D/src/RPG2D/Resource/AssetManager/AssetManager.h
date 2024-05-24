@@ -13,6 +13,7 @@
 #include <string>
 #include "RPG2D/Function/Renderer/Shader.h"
 #include "RPG2D/Function/Renderer/Texture2D.h"
+#include "RPG2D/Function/Audio/Audio.h"
 
 /// <summary>
 /// 从根据传入的着色器文件路径生成shdaer
@@ -26,19 +27,24 @@ class AssetManager
 		// resource storage 
 		std::map<std::string, Ref<Shader>> Shaders;
 		std::map<std::string, Ref<Texture2D>> Textures;
-		// loads (and generates) a shader program from file loading vertex, fragment (and geometry) shader's source code. If gShaderFile is not nullptr, it also loads a geometry shader
+		std::map<std::string, Ref<Audio>> Audios;
+
 		Ref<Shader>    LoadShader(const char *vShaderFile, const char *fShaderFile, const char *gShaderFile, std::string name);
 		Ref<Shader>    LoadShaderWithDir(const std::string , const std::string , const std::string, std::string name);
-		// retrieves a stored sader
 		Ref<Shader>    GetShader(std::string name);
-		// loads (and generates) a texture from file
+
 		Ref<Texture2D> LoadTexture(const char* file, bool alpha,std::string name);
 		Ref<Texture2D> LoadTextureWithDir(const std::string file, bool alpha,std::string name);
-		// retrieves a stored texture
 		Ref<Texture2D> GetTexture(std::string name);
-		// properly de-allocates all loaded resources
+
+
+		Ref<Audio> LoadAudio(const char* file,std::string name);
+		Ref<Audio> LoadAudioWithDir(const std::string file,std::string name);
+		Ref<Audio> GetAudio(std::string name);
+
 		void SetShaderDir(const std::string dir) { shaderDir = dir; };
 		void SetTextureDir(const std::string dir) { textureDir = dir; };
+		void SetAudioDir(const std::string dir) { audioDir = dir; };
 		void Clear();
 		AssetManager();
 	private:
@@ -49,6 +55,7 @@ class AssetManager
 		Ref<Texture2D> loadTextureFromFile(const char *file, bool alpha);
 		std::string shaderDir;
 		std::string textureDir;
+		std::string audioDir;
 	};
 }
 

@@ -42,10 +42,11 @@ public:
 		//设置资源路径
 		assetManager->SetShaderDir("C:/Work/GameEngine/RPG2D/Sandbox/asset/shader/");
 		assetManager->SetTextureDir("C:/Work/GameEngine/RPG2D/Sandbox/asset/texture/");
+		assetManager->SetAudioDir("C:/Work/GameEngine/RPG2D/Sandbox/asset/audio/");
 		//获取长宽
 		float width =static_cast<float>(m_Window->GetWidth());
 		float height = static_cast<float>(m_Window->GetHeight());
-		//加载并设定Shader
+		//加载着色器
 		assetManager->LoadShaderWithDir("sprite.vs","sprite.fs", "", "sprite");
 		assetManager->GetShader("sprite")->Bind();
 		assetManager->GetShader("sprite")->SetInt("sprite", 0);
@@ -62,6 +63,8 @@ public:
 		assetManager->LoadTextureWithDir("enemy2.png",true,"enemy2");
 		assetManager->LoadTextureWithDir("enemy3.png",true,"enemy3");
 		assetManager->LoadTextureWithDir("enemy4.png",true,"enemy4");
+		//加载音效
+		assetManager->LoadAudioWithDir("test.mp3", "bgm");
 		//创建场景
 		Ref<SceneManager> sceneManager = GlobalContext::GetInstance()->m_SceneManager;
 		Ref<Scene> scene = CreateRef<Scene>("Start");
@@ -90,6 +93,11 @@ public:
 			//背景的大小被放大了1.2倍,最终大小为 2945*768 ,实际大小2454*640;
 			trans.Scale = glm::vec3{1.2,1.2,1};
 			scene->GetComponentWithName<TransformComponent>("background") = trans;
+			//增加背景音效
+			AudioComponent audio;
+			audio.audio = assetManager->GetAudio("bgm");
+			audio.play = true;
+			scene->AddComponentWithName<AudioComponent>("background",audio);
 		}
 		//地面
 		{

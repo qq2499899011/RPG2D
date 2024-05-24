@@ -51,6 +51,23 @@ namespace RPG2D {
 		return Textures[name];
 	}
 
+	Ref<Audio> AssetManager::LoadAudio(const char* file, std::string name)
+	{
+		Ref<Audio> audio = CreateRef<Audio>(file,name);
+		Audios[name] = audio;
+		return audio;
+	}
+
+	Ref<Audio> AssetManager::LoadAudioWithDir(const std::string file, std::string name)
+	{
+		return LoadAudio((audioDir+file).c_str(),name);
+	}
+
+	Ref<Audio> AssetManager::GetAudio(std::string name)
+	{
+		return Audios[name];
+	}
+
 	/// <summary>
 	/// 释放所有shader和texture
 	/// </summary>

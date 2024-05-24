@@ -25,6 +25,7 @@ namespace RPG2D {
 		Instance->m_EventSystem = CreateRef<EventSystem>();
 		Instance->m_UISystem = CreateRef<UISystem>();
 		Instance->m_ParticleSystem = CreateRef<ParticleSystem>();
+		Instance->m_AudioSystem = CreateRef<AudioSystem>();
 	}
 
 	void GlobalContext::Init()
@@ -37,12 +38,13 @@ namespace RPG2D {
 		//调用所有系统的更新函数
 		//每次更新前，把列表中实体销毁
 		m_SceneManager->GetSceneActive()->DestroyEntityInList();
-		//物理->脚本->动画->渲染->UI,对场景进行处理。
+		//物理->脚本->动画->音频->渲染->粒子->UI,对场景进行处理。
 		m_PhysicsSystem->Update(ts);
 		m_ScriptSystem->Update(ts);
+		m_AudioSystem->Update(ts);
 		m_AnimationSystem->Update(ts);
-		m_ParticleSystem->Update(ts);
 		m_RendererManager->Update(ts);
+		m_ParticleSystem->Update(ts);
 		m_UISystem->Update(ts);
 		//TODO：还没有对UI进行封装
 	}

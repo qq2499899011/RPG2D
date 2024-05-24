@@ -9,6 +9,7 @@
 #include "RPG2D/Function/UI/UISystem.h"
 #include "RPG2D/Events/Event.h"
 #include "RPG2D/Function/Particle/ParticleSystem.h"
+#include "RPG2D/Function/Audio/AudioSystem.h"
 /// <summary>
 /// 管理所有的system和manager
 /// </summary>
@@ -26,6 +27,7 @@ namespace RPG2D {
 		Ref<EventSystem> m_EventSystem;
 		Ref<UISystem> m_UISystem;
 		Ref<ParticleSystem> m_ParticleSystem;
+		Ref<AudioSystem> m_AudioSystem;
 		//要把常用的操作进行包装。
 		static Ref<GlobalContext> GetInstance();
 		static void Create();
