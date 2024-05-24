@@ -3,6 +3,8 @@
 #include "LogSystem.h"
 #include "Timestep.h"
 #include "RPG2D/Function/Renderer/RenderCommand.h"
+#include "soloud.h"
+#include "soloud_wav.h"
 namespace RPG2D {
 
 
@@ -45,12 +47,45 @@ namespace RPG2D {
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 		*/
+		//播放音乐
+		AudioInit();
 	}
 
 	void Application::Update(Timestep ts)
 	{
 		//调用更新函数
 		GlobalContext::GetInstance()->Update(ts);
+		//输出播放时间
+		if(!m_Audio->isValidVoiceHandle(handle))RPG2D_CORE_INFO("playTime:{0}",m_Audio->getStreamTime(handle));
+	}
+	void Application::AudioInit()
+	{
+		//创建引擎
+		m_Audio = new SoLoud::Soloud();
+		sound = new SoLoud::Wav();
+		// 初始化引擎
+		if (m_Audio->init() != SoLoud::SO_NO_ERROR) {
+			// 初始化失败处理
+		}
+		else {
+			RPG2D_CORE_INFO("AudioLoadSuccess!");
+		}
+		//加载音频
+		if (sound->load("C:/Work/GameEngine/RPG2D/Sandbox/asset/audio/test.mp3") != SoLoud::SO_NO_ERROR) {
+			// 加载失败处理
+		}
+		else {
+			RPG2D_CORE_INFO("SoundLoadSuccess!,time={0}",sound->getLength());
+		}
+		//播放音频
+		SoLoud::handle voiceHandle = m_Audio->playBackground(*sound);
+		handle = voiceHandle;
+		m_Audio->setGlobalVolume(1.0f);
+		/*
+		while (true) {
+			RPG2D_CORE_INFO("playTime:{0}",m_Audio->getStreamTime(handle));
+		}
+		*/
 	}
 	//对应用程序中需要监听的事件进行注册
 	void Application::RegisterEvent()

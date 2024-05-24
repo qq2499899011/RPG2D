@@ -1,46 +1,45 @@
-[14:12:50] [info] RPG2D: Hello
-[14:12:50] [warning] APP: client hello
-[14:12:50] [warning] APP: www
-[14:12:50] [info] RPG2D: Creating window RPG2D Engine (1600, 900)
-[14:12:51] [info] APP: random_seed:0.95016295
-[14:12:51] [info] APP: random_seed:0.8609249
-[14:12:52] [info] RPG2D: contact begin
-[14:12:52] [info] RPG2D: contact begin
-[14:12:52] [info] RPG2D: contact begin
-[14:12:52] [info] APP: random_seed:0.6357598
-[14:12:52] [info] APP: random_seed:0.36262426
-[14:12:53] [info] APP: random_seed:0.81352425
-[14:12:53] [info] APP: random_seed:0.04443433
-[14:12:54] [info] APP: random_seed:0.8960842
-[14:12:54] [info] APP: random_seed:0.61152726
-[14:12:55] [info] APP: random_seed:0.12774248
-[14:12:55] [info] APP: random_seed:0.7601416
-[14:12:56] [info] APP: random_seed:0.8935339
-[14:12:56] [info] APP: random_seed:0.1787402
-[14:12:57] [info] APP: random_seed:0.0598538
-[14:12:57] [info] APP: random_seed:0.6188574
-[14:12:58] [info] APP: random_seed:0.81045824
-[14:12:58] [info] APP: random_seed:0.08591881
-[14:12:59] [info] APP: random_seed:0.674326
-[14:12:59] [info] APP: random_seed:0.015942844
-[14:13:00] [info] APP: random_seed:0.7576424
-[14:13:00] [info] APP: random_seed:0.79084176
-[14:13:01] [info] APP: random_seed:0.3394218
-[14:13:01] [info] APP: random_seed:0.92012316
-[14:13:02] [info] APP: random_seed:0.6564569
-[14:13:02] [info] APP: random_seed:0.8356136
-[14:13:03] [info] APP: random_seed:0.347125
-[14:13:03] [info] APP: random_seed:0.5637999
-[14:13:04] [info] APP: random_seed:5.827332e-05
-[14:13:04] [info] APP: random_seed:0.283891
-[14:13:05] [info] APP: random_seed:0.80782795
-[14:13:05] [info] APP: random_seed:0.11364937
-[14:13:06] [info] APP: random_seed:0.5686614
-[14:13:06] [info] APP: random_seed:0.88534355
-[14:13:07] [info] APP: random_seed:0.61100435
-[14:13:07] [info] APP: random_seed:0.18419325
-[14:13:08] [info] APP: random_seed:0.008447523
-[14:13:08] [info] APP: random_seed:0.8948582
-[14:13:09] [info] APP: random_seed:0.04651429
-[14:13:09] [info] APP: random_seed:0.47386882
-[14:13:09] [warning] APP: www1111111222
+[16:50:50] [info] RPG2D: Hello
+[16:50:50] [warning] APP: client hello
+[16:50:50] [warning] APP: www
+[16:50:50] [info] RPG2D: Creating window RPG2D Engine (1600, 900)
+[16:50:50] [info] RPG2D: AudioLoadSuccess!
+[16:50:51] [info] RPG2D: SoundLoadSuccess!,time=213.133056640625
+[16:50:51] [info] APP: random_seed:0.845196
+[16:50:51] [info] APP: random_seed:0.40225804
+[16:50:51] [info] APP: random_seed:0.40900737
+[16:50:52] [info] APP: random_seed:0.6102806
+[16:50:52] [info] RPG2D: contact begin
+[16:50:52] [info] RPG2D: contact begin
+[16:50:52] [info] RPG2D: contact begin
+[16:50:52] [info] APP: random_seed:0.6378611
+[16:50:53] [info] APP: random_seed:0.009203746
+[16:50:53] [info] APP: random_seed:0.42439893
+[16:50:54] [info] APP: random_seed:0.9851371
+[16:50:54] [info] APP: random_seed:0.6065266
+[16:50:55] [info] APP: random_seed:0.9027101
+[16:50:55] [info] APP: random_seed:0.37648553
+[16:50:56] [info] APP: random_seed:0.6462312
+[16:50:56] [info] APP: random_seed:0.7553326
+[16:50:57] [info] APP: random_seed:0.106160864
+[16:50:57] [info] APP: random_seed:0.71381664
+[16:50:58] [info] APP: random_seed:0.43228546
+[16:50:58] [info] APP: random_seed:0.9461958
+[16:50:59] [info] APP: random_seed:0.037921473
+[16:50:59] [info] APP: random_seed:0.8794123
+[16:51:00] [info] APP: random_seed:0.26513913
+[16:51:00] [info] APP: random_seed:0.12982711
+[16:51:01] [info] APP: random_seed:0.34965327
+[16:51:01] [info] APP: random_seed:0.83150834
+[16:51:02] [info] APP: random_seed:0.15220156
+[16:51:02] [info] APP: random_seed:0.42286292
+[16:51:03] [info] APP: random_seed:0.124866664
+[16:51:03] [info] APP: random_seed:0.9617218
+[16:51:04] [info] APP: random_seed:0.68239456
+[16:51:04] [info] APP: random_seed:0.14857619
+[16:51:05] [info] APP: random_seed:0.55347335
+[16:51:05] [info] APP: random_seed:0.21374755
+[16:51:06] [info] APP: random_seed:0.31700894
+[16:51:06] [info] APP: random_seed:0.49861577
+[16:51:07] [info] APP: random_seed:0.32213482
+[16:51:07] [info] APP: random_seed:0.48716494
+[16:51:08] [warning] APP: www1111111222

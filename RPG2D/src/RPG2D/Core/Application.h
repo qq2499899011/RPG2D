@@ -3,6 +3,10 @@
 #include "RPG2D/Events/ApplicationEvent.h"
 #include "RPG2D/Core/LayerStack.h"
 #include "RPG2D/ImGui/ImGuiLayer.h"
+namespace SoLoud {
+	class Soloud;
+	class Wav;
+}
 namespace RPG2D {
 	class Application
 	{
@@ -20,6 +24,10 @@ namespace RPG2D {
 		float GetTime() { return m_Window->GetTime(); }
 		Scope<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
+		SoLoud::Soloud* m_Audio;
+		SoLoud::Wav* sound;
+		unsigned int handle;
+		void AudioInit();
 		//ËùÓÐmanagerºÍsystem¡£
 	private:
 		void Update(Timestep ts);

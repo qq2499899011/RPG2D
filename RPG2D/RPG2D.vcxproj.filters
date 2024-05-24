@@ -37,6 +37,9 @@
     <Filter Include="src\RPG2D\Function\Input">
       <UniqueIdentifier>{8FCE20F0-7BF3-6F70-A43E-550090C26E8E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\RPG2D\Function\Particle">
+      <UniqueIdentifier>{9318107F-FF25-3E65-880C-3A50F4180A1C}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\RPG2D\Function\Physics">
       <UniqueIdentifier>{02060989-EE15-B559-57CF-197843FEA3F2}</UniqueIdentifier>
     </Filter>
@@ -45,6 +48,9 @@
     </Filter>
     <Filter Include="src\RPG2D\Function\Script">
       <UniqueIdentifier>{D40EC80A-40D1-FB94-8981-8A21F582D472}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\RPG2D\Function\UI">
+      <UniqueIdentifier>{BDFB792D-2968-3528-F25B-CD855E875790}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\RPG2D\ImGui">
       <UniqueIdentifier>{45E82257-B173-901B-BA84-1310268FEC1B}</UniqueIdentifier>
@@ -174,6 +180,12 @@
     <ClInclude Include="src\RPG2D\Function\Input\InputSystem.h">
       <Filter>src\RPG2D\Function\Input</Filter>
     </ClInclude>
+    <ClInclude Include="src\RPG2D\Function\Particle\ParticleEmitter.h">
+      <Filter>src\RPG2D\Function\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RPG2D\Function\Particle\ParticleSystem.h">
+      <Filter>src\RPG2D\Function\Particle</Filter>
+    </ClInclude>
     <ClInclude Include="src\RPG2D\Function\Physics\ContactListener.h">
       <Filter>src\RPG2D\Function\Physics</Filter>
     </ClInclude>
@@ -215,6 +227,9 @@
     </ClInclude>
     <ClInclude Include="src\RPG2D\Function\Script\ScriptSystem.h">
       <Filter>src\RPG2D\Function\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RPG2D\Function\UI\UISystem.h">
+      <Filter>src\RPG2D\Function\UI</Filter>
     </ClInclude>
     <ClInclude Include="src\RPG2D\ImGui\ImGuiLayer.h">
       <Filter>src\RPG2D\ImGui</Filter>
@@ -1491,9 +1506,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\RPG2D\Function\UI\UISystem.h" />
-    <ClInclude Include="src\RPG2D\Function\Particle\ParticleSystem.h" />
-    <ClInclude Include="src\RPG2D\Function\Particle\ParticleEmitter.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -1550,6 +1562,12 @@
     <ClCompile Include="src\RPG2D\Function\Global\GlobalContext.cpp">
       <Filter>src\RPG2D\Function\Global</Filter>
     </ClCompile>
+    <ClCompile Include="src\RPG2D\Function\Particle\ParticleEmitter.cpp">
+      <Filter>src\RPG2D\Function\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RPG2D\Function\Particle\ParticleSystem.cpp">
+      <Filter>src\RPG2D\Function\Particle</Filter>
+    </ClCompile>
     <ClCompile Include="src\RPG2D\Function\Physics\ContactListener.cpp">
       <Filter>src\RPG2D\Function\Physics</Filter>
     </ClCompile>
@@ -1592,6 +1610,9 @@
     <ClCompile Include="src\RPG2D\Function\Script\ScriptSystem.cpp">
       <Filter>src\RPG2D\Function\Script</Filter>
     </ClCompile>
+    <ClCompile Include="src\RPG2D\Function\UI\UISystem.cpp">
+      <Filter>src\RPG2D\Function\UI</Filter>
+    </ClCompile>
     <ClCompile Include="src\RPG2D\ImGui\ImGuiBuild.cpp">
       <Filter>src\RPG2D\ImGui</Filter>
     </ClCompile>
@@ -1616,8 +1637,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\RPG2D\Function\UI\UISystem.cpp" />
-    <ClCompile Include="src\RPG2D\Function\Particle\ParticleSystem.cpp" />
-    <ClCompile Include="src\RPG2D\Function\Particle\ParticleEmitter.cpp" />
   </ItemGroup>
 </Project>

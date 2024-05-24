@@ -77,7 +77,7 @@
       <PrecompiledHeaderFile>RPG2Dpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING;RPG2D_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;RPG2D_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\ImGui;vendor\glm;vendor\stb_image;vendor\entt\include;vendor\Box2D\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\ImGui;vendor\glm;vendor\stb_image;vendor\entt\include;vendor\Box2D\include;vendor\SoLoud\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -97,7 +97,7 @@
       <PrecompiledHeaderFile>RPG2Dpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING;RPG2D_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;RPG2D_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\ImGui;vendor\glm;vendor\stb_image;vendor\entt\include;vendor\Box2D\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\ImGui;vendor\glm;vendor\stb_image;vendor\entt\include;vendor\Box2D\include;vendor\SoLoud\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -121,7 +121,7 @@
       <PrecompiledHeaderFile>RPG2Dpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING;RPG2D_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;RPG2D_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\ImGui;vendor\glm;vendor\stb_image;vendor\entt\include;vendor\Box2D\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\Glad\include;vendor\ImGui;vendor\glm;vendor\stb_image;vendor\entt\include;vendor\Box2D\include;vendor\SoLoud\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -140,8 +140,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\RPG2D\Function\Particle\ParticleEmitter.h" />
-    <ClInclude Include="src\RPG2D\Function\Particle\ParticleSystem.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
@@ -171,6 +169,8 @@
     <ClInclude Include="src\RPG2D\Function\Animation\AnimatiorController.h" />
     <ClInclude Include="src\RPG2D\Function\Global\GlobalContext.h" />
     <ClInclude Include="src\RPG2D\Function\Input\InputSystem.h" />
+    <ClInclude Include="src\RPG2D\Function\Particle\ParticleEmitter.h" />
+    <ClInclude Include="src\RPG2D\Function\Particle\ParticleSystem.h" />
     <ClInclude Include="src\RPG2D\Function\Physics\ContactListener.h" />
     <ClInclude Include="src\RPG2D\Function\Physics\Physics2D.h" />
     <ClInclude Include="src\RPG2D\Function\Renderer\Buffer.h" />
@@ -185,6 +185,7 @@
     <ClInclude Include="src\RPG2D\Function\Renderer\Texture2D.h" />
     <ClInclude Include="src\RPG2D\Function\Renderer\VertexArray.h" />
     <ClInclude Include="src\RPG2D\Function\Script\ScriptSystem.h" />
+    <ClInclude Include="src\RPG2D\Function\UI\UISystem.h" />
     <ClInclude Include="src\RPG2D\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\RPG2D\Resource\AssetManager\AssetManager.h" />
     <ClInclude Include="src\RPG2D\Resource\ResType\Components.h" />
@@ -193,7 +194,6 @@
     <ClInclude Include="src\RPG2D\Resource\Scene\Scene.h" />
     <ClInclude Include="src\RPG2D\Resource\Scene\SceneManager.h" />
     <ClInclude Include="src\RPG2Dpch.h" />
-    <ClInclude Include="src\RPG2D\Function\UI\UISystem.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_features.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_fixes.hpp" />
@@ -613,8 +613,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\RPG2D\Function\Particle\ParticleEmitter.cpp" />
-    <ClCompile Include="src\RPG2D\Function\Particle\ParticleSystem.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
@@ -633,6 +631,8 @@
     <ClCompile Include="src\RPG2D\Function\Animation\Animatior.cpp" />
     <ClCompile Include="src\RPG2D\Function\Animation\AnimatiorController.cpp" />
     <ClCompile Include="src\RPG2D\Function\Global\GlobalContext.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Particle\ParticleEmitter.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Particle\ParticleSystem.cpp" />
     <ClCompile Include="src\RPG2D\Function\Physics\ContactListener.cpp" />
     <ClCompile Include="src\RPG2D\Function\Physics\Physics2D.cpp" />
     <ClCompile Include="src\RPG2D\Function\Renderer\Buffer.cpp" />
@@ -647,6 +647,7 @@
     <ClCompile Include="src\RPG2D\Function\Renderer\Texture2D.cpp" />
     <ClCompile Include="src\RPG2D\Function\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\RPG2D\Function\Script\ScriptSystem.cpp" />
+    <ClCompile Include="src\RPG2D\Function\UI\UISystem.cpp" />
     <ClCompile Include="src\RPG2D\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\RPG2D\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\RPG2D\Resource\AssetManager\AssetManager.cpp" />
@@ -656,7 +657,6 @@
     <ClCompile Include="src\RPG2Dpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\RPG2D\Function\UI\UISystem.cpp" />
     <ClCompile Include="vendor\stb_image\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -671,6 +671,9 @@
     </ProjectReference>
     <ProjectReference Include="vendor\Box2D\Box2D.vcxproj">
       <Project>{A434E80C-1049-10BE-D9CA-B31D459E0CEF}</Project>
+    </ProjectReference>
+    <ProjectReference Include="vendor\SoLoud\SoLoud.vcxproj">
+      <Project>{5B657FD1-4707-AAA7-30C2-BDFB1C0331F8}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -26,12 +26,14 @@ IncludeDir["stb_image"] = "%{wks.location}/RPG2D/vendor/stb_image"
 IncludeDir["glm"] = "%{wks.location}/RPG2D/vendor/glm"
 IncludeDir["entt"] = "%{wks.location}/RPG2D/vendor/entt/include"
 IncludeDir["Box2D"] = "%{wks.location}/RPG2D/vendor/Box2D/include"
+IncludeDir["SoLoud"] = "%{wks.location}/RPG2D/vendor/SoLoud/include"
 
 --添加子模组premake 文件
 include "RPG2D/vendor/GLFW" -- GLFW脚本文件
 include "RPG2D/vendor/Glad"
 include "RPG2D/vendor/imgui"
 include "RPG2D/vendor/Box2D"
+include "RPG2D/vendor/SoLoud"
 
 project "RPG2D"--项目名称
 	location "RPG2D"
@@ -66,6 +68,7 @@ project "RPG2D"--项目名称
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.entt}",
 		"%{IncludeDir.Box2D}",
+		"%{IncludeDir.SoLoud}",
 	}
 	links
 	{
@@ -74,6 +77,7 @@ project "RPG2D"--项目名称
 		"Glad",
 		"ImGui",
 		"Box2D",
+		"SoLoud",
 	}
 
 	filter "system:windows"
