@@ -45,4 +45,9 @@ namespace RPG2D {
 			return 0;
 		}
 	}
+	void AudioSystem::DeInit()
+	{
+		m_AudioEngine->stopAll();
+		m_AudioEngine->deinit();
+	}
 }

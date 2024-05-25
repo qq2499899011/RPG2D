@@ -49,9 +49,8 @@ namespace RPG2D {
 		virtual void SetSubWidth(const uint32_t) override;
 		virtual void SetSubHeight(const uint32_t) override;
 		virtual glm::vec4 GetSubTextureCoords(int, int) override;
-
-		// Í¨¹ý Texture2D ¼Ì³Ð
-		void SetSubWH(const uint32_t, const uint32_t) override;
+		virtual void SetSubWH(const uint32_t, const uint32_t) override;
+		virtual glm::vec2 GetSize() const override;
 	};
 }
 

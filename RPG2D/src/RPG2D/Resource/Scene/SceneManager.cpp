@@ -11,9 +11,19 @@ namespace RPG2D {
 	Ref<Scene> SceneManager::SetSceneActive(int num)
 	{
 		activeSceneNum = num;
-		//设置后初始化物理场景
-		GlobalContext::GetInstance()->m_PhysicsSystem->Init();
+		//更新物理引擎内容
+		GlobalContext::GetInstance()->m_PhysicsSystem->WhenActiveScene();
 		return scenes[num];
+	}
+	Ref<Scene> SceneManager::CreateScene(const std::string& name)
+	{
+		Ref<Scene> scene = CreateRef<Scene>(name);
+		//设置物理场景
+		//设置后初始化物理场景
+		scene->SetPhysicsWorld(GlobalContext::GetInstance()->m_PhysicsSystem->Create());
+		//加入场景
+		AddScene(scene);
+		return scene;
 	}
 	//通过场景名称设置活跃场景
 	Ref<Scene> SceneManager::SetSceneActive(const std::string& name) {

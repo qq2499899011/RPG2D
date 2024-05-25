@@ -16,7 +16,7 @@ namespace RPG2D {
     private:
         Timestep currentTime = 0.0f;
         Timestep maxTime = 0.0f;
-        Ref<Texture2D> curTexture;
+        Ref<Texture2D> curTexture = nullptr;
         std::map<Timestep, Ref<Texture2D>> frames;
 	};
 }

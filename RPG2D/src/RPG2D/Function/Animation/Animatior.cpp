@@ -5,9 +5,9 @@ namespace RPG2D {
 	{
 		return curTexture;
 	}
-    // 添加纹理
+    // 添加纹理,如果curTexture是空，赋值
     void Animatior::AddFrame(Timestep ts, Ref<Texture2D> texture){
-        //还要记录最大时间。
+        if (!curTexture)curTexture = texture;
         if (ts > maxTime-0.1f)maxTime = ts+0.1f;
         frames[ts] = texture;
     }

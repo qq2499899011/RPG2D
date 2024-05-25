@@ -5,7 +5,7 @@
 namespace RPG2D {
 	void ContactListener::BeginContact(b2Contact* contact)
 	{
-		RPG2D_CORE_INFO("contact begin");
+		//RPG2D_CORE_INFO("contact begin");
 		//分别调用脚本组件中的OnCollisionEngin,并且把碰撞的对象传入。
 		 // 获取碰撞的两个夹具
 		b2Fixture* fixtureA = contact->GetFixtureA();
@@ -29,6 +29,6 @@ namespace RPG2D {
 
 	void ContactListener::EndContact(b2Contact* contact)
 	{
-		RPG2D_CORE_INFO("contact end");
+		//RPG2D_CORE_INFO("contact end");
 	}
 }

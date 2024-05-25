@@ -114,6 +114,7 @@ namespace RPG2D {
 	bool Application::OnWindowClose(Event* e)
 	{
 		m_Running = false;
+		GlobalContext::GetInstance()->m_AudioSystem->DeInit();
 		return true;
 	}
 

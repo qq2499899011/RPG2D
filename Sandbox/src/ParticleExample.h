@@ -23,7 +23,7 @@ public:
 		emitter_p->SetParticleInit([](Particle& p) {
 			//获取随机种子,计算初始位置
 			p.position.x = p.random_seed * 1600 - 800;
-			RPG2D_INFO("random_seed:{0}",p.random_seed);
+			//RPG2D_INFO("random_seed:{0}",p.random_seed);
 			p.position.y = 0;
 			p.velocity = glm::vec2(0.0,100.0f);
 			p.size = glm::vec2(10.0f, 10.0f);

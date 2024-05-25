@@ -3,13 +3,7 @@
 #include "RPG2D/Core/Timestep.h"
 //状态+对应动画
 namespace RPG2D {
-	// 定义动画状态
-	enum class AnimationState {
-		Idle,
-		Walking,
-		Running,
-		Jumping,
-	};
+	using AnimationState = std::string;
 	class AnimatiorController
 	{
 		//有一系列的animator组件。

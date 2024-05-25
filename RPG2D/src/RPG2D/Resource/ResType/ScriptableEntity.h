@@ -16,7 +16,7 @@ namespace RPG2D {
 		}
 		virtual void OnCollisionBegin(Entity other) {
 			//Êä³öÅö×²
-			RPG2D_CORE_INFO("{0}:contact {1}",m_Entity.GetName(),other.GetName());
+			//RPG2D_CORE_INFO("{0}:contact {1}",m_Entity.GetName(),other.GetName());
 		}
 	protected:
 		virtual void OnCreate() = 0;

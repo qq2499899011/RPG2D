@@ -12,6 +12,7 @@ public:
 	void SetAmmo(Entity entity);
 	static Entity Assemble();
 private:
+	void state_update();
 	void movement(Timestep ts);
 	void fire(Timestep);
 	float playerSpeed = 500.0f;
@@ -20,7 +21,11 @@ private:
 	bool canFire = false;
 	bool dirLeft = true;
 	float m_VecX = 8.0f;
+	float m_VecY = 12.0f;
 	bool canJump = true;
 	Entity ammo;
+	//¸÷¸ö×´Ì¬
+	std::string state;
+	std::string state_old;//¾É×´Ì¬
 };
 

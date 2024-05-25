@@ -87,7 +87,9 @@ namespace RPG2D {
 		glm::vec2 scale = glm::vec2(transform.Scale.x, transform.Scale.y);
 		//获取size
 		glm::vec2 size = glm::vec2(scale.x * sprite.Texture->GetWidth(), scale.y * sprite.Texture->GetHeight());
-		//根据Transform和Sprite将精灵绘制出来
+		//获取实际大小后，计算实际位置
+		pos.x -= size.x * transform.anchor.x;
+		pos.y -= size.y * transform.anchor.y;
 		m_SpriteRenderer->DrawSprite(sprite.Texture, pos, size, transform.Rotation.z,sprite.mirror,sprite.Color,sprite.Index);
 	}
 	//直接与图片大小有关。

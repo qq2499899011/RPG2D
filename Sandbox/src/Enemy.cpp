@@ -1,5 +1,5 @@
 #include "Enemy.h"
-
+#include "Bullet.h"
 void Enemy::OnCreate()
 {
 }
@@ -10,7 +10,7 @@ void Enemy::OnDestroy()
 
 void Enemy::OnUpdate(Timestep ts)
 {
-
+	fire(ts);
 }
 
 void Enemy::OnCollisionBegin(Entity other)
@@ -18,9 +18,9 @@ void Enemy::OnCollisionBegin(Entity other)
 	//获取对方的Tag，如果是子弹，就死亡
 	if (other.GetName().compare("Bullet") == 0) {
 		//碰撞时调用
-		RPG2D_INFO("dead");
+		//RPG2D_INFO("dead");
 		//调用移除函数
-		GlobalContext::GetInstance()->m_SceneManager->GetSceneActive()->RemoveEntity(m_Entity);
+		//GlobalContext::GetInstance()->m_SceneManager->GetSceneActive()->RemoveEntity(m_Entity);
 	}
 }
 
@@ -38,8 +38,8 @@ Entity Enemy::Assemble()
 	enemyAnimatior->AddFrame(0.2f, assetManager->GetTexture("enemy4"));
 	//创建Controller
 	Ref<AnimatiorController> enemyAC = CreateRef<AnimatiorController>();
-	enemyAC->AddAnimation(AnimationState::Idle, enemyAnimatior);
-	enemyAC->SetState(AnimationState::Idle);
+	enemyAC->AddAnimation("idle", enemyAnimatior);
+	enemyAC->SetState("idle");
 	//创建动画组件
 	AnimatiorControllerComponent enemyACcomponent;
 	enemyACcomponent.animatiorController = enemyAC;
@@ -96,3 +96,18 @@ void Enemy::SetVelocity(glm::vec2 vec)
 	physics->SetVelocity(m_Entity,m_Velocity);
 }
 
+void Enemy::fire(Timestep ts)
+{
+	if (CD < 1 / firingRate)CD+=ts;
+	else {
+		Entity bullet = Bullet::Assemble();
+		//设置子弹初始位置;
+		//获取角色当前位置
+		TransformComponent& trans = m_Entity.GetComponent<TransformComponent>();
+		GlobalContext::GetInstance()->m_PhysicsSystem->SetPositionWithPixel(bullet,glm::vec2(trans.Translation.x,trans.Translation.y+20.0f));
+		//设置子弹方向
+		Bullet* bulletScript = dynamic_cast<Bullet*>(bullet.GetComponent<NativeScriptComponent>().Instance);
+		bulletScript->SetVelocity(glm::vec2(-bulletScript->GetVelocity().x,bulletScript->GetVelocity().y));
+		CD -= 1 / firingRate;
+	}
+}

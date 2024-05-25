@@ -55,9 +55,29 @@ public:
 		assetManager->LoadTextureWithDir("background.png", true, "back");
 		assetManager->LoadTextureWithDir("bullet.png",true,"bullet");
 		//动画纹理
-		assetManager->LoadTextureWithDir("player1.png",true,"player1");
-		assetManager->LoadTextureWithDir("player2.png",true,"player2");
-		assetManager->LoadTextureWithDir("player3.png",true,"player3");
+		//角色移动
+		assetManager->LoadTextureWithDir("player/player_run01.png",true,"player_run1");
+		assetManager->LoadTextureWithDir("player/player_run02.png",true,"player_run2");
+		assetManager->LoadTextureWithDir("player/player_run03.png",true,"player_run3");
+		//角色死亡
+		assetManager->LoadTextureWithDir("player/player_dead01.png",true,"player_dead1");
+		assetManager->LoadTextureWithDir("player/player_dead02.png",true,"player_dead2");
+		assetManager->LoadTextureWithDir("player/player_dead03.png",true,"player_dead3");
+		//角色向上持枪+移动
+		assetManager->LoadTextureWithDir("player/player_uprun01.png",true,"player_uprun1");
+		assetManager->LoadTextureWithDir("player/player_uprun02.png",true,"player_uprun2");
+		assetManager->LoadTextureWithDir("player/player_uprun03.png",true,"player_uprun3");
+		//角色向下持枪+移动
+		assetManager->LoadTextureWithDir("player/player_downrun01.png",true,"player_downrun1");
+		assetManager->LoadTextureWithDir("player/player_downrun02.png",true,"player_downrun2");
+		assetManager->LoadTextureWithDir("player/player_downrun03.png",true,"player_downrun3");
+		//角色跳跃
+		assetManager->LoadTextureWithDir("player/player_jump01.png",true,"player_jump1");
+		assetManager->LoadTextureWithDir("player/player_jump02.png",true,"player_jump2");
+		//角色向上持枪
+		assetManager->LoadTextureWithDir("player/player_up01.png",true,"player_up1");
+		//角色趴下
+		assetManager->LoadTextureWithDir("player/player_down01.png",true,"player_down1");
 		//敌人纹理
 		assetManager->LoadTextureWithDir("enemy1.png",true,"enemy1");
 		assetManager->LoadTextureWithDir("enemy2.png",true,"enemy2");
@@ -67,9 +87,8 @@ public:
 		assetManager->LoadAudioWithDir("test.mp3", "bgm");
 		//创建场景
 		Ref<SceneManager> sceneManager = GlobalContext::GetInstance()->m_SceneManager;
-		Ref<Scene> scene = CreateRef<Scene>("Start");
 		//加入场景
-		sceneManager->AddScene(scene);
+		Ref<Scene> scene = sceneManager->CreateScene("Start");
 		sceneManager->SetSceneActive("Start");
 		//背景
 		{

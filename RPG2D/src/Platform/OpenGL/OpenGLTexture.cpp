@@ -15,7 +15,7 @@ namespace RPG2D {
 	//纹理初始化设置
 	//默认长宽0,内部格式和加载格式RGB，环绕模式重复、过滤模式线性
 	OpenGLTexture::OpenGLTexture(std::string& name)
-		: Width(0), Height(0), Internal_Format(GL_RGB), Image_Format(GL_RGB), Wrap_S(GL_REPEAT), Wrap_T(GL_REPEAT), Filter_Min(GL_LINEAR), Filter_Max(GL_LINEAR)
+		: Width(0), Height(0), Internal_Format(GL_RGB), Image_Format(GL_RGB), Wrap_S(GL_MIRRORED_REPEAT), Wrap_T(GL_MIRRORED_REPEAT), Filter_Min(GL_LINEAR), Filter_Max(GL_LINEAR)
 	{
 		//设置名称
 		this->name = name;
@@ -109,5 +109,9 @@ namespace RPG2D {
 	{
 		SubWidth = w;
 		SubHeight = h;
+	}
+	glm::vec2 OpenGLTexture::GetSize() const
+	{
+		return glm::vec2(Width,Height);
 	}
 }

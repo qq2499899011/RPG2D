@@ -42,17 +42,39 @@ namespace RPG2D {
 namespace RPG2D {
 	PhysicsSystem::PhysicsSystem()
 	{
-		m_Contact =new ContactListener();
+		m_Contact = new ContactListener();
 		m_PixelPerMeter = 50.0f;
 	}
 
 	PhysicsSystem::~PhysicsSystem()
 	{
 	}
-	//切换场景时调用
+	//切换场景时，获取物理指针。
+
+	b2World* PhysicsSystem::Create()
+	{
+		//设置重力加速度方向
+		m_PhysicsWorld = new b2World({ 0.0f, 19.6f });
+		//清空bodyToDestroy
+		m_BodiesToDestroy.clear();
+		//设置碰撞检测
+		m_PhysicsWorld->SetContactListener(m_Contact);
+		return m_PhysicsWorld;
+	}
+
+	void PhysicsSystem::WhenActiveScene()
+	{
+		//设置重力加速度方向
+		m_PhysicsWorld = GlobalContext::GetInstance()->m_SceneManager->GetSceneActive()->GetPhysicsWorld();
+		//清空bodyToDestroy
+		m_BodiesToDestroy.clear();
+		//设置碰撞检测
+		m_PhysicsWorld->SetContactListener(m_Contact);
+	}
+
+	//创建场景时调用
 	void PhysicsSystem::Init()
 	{
-		
 		//设置重力加速度方向
 		m_PhysicsWorld = new b2World({ 0.0f, 9.8f });
 		//清空bodyToDestroy
@@ -63,16 +85,6 @@ namespace RPG2D {
 		//直接通过SceneManager获取view
 		entt::registry* m_Registry = GlobalContext::GetInstance()->m_SceneManager->GetRegistry();
 		GlobalContext::GetInstance()->m_SceneManager->GetSceneActive()->SetPhysicsWorld(m_PhysicsWorld);
-		/*
-		auto view = m_Registry->view<Rigidbody2DComponent>();
-		//遍历实体，对于每个刚体实体，建立其在box2d中的对应body。
-		//当生成预制体之后，需要执行一次这个过程。
-		for (auto e : view)
-		{
-			Entity entity = { e, GlobalContext::GetInstance()->m_SceneManager->GetSceneActive().get()};
-			AddEntity(entity);
-		}
-		*/
 	}
 	void PhysicsSystem::Update(Timestep ts)
 	{
@@ -80,7 +92,7 @@ namespace RPG2D {
 		DestroyBodies();
 		//更新模拟情况。
 		m_PhysicsWorld->Step(ts, velocityIterations, positionIterations);
-		
+
 		/*
 		//获取碰撞情况
 		b2Contact* contact = m_PhysicsWorld->GetContactList();
@@ -103,19 +115,16 @@ namespace RPG2D {
 			contact = contact->GetNext();
 			//
 		}
-		
+
 		*/
-		
+
 		entt::registry* m_Registry = GlobalContext::GetInstance()->m_SceneManager->GetRegistry();
 		// 遍历所有具有刚体组件的实体
 		auto view = m_Registry->view<Rigidbody2DComponent>();
 		for (auto e : view)
 		{
-			if (InputSystem::IsKeyPressed(Key::K)) {
-				RPG2D_CORE_INFO("good");
-			}
 			//新建实体
-			Entity entity = { e, GlobalContext::GetInstance()->m_SceneManager->GetSceneActive().get()};
+			Entity entity = { e, GlobalContext::GetInstance()->m_SceneManager->GetSceneActive().get() };
 			//获取实体的组件
 			auto& transform = entity.GetComponent<TransformComponent>();
 			auto& rb2d = entity.GetComponent<Rigidbody2DComponent>();
@@ -138,7 +147,7 @@ namespace RPG2D {
 		//设置body定义：类型 位置 角度
 		b2BodyDef bodyDef;
 		bodyDef.type = Rigidbody2DTypeToBox2DBody(rb2d.Type);
-		bodyDef.position.Set(transform.Translation.x/m_PixelPerMeter, transform.Translation.y/m_PixelPerMeter);
+		bodyDef.position.Set(transform.Translation.x / m_PixelPerMeter, transform.Translation.y / m_PixelPerMeter);
 		bodyDef.angle = transform.Rotation.z;
 		bodyDef.userData.pointer = static_cast<uintptr_t>(entity.GetUID().getID());
 		//根据定义,生成一个b2Body
@@ -150,7 +159,7 @@ namespace RPG2D {
 			auto& bc2d = entity.GetComponent<BoxCollider2DComponent>();
 			//自动对相关碰撞体小大除以2，所以设置碰撞体时，直接填入实际大小即可。
 			b2PolygonShape boxShape;
-			boxShape.SetAsBox(bc2d.Size.x/(m_PixelPerMeter*2), bc2d.Size.y/(2*m_PixelPerMeter), b2Vec2(bc2d.Offset.x/m_PixelPerMeter, bc2d.Offset.y/m_PixelPerMeter), 0.0f);
+			boxShape.SetAsBox(bc2d.Size.x / (m_PixelPerMeter * 2), bc2d.Size.y / (2 * m_PixelPerMeter), b2Vec2(bc2d.Offset.x / m_PixelPerMeter, bc2d.Offset.y / m_PixelPerMeter), 0.0f);
 			//boxShape.SetAsBox(bc2d.Size.x, bc2d.Size.y);
 			b2FixtureDef fixtureDef;
 			fixtureDef.shape = &boxShape;
@@ -178,6 +187,32 @@ namespace RPG2D {
 			body->CreateFixture(&fixtureDef);
 		}
 	}
+	//默认已经加入了物理引擎,重置碰撞信息
+	void PhysicsSystem::ResetBoxCollider(Entity entity)
+	{
+		if (entity.HasComponent<BoxCollider2DComponent>())
+		{
+			auto& bc2d = entity.GetComponent<BoxCollider2DComponent>();
+			//获取body
+			auto& rb2d = entity.GetComponent<Rigidbody2DComponent>();
+			b2Body* body = static_cast<b2Body*>(rb2d.RuntimeBody);
+			//获取fixture
+			b2Fixture* fixture = body->GetFixtureList();
+			//销毁旧的fixture
+			body->DestroyFixture(fixture);
+			//新建fixture
+			b2PolygonShape boxShape;
+			boxShape.SetAsBox(bc2d.Size.x / (m_PixelPerMeter * 2), bc2d.Size.y / (2 * m_PixelPerMeter), b2Vec2(bc2d.Offset.x / m_PixelPerMeter, bc2d.Offset.y / m_PixelPerMeter), 0.0f);
+			b2FixtureDef fixtureDef;
+			fixtureDef.shape = &boxShape;
+			fixtureDef.isSensor = bc2d.isSensor;
+			fixtureDef.density = bc2d.Density;
+			fixtureDef.friction = bc2d.Friction;
+			fixtureDef.restitution = bc2d.Restitution;
+			fixtureDef.restitutionThreshold = bc2d.RestitutionThreshold;
+			body->CreateFixture(&fixtureDef);
+		}
+	}
 	void PhysicsSystem::RemoveEntity(Entity entity)
 	{
 		if (!entity.HasComponent<Rigidbody2DComponent>())return;
@@ -194,16 +229,16 @@ namespace RPG2D {
 		Rigidbody2DComponent& rgb2d = entity.GetComponent<Rigidbody2DComponent>();
 		b2Body* body = static_cast<b2Body*>(rgb2d.RuntimeBody);
 		//返回位置
-		return glm::vec2(body->GetPosition().x*m_PixelPerMeter, body->GetPosition().y* m_PixelPerMeter);
+		return glm::vec2(body->GetPosition().x * m_PixelPerMeter, body->GetPosition().y * m_PixelPerMeter);
 	}
-	void PhysicsSystem::SetPositionWithPixel(Entity entity,glm::vec2 pos)
+	void PhysicsSystem::SetPositionWithPixel(Entity entity, glm::vec2 pos)
 	{
 		//获取刚体
 		Rigidbody2DComponent& rgb2d = entity.GetComponent<Rigidbody2DComponent>();
 		b2Body* body = static_cast<b2Body*>(rgb2d.RuntimeBody);
 		b2Vec2 newPos;
-		newPos.x = pos.x/m_PixelPerMeter;
-		newPos.y = pos.y/m_PixelPerMeter;
+		newPos.x = pos.x / m_PixelPerMeter;
+		newPos.y = pos.y / m_PixelPerMeter;
 		body->SetTransform(newPos, 0.0f);
 	}
 	//这里速度和y轴方向相反，也就是向上是跳。
@@ -218,6 +253,17 @@ namespace RPG2D {
 		v.y = -velocity.y;
 		body->SetLinearVelocity(v);
 	}
+	void PhysicsSystem::CalculateCollisionBox(TransformComponent trans, glm::vec2 textureSize, BoxCollider2DComponent& box2d)
+	{
+		//判断锚点位置
+		float width = trans.Scale.x * textureSize.x;
+		float height = trans.Scale.y * textureSize.y;
+		box2d.Size = glm::vec2(width, height);
+		//0-1 转化成为1->-1
+		glm::vec2 off = glm::vec2(1.0f) - glm::vec2(trans.anchor.x*2,trans.anchor.y*2);
+		box2d.Offset = glm::vec2(off.x * width / 2,off.y * height / 2);
+	}
+	//ReSetEntity
 	//获取速度需要符合opengl的坐标轴，因此需要y取相反数
 	glm::vec2 PhysicsSystem::GetVelocity(Entity entity)
 	{

@@ -12,6 +12,7 @@ namespace RPG2D {
 		~AudioSystem();
 		void Update(Timestep st);
 		double GetStreamTime(unsigned int handle)const;//获取剩余时间
+		void DeInit();
 	private:
 		//音频引擎
 		Ref<SoLoud::Soloud> m_AudioEngine;

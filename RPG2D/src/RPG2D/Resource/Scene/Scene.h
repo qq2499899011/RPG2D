@@ -64,6 +64,7 @@ namespace RPG2D {
 		entt::registry* GetRegistry();
 		//设置物理世界
 		void SetPhysicsWorld(b2World*);
+		b2World* GetPhysicsWorld() { return m_PhysicsWorld; }
 		//获取所有具有此类compoents的实体
 		template<typename... Components>
 		auto GetAllEntitiesWith()

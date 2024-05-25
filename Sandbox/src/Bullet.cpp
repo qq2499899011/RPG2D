@@ -40,7 +40,7 @@ Entity Bullet::Assemble()
 	scene->DisableEntity(bullet);
 	//物理组件
 	Rigidbody2DComponent rgb2d;
-	rgb2d.Type = Rigidbody2DComponent::BodyType::Dynamic;
+	rgb2d.Type = Rigidbody2DComponent::BodyType::Kinematic;
 	scene->AddComponentWithUID<Rigidbody2DComponent>(uid, rgb2d);
 	//碰撞盒
 	BoxCollider2DComponent box2d;

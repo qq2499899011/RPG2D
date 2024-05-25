@@ -12,6 +12,10 @@ public:
 	void SetVelocity(glm::vec2);
 	static Entity Assemble();
 private:
+	void fire(Timestep);
+	const float firingRate =1.0f;
+	float CD = 0;//…‰ª˜¿‰»¥ ±º‰
+	bool canFire = false;
 	glm::vec2 m_Velocity = glm::vec2(5.0f, 0);
 };
 
