@@ -32,20 +32,30 @@ namespace RPG2D {
 	{
 		//初始化
 		m_UISystem->Init();
+		//OnStart
+		//m_ScriptSystem->Init();
 	}
 	void GlobalContext::Update(Timestep ts)
 	{
 		//调用所有系统的更新函数
-		//每次更新前，把列表中实体销毁
+		m_PhysicsSystem->DestroyBodies();
 		m_SceneManager->GetSceneActive()->DestroyEntityInList();
 		//物理->脚本->动画->音频->渲染->粒子->UI,对场景进行处理。
 		m_PhysicsSystem->Update(ts);
+		//物理世界的物体优先于场景销毁
 		m_ScriptSystem->Update(ts);
 		m_AudioSystem->Update(ts);
 		m_AnimationSystem->Update(ts);
-		m_RendererManager->Update(ts);
 		m_ParticleSystem->Update(ts);
+		m_RendererManager->Update(ts);
 		m_UISystem->Update(ts);
 		//TODO：还没有对UI进行封装
+	}
+	void GlobalContext::DeInit()
+	{
+		GlobalContext::GetInstance()->m_AudioSystem->DeInit();
+		GlobalContext::GetInstance()->m_ScriptSystem->DeInit();
+		GlobalContext::GetInstance()->m_AssetManager->Clear();
+		GlobalContext::GetInstance()->m_SceneManager->DeInit();
 	}
 }

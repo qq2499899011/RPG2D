@@ -1,7 +1,6 @@
 #pragma once
 
 #include "RPG2D/Core/Window.h"
-#include "RPG2D/Function/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>
 
@@ -29,7 +28,6 @@ namespace RPG2D {
 		virtual void Shutdown();
 	private:
 		GLFWwindow* m_Window;//GLFW窗口对象
-		//Scope<GraphicsContext> m_Context;//上下文 TODO:上下文暂时禁用
 
 		struct WindowData//窗口数据
 		{

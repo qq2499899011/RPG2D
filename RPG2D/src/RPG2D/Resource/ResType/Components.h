@@ -66,7 +66,16 @@ namespace RPG2D {
 		SpriteRendererComponent(const glm::vec4& color)
 			: Color(color) {}
 	};
-
+	//对应一个颜色
+	struct SquareRendererComponent
+	{
+		glm::vec2 Size{ 1.0f,1.0f };
+		glm::vec4 Color{ 1.0f, 1.0f, 1.0f, 1.0f };
+		SquareRendererComponent() = default;
+		SquareRendererComponent(const SquareRendererComponent&) = default;
+		SquareRendererComponent(const glm::vec4& color,const glm::vec2& size)
+			: Color(color),Size(size) {}
+	};
 	//动画组件
 	struct AnimatiorControllerComponent
 	{
@@ -112,7 +121,8 @@ namespace RPG2D {
 		BodyType Type = BodyType::Static;
 		//固定旋转
 		bool FixedRotation = true;
-
+		//加速度
+		glm::vec2 Acceleration = glm::vec2(0,0);
 		// Storage for runtime
 		void* RuntimeBody = nullptr;
 
@@ -165,6 +175,7 @@ namespace RPG2D {
 		ButtonCallBack buttonClick;
 		//颜色
 		glm::vec4 color = glm::vec4(1.0f,0.0f,0.0f,1.0f);
+		glm::vec4 hoverColor = glm::vec4(1.0f);
 		ButtonComponent() = default;
 		ButtonComponent(const ButtonComponent&) = default;
 		ButtonComponent(const std::string& tag)
@@ -231,7 +242,7 @@ namespace RPG2D {
 	/// 不包括IDComponent 和 tagComponent
 	/// </summary>
 	using AllComponents =
-		ComponentGroup<TransformComponent, SpriteRendererComponent,
+		ComponentGroup<TransformComponent, SpriteRendererComponent,SquareRendererComponent,
 		CircleRendererComponent,SpriteRendererComponent,NativeScriptComponent,
 	    Rigidbody2DComponent, BoxCollider2DComponent,ButtonComponent,TextComponent,ProgressBarComponent,
 		CircleCollider2DComponent,AudioComponent>;

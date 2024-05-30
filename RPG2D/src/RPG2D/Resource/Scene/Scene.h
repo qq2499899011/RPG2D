@@ -32,6 +32,7 @@ namespace RPG2D {
 		Entity GetEntityByUID(UID uid);
 		//禁用组件
 		void DisableEntity(Entity entity);
+		void DeInit();
 		//增加组件
 		template<typename T>
 		bool AddComponentWithName(const std::string& name, T& component) {

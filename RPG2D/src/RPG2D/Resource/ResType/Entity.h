@@ -14,12 +14,13 @@ namespace RPG2D {
 		Entity() = default;
 		Entity(entt::entity handle, Scene* scene);
 		Entity(const Entity& other) = default;
-
+		glm::vec2 GetCenter();
+		glm::vec2 GetPos();
+		glm::vec2 GetScale();
 		//组件增删改查
 		template<typename T, typename... Args>
 		T& AddComponent(Args&&... args)
 		{
-			RPG2D_CORE_ASSERT(!HasComponent<T>(), "Entity already has component!");
 			T& component = m_Scene->m_Registry.emplace<T>(m_EntityHandle, std::forward<Args>(args)...);
 			m_Scene->OnComponentAdded<T>(*this, component);
 			return component;
@@ -36,7 +37,6 @@ namespace RPG2D {
 		template<typename T>
 		T& GetComponent()
 		{
-			RPG2D_CORE_ASSERT(HasComponent<T>(), "Entity does not have component!");
 			return m_Scene->m_Registry.get<T>(m_EntityHandle);
 		}
 
@@ -49,7 +49,6 @@ namespace RPG2D {
 		template<typename T>
 		void RemoveComponent()
 		{
-			RPG2D_CORE_ASSERT(HasComponent<T>(), "Entity does not have component!");
 			m_Scene->m_Registry.remove<T>(m_EntityHandle);
 		}
 
@@ -58,7 +57,7 @@ namespace RPG2D {
 		operator uint32_t() const { return (uint32_t)m_EntityHandle; }
 
 		UID GetUID() { return GetComponent<IDComponent>().ID; }
-		const std::string& GetName() { return GetComponent<TagComponent>().Tag; }
+		const std::string& GetName();
 
 		bool operator==(const Entity& other) const
 		{

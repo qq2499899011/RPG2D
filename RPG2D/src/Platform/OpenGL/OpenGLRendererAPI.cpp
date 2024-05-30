@@ -4,16 +4,7 @@
 #include <glad/glad.h>
 
 namespace RPG2D {
-	/// <summary>
 	/// opengl回调函数，根据不同严重等级使用spdlog输出不同严重程度的信息。
-	/// </summary>
-	/// <param name="source"></param>
-	/// <param name="type"></param>
-	/// <param name="id"></param>
-	/// <param name="severity"></param>
-	/// <param name="length"></param>
-	/// <param name="message"></param>
-	/// <param name="userParam"></param>
 	void OpenGLMessageCallback(
 		unsigned source,
 		unsigned type,
@@ -34,12 +25,10 @@ namespace RPG2D {
 		RPG2D_CORE_ASSERT(false, "Unknown severity level!");
 	}
 	
-	/// <summary>
 	/// 启用混合 设置混合方式 启用深度测试 启用线段平滑
-	/// </summary>
 	void OpenGLRendererAPI::Init()
 	{
-		RPG2D_PROFILE_FUNCTION();
+		
 
 	#ifdef RPG2D_DEBUG
 		//开启调试
@@ -59,13 +48,6 @@ namespace RPG2D {
 		glEnable(GL_LINE_SMOOTH);
 	}
 
-	/// <summary>
-	/// 调整视口大小
-	/// </summary>
-	/// <param name="x"></param>
-	/// <param name="y"></param>
-	/// <param name="width"></param>
-	/// <param name="height"></param>
 	void OpenGLRendererAPI::SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
 	{
 		glViewport(x, y, width, height);
@@ -81,11 +63,7 @@ namespace RPG2D {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
-	/// <summary>
 	/// drawelement，包含对vao的绑定。
-	/// </summary>
-	/// <param name="vertexArray"></param>
-	/// <param name="indexCount"></param>
 	void OpenGLRendererAPI::DrawIndexed(const Ref<VertexArray>& vertexArray, uint32_t indexCount)
 	{
 		vertexArray->Bind();
@@ -94,21 +72,14 @@ namespace RPG2D {
 		glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
 	}
 
-	/// <summary>
 	/// 画线 内部包含vao的绑定
-	/// </summary>
-	/// <param name="vertexArray"></param>
-	/// <param name="vertexCount"></param>
 	void OpenGLRendererAPI::DrawLines(const Ref<VertexArray>& vertexArray, uint32_t vertexCount)
 	{
 		vertexArray->Bind();
 		glDrawArrays(GL_TRIANGLES, 0, vertexCount);
 	}
 
-	/// <summary>
 	/// 设置线段长度
-	/// </summary>
-	/// <param name="width"></param>
 	void OpenGLRendererAPI::SetLineWidth(float width)
 	{
 		glLineWidth(width);

@@ -23,13 +23,13 @@ namespace RPG2D {
 	//新建的时候自动进行初始化操作。
 	WindowsWindow::WindowsWindow(const WindowProps& props)
 	{
-		RPG2D_PROFILE_FUNCTION();
+		
 		Init(props);
 	}
 
 	WindowsWindow::~WindowsWindow()
 	{
-		RPG2D_PROFILE_FUNCTION();
+		
 
 		Shutdown();
 	}
@@ -53,7 +53,7 @@ namespace RPG2D {
 	void WindowsWindow::Init(const WindowProps& props)
 	{
 		//1.设置窗口属性
-		RPG2D_PROFILE_FUNCTION();
+		
 
 		m_Data.Title = props.Title;
 		m_Data.Width = props.Width;
@@ -65,21 +65,16 @@ namespace RPG2D {
 		if (s_GLFWWindowCount == 0)
 		{
 			//如果当前
-			RPG2D_PROFILE_SCOPE("glfwInit");
 			int success = glfwInit();
 			RPG2D_CORE_ASSERT(success, "Could not initialize GLFW!");
 			glfwSetErrorCallback(GLFWErrorCallback);
 		}
 		//3.创建glfw窗口
-		//大括号，美观，定义为一个整体
 		{
-			RPG2D_PROFILE_SCOPE("glfwCreateWindow");
-			/*
 			#if defined(RPG2D_DEBUG)
 			if (RendererManager::GetAPI() == RendererAPI::API::OpenGL)
 				glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);//捕获Opengl的调试信息。
 			#endif
-			*/
 			m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 			++s_GLFWWindowCount;
 		}
@@ -205,7 +200,7 @@ namespace RPG2D {
 
 	void WindowsWindow::Shutdown()
 	{
-		RPG2D_PROFILE_FUNCTION();
+		
 
 		glfwDestroyWindow(m_Window);//销毁glfw窗口
 		--s_GLFWWindowCount;
@@ -225,7 +220,7 @@ namespace RPG2D {
 
 	void WindowsWindow::SetVSync(bool enabled)
 	{
-		RPG2D_PROFILE_FUNCTION();
+		
 
 		if (enabled)
 			glfwSwapInterval(1);//启用垂直同步 图像渲染与垂直同步信号同步

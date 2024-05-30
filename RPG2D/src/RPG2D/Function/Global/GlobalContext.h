@@ -1,7 +1,7 @@
 #pragma once
 #include "RPG2D/Function/Animation/AnimationSystem.h"
 #include "RPG2D/Function/Input/InputSystem.h"
-#include "RPG2D/Function/Physics/Physics2D.h"
+#include "RPG2D/Function/Physics/PhysicsSystem.h"
 #include "RPG2D/Function/Renderer/RendererManager.h"
 #include "RPG2D/Function/Script/ScriptSystem.h"
 #include "RPG2D/Resource/AssetManager/AssetManager.h"
@@ -33,6 +33,7 @@ namespace RPG2D {
 		static void Create();
 		void Init();
 		void Update(Timestep ts);
+		void DeInit();
 	private:
 		static Ref<GlobalContext> Instance;
 	};

@@ -1,5 +1,5 @@
 #include "RPG2Dpch.h"
-#include "Physics2D.h"
+#include "PhysicsSystem.h"
 #include "RPG2D/Function/Global/GlobalContext.h"
 #include "RPG2D/Resource/ResType/Entity.h"
 #include "RPG2D/Resource/ResType/Components.h"
@@ -54,7 +54,7 @@ namespace RPG2D {
 	b2World* PhysicsSystem::Create()
 	{
 		//设置重力加速度方向
-		m_PhysicsWorld = new b2World({ 0.0f, 19.6f });
+		m_PhysicsWorld = new b2World({ 0.0f, 0.0f });
 		//清空bodyToDestroy
 		m_BodiesToDestroy.clear();
 		//设置碰撞检测
@@ -89,52 +89,44 @@ namespace RPG2D {
 	void PhysicsSystem::Update(Timestep ts)
 	{
 		//先删除数组中的待删除物体
-		DestroyBodies();
+		//DestroyBodies();
+		//更新速度
+		entt::registry* m_Registry = GlobalContext::GetInstance()->m_SceneManager->GetRegistry();
+		{
+			auto view = m_Registry->view<Rigidbody2DComponent>();
+			for (auto e : view)
+			{
+				//新建实体
+				Entity entity = { e, GlobalContext::GetInstance()->m_SceneManager->GetSceneActive().get() };
+				auto& rb2d = entity.GetComponent<Rigidbody2DComponent>();
+				//获取速度
+				glm::vec2 vec = GetVelocity(entity);
+				//计算速度
+				vec.x += rb2d.Acceleration.x * ts;
+				vec.y += rb2d.Acceleration.y * ts;
+				//写入速度
+				SetVelocity(entity, vec);
+			}
+		}
 		//更新模拟情况。
 		m_PhysicsWorld->Step(ts, velocityIterations, positionIterations);
-
-		/*
-		//获取碰撞情况
-		b2Contact* contact = m_PhysicsWorld->GetContactList();
-		while (contact!=nullptr)
 		{
-			b2Fixture* fixtureA = contact->GetFixtureA();
-			b2Fixture* fixtureB = contact->GetFixtureB();
-
-			// 获取碰撞的两个物体
-			b2Body* bodyA = fixtureA->GetBody();
-			b2Body* bodyB = fixtureB->GetBody();
-
-			// 获取碰撞的两个物体的位置
-			b2Vec2 positionA = bodyA->GetPosition();
-			b2Vec2 positionB = bodyB->GetPosition();
-
-			// 打印碰撞的两个物体的位置
-			std::cout << "Collision occurred between objects A at (" << positionA.x << ", " << positionA.y << ")"
-				<< " and B at (" << positionB.x << ", " << positionB.y << ")" << std::endl;
-			contact = contact->GetNext();
-			//
-		}
-
-		*/
-
-		entt::registry* m_Registry = GlobalContext::GetInstance()->m_SceneManager->GetRegistry();
-		// 遍历所有具有刚体组件的实体
-		auto view = m_Registry->view<Rigidbody2DComponent>();
-		for (auto e : view)
-		{
-			//新建实体
-			Entity entity = { e, GlobalContext::GetInstance()->m_SceneManager->GetSceneActive().get() };
-			//获取实体的组件
-			auto& transform = entity.GetComponent<TransformComponent>();
-			auto& rb2d = entity.GetComponent<Rigidbody2DComponent>();
-			//获取b2Body
-			b2Body* body = (b2Body*)rb2d.RuntimeBody;
-			//根据b2Body获取物体最新位置,并输出到transform组件中
-			const auto& position = body->GetPosition();
-			transform.Translation.x = position.x * m_PixelPerMeter;
-			transform.Translation.y = position.y * m_PixelPerMeter;
-			transform.Rotation.z = body->GetAngle();
+			auto view = m_Registry->view<Rigidbody2DComponent>();
+			for (auto e : view)
+			{
+				//新建实体
+				Entity entity = { e, GlobalContext::GetInstance()->m_SceneManager->GetSceneActive().get() };
+				//获取实体的组件
+				auto& transform = entity.GetComponent<TransformComponent>();
+				auto& rb2d = entity.GetComponent<Rigidbody2DComponent>();
+				//获取b2Body
+				b2Body* body = (b2Body*)rb2d.RuntimeBody;
+				//根据b2Body获取物体最新位置,并输出到transform组件中
+				const auto& position = body->GetPosition();
+				transform.Translation.x = position.x * m_PixelPerMeter;
+				transform.Translation.y = position.y * m_PixelPerMeter;
+				transform.Rotation.z = body->GetAngle();
+			}
 		}
 	}
 	//默认所有位置变量都除以10.
@@ -253,6 +245,22 @@ namespace RPG2D {
 		v.y = -velocity.y;
 		body->SetLinearVelocity(v);
 	}
+	void PhysicsSystem::SetVelocity(Entity entity, float velocity, float angle)
+	{
+		// 将角度转换为弧度
+		float angleInRadians = angle * b2_pi / 180.0f;
+		// 计算速度的x和y分量
+		float velocityX = velocity * cos(angleInRadians);
+		float velocityY = velocity * sin(angleInRadians);
+		SetVelocity(entity,glm::vec2(velocityX,velocityY));
+	}
+	void PhysicsSystem::SetAcceleration(Entity entity, glm::vec2 acceleration)
+	{
+		//获取刚体
+		Rigidbody2DComponent& rgb2d = entity.GetComponent<Rigidbody2DComponent>();
+		//设置加速度
+		rgb2d.Acceleration = acceleration;
+	}
 	void PhysicsSystem::CalculateCollisionBox(TransformComponent trans, glm::vec2 textureSize, BoxCollider2DComponent& box2d)
 	{
 		//判断锚点位置
@@ -276,11 +284,42 @@ namespace RPG2D {
 		glm::vec2 vec(v.x, -v.y);
 		return vec;
 	}
+	glm::vec2 PhysicsSystem::GetAcceleration(Entity entity)
+	{		//获取刚体
+		Rigidbody2DComponent& rgb2d = entity.GetComponent<Rigidbody2DComponent>();
+		//设置加速度
+		return rgb2d.Acceleration;
+	}
 	void PhysicsSystem::DestroyBodies()
 	{
 		for (b2Body* body : m_BodiesToDestroy) {
 			m_PhysicsWorld->DestroyBody(body);
 		}
 		m_BodiesToDestroy.clear();
+	}
+	void PhysicsSystem::DestroyWorld(b2World* world)
+	{
+		if (!world)return;
+		//销毁世界
+		// 停止模拟
+		world->Step(0, 0, 0);
+
+		// 销毁所有物体
+		b2Body* body = world->GetBodyList();
+		while (body) {
+			b2Body* nextBody = body->GetNext();
+			world->DestroyBody(body);
+			body = nextBody;
+		}
+
+		// 销毁所有关节
+		b2Joint* joint = world->GetJointList();
+		while (joint) {
+			b2Joint* nextJoint = joint->GetNext();
+			world->DestroyJoint(joint);
+			joint = nextJoint;
+		}
+		// 释放物理世界的内存
+		delete world;
 	}
 }

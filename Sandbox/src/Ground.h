@@ -8,7 +8,8 @@ public:
 	virtual void OnCreate() override;
 	virtual void OnDestroy() override;
 	virtual void OnUpdate(Timestep ts) override;
-	static Entity Assemble();
+	static void Assemble();
+	static Entity Assemble(glm::vec2,glm::vec2);
 private:
 	float playerSpeed = 500.0f;
 	const float firingRate = 3.0f;

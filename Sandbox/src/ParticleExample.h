@@ -18,7 +18,7 @@ public:
 		//创建一个新的粒子发射器对象
 		Ref<ParticleEmitter> emitter_p = CreateRef<ParticleEmitter>(100);
 		//设定纹理
-		emitter_p->SetTexture(assetManager->GetTexture("bullet"));
+		emitter_p->SetTexture(assetManager->GetTexture("snow"));
 		//设定初始化
 		emitter_p->SetParticleInit([](Particle& p) {
 			//获取随机种子,计算初始位置

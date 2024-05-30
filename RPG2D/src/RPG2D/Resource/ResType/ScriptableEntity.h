@@ -14,11 +14,24 @@ namespace RPG2D {
 		{
 			return m_Entity.GetComponent<T>();
 		}
-		virtual void OnCollisionBegin(Entity other) {
+		virtual bool OnCollisionBegin(Entity other) {
 			//输出碰撞
 			//RPG2D_CORE_INFO("{0}:contact {1}",m_Entity.GetName(),other.GetName());
+			return true;
+		}		
+		virtual bool OnCollision(Entity other) {
+			//碰撞过程中
+			return true;
+		}
+		virtual bool OnCollisionEnd(Entity other) {
+			//输出碰撞
+			//RPG2D_CORE_INFO("{0}:contact end{1}",m_Entity.GetName(),other.GetName());
+			return true;
 		}
 	protected:
+		virtual void OnStart() {
+			
+		};
 		virtual void OnCreate() = 0;
 		virtual void OnDestroy() = 0;
 		virtual void OnUpdate(Timestep ts) = 0;

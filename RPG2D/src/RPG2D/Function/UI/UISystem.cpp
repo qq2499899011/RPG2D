@@ -10,6 +10,14 @@
 // TEMPORARY
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
+#include "RPG2Dpch.h"
+
+#include <misc/cpp/imgui_stdlib.cpp>
+
+#define IMGUI_IMPL_OPENGL_LOADER_GLAD
+#include <backends/imgui_impl_opengl3.cpp>
+#include <backends/imgui_impl_glfw.cpp>
+
 namespace RPG2D {
 	void UISystem::Init()
 	{
@@ -25,6 +33,7 @@ namespace RPG2D {
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
 		//设置字体
 		io.FontDefault = io.Fonts->AddFontFromFileTTF("C:/Work/GameEngine/RPG2D/Sandbox/asset/font/simhei.ttf", m_FontSize);
+		int i = 1;
 		// imgui颜色
 		ImGui::StyleColorsDark();
 		//初始化glfw和opengl
@@ -92,12 +101,14 @@ namespace RPG2D {
 			ImGui::SetCursorPos(ImVec2(trans.Translation.x,trans.Translation.y));
 			//设置颜色
 			ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(button.color.r, button.color.g, button.color.b, button.color.a));
+			ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(button.hoverColor.r, button.hoverColor.g, button.hoverColor.b, button.hoverColor.a));
 			//获取字体缩放比例
 			ImGui::SetWindowFontScale(button.fontsize/m_FontSize);
 			if (ImGui::Button(button.context.c_str(), ImVec2(trans.Scale.x, trans.Scale.y))) {
 				//按下后调用函数
 				button.buttonClick();
 			}
+			ImGui::PopStyleColor();
 			ImGui::PopStyleColor();
 		}
 		//遍历所有带有Text组件的实体

@@ -102,16 +102,6 @@ namespace RPG2D {
 			1.0f, 1.0f, 1.0f, 1.0f,
 			1.0f, 0.0f, 1.0f, 0.0f
 		};
-		/*float vertices[] = {
-			// pos      // tex
-			0.0f, 1.0f, 1.0f, 1.0f,
-			1.0f, 0.0f, 0.0f, 0.0f,
-			0.0f, 0.0f, 1.0f, 0.0f, 
-
-			0.0f, 1.0f, 1.0f, 1.0f,
-			1.0f, 1.0f, 0.0f, 1.0f,
-			1.0f, 0.0f, 0.0f, 0.0f
-		};*/
 
 		//Éú³ÉVAO
 		quadVAO = VertexArray::Create();

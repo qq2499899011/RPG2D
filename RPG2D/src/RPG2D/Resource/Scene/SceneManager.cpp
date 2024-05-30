@@ -74,5 +74,15 @@ namespace RPG2D {
 			nextSceneNum = -1;
 		}
 	}
+
+	void SceneManager::DeInit()
+	{
+		//释放所有场景
+		for (Ref<Scene> scene : scenes) {
+			//调用释放我
+			scene->DeInit();
+		}
+		scenes.clear();
+	}
 	
 }

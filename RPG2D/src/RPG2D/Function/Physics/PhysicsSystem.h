@@ -22,10 +22,14 @@ namespace RPG2D {
 		glm::vec2 GetPixelPosition(Entity entity);
 		void SetPositionWithPixel(Entity,glm::vec2);
 		void SetVelocity(Entity,glm::vec2);
+		void SetVelocity(Entity,float speed,float angle);
+		void SetAcceleration(Entity,glm::vec2);
 		void CalculateCollisionBox(TransformComponent, glm::vec2, BoxCollider2DComponent&);
 		glm::vec2 GetVelocity(Entity);
-	private:
+		glm::vec2 GetAcceleration(Entity);
 		void DestroyBodies();
+		void DestroyWorld(b2World*);
+	private:
 		//µü´ú¾«¶È
 		const int32_t velocityIterations = 6;
 		const int32_t positionIterations = 2;

@@ -9,6 +9,8 @@ namespace RPG2D {
 		void Update(Timestep ts);
 		//初始化
 		void Init();
+		//释放资源
+		void DeInit();
 
 	};
 }

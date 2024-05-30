@@ -10,11 +10,15 @@ void Bullet::OnDestroy()
 
 void Bullet::OnUpdate(Timestep ts)
 {
-	//movement(ts);
-	
+	lifeTime += ts;
+	if (lifeTime >= lifeSpan) {
+		lifeSpan = 2100000;
+		Ref<Scene> scene = GlobalContext::GetInstance()->m_SceneManager->GetSceneActive();
+		scene->RemoveEntity(m_Entity);
+	}
 }
 
-Entity Bullet::Assemble()
+Entity Bullet::Assemble(bool isPlayer)
 {
 	Ref<Scene> scene = GlobalContext::GetInstance()->m_SceneManager->GetSceneActive();
 	Ref<AssetManager> assetManager = GlobalContext::GetInstance()->m_AssetManager;
@@ -58,6 +62,8 @@ Entity Bullet::Assemble()
 	physics->AddEntity(bullet);
 	//¼ÓÈë
 	//scene->DisableEntity(player);
+	Bullet* bulletIns = dynamic_cast<Bullet*>(bullet.GetComponent<NativeScriptComponent>().Instance);
+	bulletIns->SetPlayer(isPlayer);
 	return bullet;
 
 }

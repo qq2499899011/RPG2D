@@ -1,47 +1,7 @@
-[23:17:02] [info] RPG2D: Hello
-[23:17:02] [warning] APP: client hello
-[23:17:02] [warning] APP: www
-[23:17:02] [info] RPG2D: AudioEngineInitSuccess!
-[23:17:02] [info] RPG2D: Creating window RPG2D Engine (1600, 900)
-[23:17:04] [info] RPG2D: AudioLoadSuccess!,time=213.133056640625
-[23:17:04] [info] APP: player being hit
-[23:17:06] [info] APP: player being hit
-[23:17:06] [info] APP: player being hit
-[23:17:07] [info] APP: player being hit
-[23:17:07] [info] APP: player being hit
-[23:17:08] [info] APP: player being hit
-[23:17:08] [info] APP: player being hit
-[23:17:09] [info] APP: player being hit
-[23:17:09] [info] APP: player being hit
-[23:17:09] [info] APP: change stateidle to down
-[23:17:16] [info] APP: change statedown to idle
-[23:17:16] [info] APP: player being hit
-[23:17:17] [info] APP: player being hit
-[23:17:17] [info] APP: player being hit
-[23:17:17] [info] APP: change staterun to jump
-[23:17:19] [info] APP: change statejump to run
-[23:17:19] [info] APP: player being hit
-[23:17:19] [info] APP: change staterun to jump
-[23:17:20] [info] APP: change statejump to run
-[23:17:20] [info] APP: player being hit
-[23:17:20] [info] APP: player being hit
-[23:17:20] [info] APP: player being hit
-[23:17:20] [info] APP: player being hit
-[23:17:21] [info] APP: player being hit
-[23:17:21] [info] APP: player being hit
-[23:17:21] [info] APP: change staterun to jump
-[23:17:21] [info] APP: change statejump to run
-[23:17:21] [info] APP: change staterun to jump
-[23:17:21] [info] APP: change statejump to run
-[23:17:21] [info] APP: change staterun to jump
-[23:17:21] [info] APP: change statejump to run
-[23:17:21] [info] APP: change staterun to jump
-[23:17:21] [info] APP: change statejump to run
-[23:17:21] [info] APP: change staterun to jump
-[23:17:21] [info] APP: change statejump to run
-[23:17:21] [info] APP: change staterun to jump
-[23:17:21] [info] APP: change statejump to run
-[23:17:21] [info] APP: change stateuprun to jump
-[23:17:21] [info] APP: change statejump to uprun
-[23:17:21] [info] APP: change stateuprun to jump
-[23:17:22] [info] APP: change statejump to idle
+[12:53:54] [info] RPG2D: Hello
+[12:53:54] [warning] APP: client hello
+[12:53:54] [warning] APP: www
+[12:53:54] [info] RPG2D: AudioEngineInitSuccess!
+[12:53:54] [info] RPG2D: Creating window RPG2D Engine (1600, 900)
+[12:53:55] [info] RPG2D: AudioLoadSuccess!,time=6.13877534866333
+[12:53:55] [info] RPG2D: AudioLoadSuccess!,time=180.03591918945312

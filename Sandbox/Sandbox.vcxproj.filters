@@ -42,6 +42,12 @@
     <ClCompile Include="src\ParticleExample.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\AssetPrepare.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BonusShip.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Player.h">
@@ -68,9 +74,11 @@
     <ClInclude Include="src\ParticleExample.h">
       <Filter>头文件</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="asset\shader\sprite.fs" />
-    <None Include="asset\shader\sprite.vs" />
+    <ClInclude Include="src\AssetPrepare.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BonusShip.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -96,9 +96,6 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
@@ -129,12 +126,6 @@
     <ClInclude Include="src\RPG2D\Core\KeyCodes.h">
       <Filter>src\RPG2D\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\RPG2D\Core\Layer.h">
-      <Filter>src\RPG2D\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\RPG2D\Core\LayerStack.h">
-      <Filter>src\RPG2D\Core</Filter>
-    </ClInclude>
     <ClInclude Include="src\RPG2D\Core\LogSystem.h">
       <Filter>src\RPG2D\Core</Filter>
     </ClInclude>
@@ -149,9 +140,6 @@
     </ClInclude>
     <ClInclude Include="src\RPG2D\Core\Window.h">
       <Filter>src\RPG2D\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\RPG2D\Debug\Instrumentor.h">
-      <Filter>src\RPG2D\Debug</Filter>
     </ClInclude>
     <ClInclude Include="src\RPG2D\Events\ApplicationEvent.h">
       <Filter>src\RPG2D\Events</Filter>
@@ -189,13 +177,10 @@
     <ClInclude Include="src\RPG2D\Function\Physics\ContactListener.h">
       <Filter>src\RPG2D\Function\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="src\RPG2D\Function\Physics\Physics2D.h">
+    <ClInclude Include="src\RPG2D\Function\Physics\PhysicsSystem.h">
       <Filter>src\RPG2D\Function\Physics</Filter>
     </ClInclude>
     <ClInclude Include="src\RPG2D\Function\Renderer\Buffer.h">
-      <Filter>src\RPG2D\Function\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\RPG2D\Function\Renderer\GraphicsContext.h">
       <Filter>src\RPG2D\Function\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\RPG2D\Function\Renderer\OrthographicCamera.h">
@@ -230,9 +215,6 @@
     </ClInclude>
     <ClInclude Include="src\RPG2D\Function\UI\UISystem.h">
       <Filter>src\RPG2D\Function\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\RPG2D\ImGui\ImGuiLayer.h">
-      <Filter>src\RPG2D\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="src\RPG2D\Resource\AssetManager\AssetManager.h">
       <Filter>src\RPG2D\Resource\AssetManager</Filter>
@@ -1508,12 +1490,10 @@
     </ClInclude>
     <ClInclude Include="src\RPG2D\Function\Audio\Audio.h" />
     <ClInclude Include="src\RPG2D\Function\Audio\AudioSystem.h" />
+    <ClInclude Include="src\RPG2D\Function\Renderer\SquareRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
@@ -1535,12 +1515,6 @@
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\RPG2D\Core\Application.cpp">
-      <Filter>src\RPG2D\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\RPG2D\Core\Layer.cpp">
-      <Filter>src\RPG2D\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\RPG2D\Core\LayerStack.cpp">
       <Filter>src\RPG2D\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\RPG2D\Core\LogSystem.cpp">
@@ -1573,13 +1547,10 @@
     <ClCompile Include="src\RPG2D\Function\Physics\ContactListener.cpp">
       <Filter>src\RPG2D\Function\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="src\RPG2D\Function\Physics\Physics2D.cpp">
+    <ClCompile Include="src\RPG2D\Function\Physics\PhysicsSystem.cpp">
       <Filter>src\RPG2D\Function\Physics</Filter>
     </ClCompile>
     <ClCompile Include="src\RPG2D\Function\Renderer\Buffer.cpp">
-      <Filter>src\RPG2D\Function\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\RPG2D\Function\Renderer\GraphicsContext.cpp">
       <Filter>src\RPG2D\Function\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\RPG2D\Function\Renderer\OrthographicCamera.cpp">
@@ -1615,12 +1586,6 @@
     <ClCompile Include="src\RPG2D\Function\UI\UISystem.cpp">
       <Filter>src\RPG2D\Function\UI</Filter>
     </ClCompile>
-    <ClCompile Include="src\RPG2D\ImGui\ImGuiBuild.cpp">
-      <Filter>src\RPG2D\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\RPG2D\ImGui\ImGuiLayer.cpp">
-      <Filter>src\RPG2D\ImGui</Filter>
-    </ClCompile>
     <ClCompile Include="src\RPG2D\Resource\AssetManager\AssetManager.cpp">
       <Filter>src\RPG2D\Resource\AssetManager</Filter>
     </ClCompile>
@@ -1641,5 +1606,6 @@
     </ClCompile>
     <ClCompile Include="src\RPG2D\Function\Audio\Audio.cpp" />
     <ClCompile Include="src\RPG2D\Function\Audio\AudioSystem.cpp" />
+    <ClCompile Include="src\RPG2D\Function\Renderer\SquareRenderer.cpp" />
   </ItemGroup>
 </Project>

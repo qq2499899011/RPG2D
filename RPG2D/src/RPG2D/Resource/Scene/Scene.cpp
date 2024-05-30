@@ -3,7 +3,7 @@
 #include "RPG2D/Resource/ResType/Entity.h"
 #include "RPG2D/Resource/ResType/Components.h"
 #include "RPG2D/Resource/ResType/ScriptableEntity.h"
-#include "RPG2D/Function/Physics/Physics2D.h"
+#include "RPG2D/Function/Physics/PhysicsSystem.h"
 #include <glm/glm.hpp>
 #include "RPG2D/Core/UID.h"
 // Box2D
@@ -150,6 +150,14 @@ namespace RPG2D {
 		m_Registry.assign<Disable>(entity);
 	}
 
+	void Scene::DeInit()
+	{
+		//销毁所有实体
+		m_Registry.clear();
+		m_EntityMap.clear();
+		m_EntityDestroyList.clear();
+	}
+
 	entt::registry* Scene::GetRegistry()
 	{
 		return &m_Registry;
@@ -241,6 +249,10 @@ namespace RPG2D {
 	}
 	template<>
 	void Scene::OnComponentAdded<AudioComponent>(Entity entity, AudioComponent& component)
+	{
+	}
+	template<>
+	void Scene::OnComponentAdded<SquareRendererComponent>(Entity entity, SquareRendererComponent& component)
 	{
 	}
 }

@@ -20,7 +20,6 @@ namespace RPG2D {
 
 	OpenGLShader::~OpenGLShader()
 	{
-		RPG2D_PROFILE_FUNCTION();
 		glDeleteProgram(ID);
 	}
 
@@ -66,39 +65,38 @@ namespace RPG2D {
 
 	void OpenGLShader::Bind() const
 	{
-		RPG2D_PROFILE_FUNCTION();
 		glUseProgram(ID);
 	}
 
 	void OpenGLShader::Unbind() const
 	{
-		RPG2D_PROFILE_FUNCTION();
 		glUseProgram(0);
 	}
 
 	void OpenGLShader::SetInt(const std::string& name, int value)
 	{
-		RPG2D_PROFILE_FUNCTION();
+		Bind();
 		GLint location = glGetUniformLocation(ID, name.c_str());
 		glUniform1i(location, value);
 	}
 
 	void OpenGLShader::SetIntArray(const std::string& name, int* values, uint32_t count)
 	{
+		Bind();
 		GLint location = glGetUniformLocation(ID, name.c_str());
 		glUniform1iv(location, count, values);
 	}
 
 	void OpenGLShader::SetFloat(const std::string& name, float value)
 	{
-		RPG2D_PROFILE_FUNCTION();
+		Bind();
 		GLint location = glGetUniformLocation(ID, name.c_str());
 		glUniform1f(location, value);
 	}
 
 	void OpenGLShader::SetFloat2(const std::string& name, const glm::vec2& value)
 	{
-		RPG2D_PROFILE_FUNCTION();
+		Bind();
 
 		GLint location = glGetUniformLocation(ID, name.c_str());
 		glUniform2f(location, value.x, value.y);
@@ -106,7 +104,7 @@ namespace RPG2D {
 
 	void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& value)
 	{
-		RPG2D_PROFILE_FUNCTION();
+		Bind();
 
 		GLint location = glGetUniformLocation(ID, name.c_str());
 		glUniform3f(location, value.x, value.y, value.z);
@@ -114,7 +112,7 @@ namespace RPG2D {
 
 	void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& value)
 	{
-		RPG2D_PROFILE_FUNCTION();
+		Bind();
 
 		GLint location = glGetUniformLocation(ID, name.c_str());
 		glUniform4f(location, value.x, value.y, value.z, value.w);
@@ -128,7 +126,7 @@ namespace RPG2D {
 
 	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value)
 	{
-		RPG2D_PROFILE_FUNCTION();
+		Bind();
 
 		GLint location = glGetUniformLocation(ID, name.c_str());
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));

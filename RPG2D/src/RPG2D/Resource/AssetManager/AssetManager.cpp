@@ -76,11 +76,15 @@ namespace RPG2D {
 		// (properly) delete all shaders	
 		for (auto iter : Shaders)
 			glDeleteProgram(iter.second->GetID());
+		Shaders.clear();
 		// (properly) delete all textures
 		for (auto iter : Textures) {
 			GLuint textureID = iter.second->GetID();
 			glDeleteTextures(1, &textureID);
 		}
+		Textures.clear();
+		Audios.clear();
+
 	}
 
 	Ref<Shader> AssetManager::loadShaderFromFile(const char *vShaderFile, const char *fShaderFile, const char *gShaderFile)

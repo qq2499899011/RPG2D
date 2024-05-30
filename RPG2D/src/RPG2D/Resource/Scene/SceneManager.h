@@ -17,6 +17,7 @@ namespace RPG2D {
 		void SetNextScene(int next);
 		void SetNextScene(const std::string& name);
 		void SwitchScene();
+		void DeInit();
 	private:
 		int activeSceneNum;
 		int nextSceneNum = -1;

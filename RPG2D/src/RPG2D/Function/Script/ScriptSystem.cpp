@@ -30,5 +30,33 @@ namespace RPG2D {
 	void ScriptSystem::Init()
 	{
 		//初始化
+		//对于已经具有实例化的实体，调用update函数。
+		entt::registry* m_Registry = GlobalContext::GetInstance()->m_SceneManager->GetRegistry();
+		m_Registry->view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
+		{
+			//如果实例=null
+			if (!nsc.Instance)
+			{
+				//实例化
+				nsc.Instance = nsc.InstantiateScript();
+				nsc.Instance->m_Entity = Entity{ entity, GlobalContext::GetInstance()->m_SceneManager->GetSceneActive().get() };
+				nsc.Instance->OnCreate();
+			}
+			//调用实例的开始函数
+			nsc.Instance->OnStart();
+		});
+	}
+	void ScriptSystem::DeInit()
+	{		//初始化
+		//对于已经具有实例化的实体，调用update函数。
+		entt::registry* m_Registry = GlobalContext::GetInstance()->m_SceneManager->GetRegistry();
+		m_Registry->view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
+			{
+				//如果实例=null
+				if (nsc.Instance)
+				{
+					nsc.DestroyScript(&nsc);
+				}
+			});
 	}
 }
